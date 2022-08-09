@@ -1,0 +1,16 @@
+{
+  "hash": "163c4fdfa06968ae3ac4c9721acca092",
+  "result": {
+    "markdown": "--- \n# url: your book url like https://bookdown.org/yihui/bookdown\n# cover-image: path to the social sharing image like images/cover.jpg\ndescription-meta: |\n  Ini adalah modul Praktikum STA 222: Metode Perancangan Percobaan.\n  Materi-materi praktikum akan dimasukkan di buku ini.\nlink-citations: yes\ngithub-repo: rstudio/bookdown-demo\n---\n\n# Pendahuluan {-}\nBuku ini akan mengadung materi-materi praktikum Metode Perancangan Percobaan. Materi satu pertemuan akan dimasukkan di satu bab^[misal, Bab 5 dari buku ini akan membahas pertemuan 5.]. Tiap bab akan mengandung bagian teori dan kode di R dan LaTeX. Slide dan recording praktikum disimpan di [Google Drive](https://drive.google.com/drive/folders/1ZnpAoV2SFYkWxqFWEQb2JDlzWLfHegBK?usp=sharing) dan materi-materi kuliah disimpan di [LMS IPB](https://newlms.ipb.ac.id).\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

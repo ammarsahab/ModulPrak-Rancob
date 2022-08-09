@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.426">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modul Praktikum Perancangan Percobaan - 3&nbsp; Perbandingan Nilai Tengah Perlakuan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./04-Bab4.html" rel="next">
+<link href="./02-Bab2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Perbandingan Nilai Tengah Perlakuan</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modul Praktikum Perancangan Percobaan</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Pendahuluan</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Bab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Konsep Dasar Perancangan Percobaan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Bab2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Percobaan Faktor Tunggal</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Bab3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Perbandingan Nilai Tengah Perlakuan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Bab4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Uji Asumsi</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Bab5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rancangan Faktorial</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Bab6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Rancangan Petak Terpisah (Split Plot Design)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Bab7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rancangan Split Blok</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Bab8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANCOVA</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lsdbnt" id="toc-lsdbnt" class="nav-link active" data-scroll-target="#lsdbnt"> <span class="header-section-number">3.1</span> LSD/BNT</a></li>
+  <li><a href="#bnj" id="toc-bnj" class="nav-link" data-scroll-target="#bnj"> <span class="header-section-number">3.2</span> BNJ</a></li>
+  <li><a href="#uji-duncan" id="toc-uji-duncan" class="nav-link" data-scroll-target="#uji-duncan"> <span class="header-section-number">3.3</span> Uji Duncan</a></li>
+  <li><a href="#kontras" id="toc-kontras" class="nav-link" data-scroll-target="#kontras"> <span class="header-section-number">3.4</span> Kontras</a>
+  <ul class="collapse">
+  <li><a href="#menyusun-kontras-ortogonal" id="toc-menyusun-kontras-ortogonal" class="nav-link" data-scroll-target="#menyusun-kontras-ortogonal"> <span class="header-section-number">3.4.1</span> Menyusun kontras ortogonal</a></li>
+  <li><a href="#menghitung-kontras" id="toc-menghitung-kontras" class="nav-link" data-scroll-target="#menghitung-kontras"> <span class="header-section-number">3.4.2</span> Menghitung Kontras</a></li>
+  </ul></li>
+  <li><a href="#polinomial-orthogonal" id="toc-polinomial-orthogonal" class="nav-link" data-scroll-target="#polinomial-orthogonal"> <span class="header-section-number">3.5</span> Polinomial Orthogonal</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Perbandingan Nilai Tengah Perlakuan</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>ANOVA pada RAK, RAKL, dan RBSL hanya dapat menguji ketidaknolan efek perlakuan. Semisal diketahui setidaknya salah satu perlakuan tersebut memiliki efek, lalu bagaimana? Tentu ada pertanyaan-pertanyaan lain yang menarik, misal:</p>
+<ol type="1">
+<li>Perlakuan mana yang memberi efek terbesar atau terkecil?</li>
+<li>Perlakuan mana yang memberi efek mirip?</li>
+<li>Apakah perlakuan dapat dikelompokkan?</li>
+</ol>
+<p>Dan pertanyaaan-pertanyaan lain. Pertanyaan itu dijawab <strong>uji lanjut</strong>.</p>
+<section id="lsdbnt" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="lsdbnt"><span class="header-section-number">3.1</span> LSD/BNT</h2>
+<p>Uji BNT menguji perlakuan secara berpasangan. Menurut Carmer dan Swanson (1973) di Montgomery (2017), BNT efektif mendeteksi perbedaan rataan perlakuan jika diaplikasikan **setelah* uji-F di ANOVA signifikan di taraf 5 persen. Hipotesis perbandingan BNT sebagai berikut:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;: \mu_{i}=\mu_{j}\\
+H_{1}&amp;:\mu_{i}\neq \mu_{j}
+\end{aligned}
+\]</span></p>
+<p>Dengan nilai kritis BNT sebagai berikut:</p>
+<p><span class="math display">\[
+\begin{aligned}
+LSD&amp;=t_{\alpha/2,db_{g}}S_{\bar{y}_{i.}-\bar{y}_{j.}}\\
+S_{\bar{y}_{i.}-\bar{y}_{j.}}&amp;=\sqrt{KTG\left(\frac{1}{r_{i}}+\frac{1}{r_{j}}\right)}
+\end{aligned}
+\]</span></p>
+<p>Jika ulangan sama, <span class="math inline">\(S_{\bar{y}_{i.}-\bar{y}_{j.}}=\sqrt{\frac{2KTG}{r}}\)</span> (kenapa?). Prosedur uji tersebut adalah membandingkan <span class="math inline">\(\bar{y}_{i.}-\bar{y}_{j.}\)</span> dengan nilai kritis. Implementasi di R (dari data RAL sebelumnya) sebagai berikut:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#baca sheet</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>DataRAL<span class="ot">&lt;-</span><span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1Bzm_R2Zd4Zbij7BO7LGDJW83DU6T3Wh7R38NN5DHCBs/edit?usp=sharing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>! Using an auto-discovered, cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  See gargle's "Non-interactive auth" vignette for more details:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  &lt;https://gargle.r-lib.org/articles/non-interactive-auth.html&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googlesheets4 package is using a cached token for
+  'muh.ammarsahab@apps.ipb.ac.id'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Reading from "DataRAL".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Range 'Sheet1'.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>RALMelt<span class="ot">&lt;-</span> <span class="fu">melt</span>(DataRAL,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>               <span class="co">#variabel yang membedakan tiap baris di tabulasi asli:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">id.vars=</span><span class="fu">c</span>(<span class="st">"Dosis"</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>               <span class="co">#kolom yang ingin digabung jadi 1</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">measured.vars=</span><span class="fu">as.character</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">8</span>)),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">value.name=</span><span class="st">"Perkecambahan"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(RALMelt)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">"Ulangan"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>RALMelt<span class="sc">$</span>Dosis<span class="ot">&lt;-</span><span class="fu">as.factor</span>(RALMelt<span class="sc">$</span>Dosis)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#anova</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>aov_RAL <span class="ot">&lt;-</span> <span class="fu">aov</span>(Perkecambahan <span class="sc">~</span> Dosis, <span class="at">data =</span> RALMelt)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_RAL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+Dosis        4 2556.4   639.1   51.36 3.6e-14 ***
+Residuals   35  435.5    12.4                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Gunakan library agricolae:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>LSD<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">LSD.test</span>(aov_RAL, <span class="st">"Dosis"</span>) <span class="co">#hasil anova, perlakuan</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(LSD<span class="sc">$</span>statistics[<span class="dv">6</span>]), <span class="co">#tabel 1</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(LSD<span class="sc">$</span>groups, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Rata-Rata per Taraf"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">"Kelompok"</span>)) <span class="co">#tabel 2</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">LSD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">3.580545</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Rata-Rata per Taraf</th>
+<th style="text-align: left;">Kelompok</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: left;">a</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: left;">a</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">90.25</td>
+<td style="text-align: left;">b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64</td>
+<td style="text-align: right;">85.00</td>
+<td style="text-align: left;">c</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: left;">d</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+<p>Atau susun argumen sebagai berikut,</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>LSD2<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">LSD.test</span>(RALMelt<span class="sc">$</span>Perkecambahan, RALMelt<span class="sc">$</span>Dosis,<span class="dv">35</span>,<span class="fl">12.4</span>) <span class="co">#respon, perlakuan, dbg, KTG</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(LSD2<span class="sc">$</span>statistics[<span class="dv">6</span>]) , <span class="co">#tabel 1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(LSD2<span class="sc">$</span>groups, <span class="at">col.names =</span><span class="fu">c</span>(<span class="st">"Rata-Rata per Taraf"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">"Kelompok"</span>)) <span class="co">#tabel 2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">LSD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">3.574374</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Rata-Rata per Taraf</th>
+<th style="text-align: left;">Kelompok</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: left;">a</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: left;">a</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">90.25</td>
+<td style="text-align: left;">b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64</td>
+<td style="text-align: right;">85.00</td>
+<td style="text-align: left;">c</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: left;">d</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+<p>Dapat dicek sendiri bahwa pengelompokan tersebut benar. Dapat juga dibuat visualisasi:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(LSD,<span class="at">horiz=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="03-Bab3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note, BNT menguji <em>semua</em> perlakuan secara berpasangan, sehingga tidak bisa memilih perbandingan tertentu saja (misal, rata-rata terbesar vs terkecil). Selain itu, BNT memiliki kelemahan, yaitu hanya dapat mengontrol tingkat kesalahan uji sepasang rata-rata saja. Jika ada beberapa pasang rata-rata, tingkat kesalahan berpotensial lebih besar. Banyak perbandingan <span class="math inline">\(g=k(k-1)/2\)</span> (dari permutasi), sehingga <em>family error rate</em> sebesar <span class="math inline">\(1-(1-\alpha)^g\)</span>. Perhitungan tersebut hanya merupakan kebalikan dari perhitungan <span class="math inline">\(P(\text{Tolak }H_{0}|H_{0} \text{ benar})\)</span>. <span class="math inline">\((1-\alpha)\)</span>. Jika diasumsikan perbandingan saling bebas, maka probabilitas tersebut menjadi <span class="math inline">\((1-\alpha)^g\)</span>.</p>
+</section>
+<section id="bnj" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="bnj"><span class="header-section-number">3.2</span> BNJ</h2>
+<p>Lalu, bagaimana cari membuat uji yang mengontrol <em>family error rate</em>? BNJ mengontrol kesalahan di t buah perlakuan sebesar <span class="math inline">\(\alpha\)</span>, sehingga di tiap pasangan akan menarima kesalahan sebesar <span class="math inline">\(\alpha/2g\)</span> karena uji dua arah menggunakan <span class="math inline">\(\alpha/2\)</span> dan ada g ulangan. Jika jumlah perlakuan banyak, metode ini akan sangat ekstrim. Oleh karena itu, walaupun metode ini tidak terlalu sensitif, metode ini memisahkan perlakuan yang benar-benar beda. BNJ memiliki nilai kritis:</p>
+<p><span class="math display">\[
+\begin{aligned}
+BNJ&amp;=q_{\alpha;t;db_{g}}S_{\bar{y}}\\
+S_{\bar{y}}&amp;=\sqrt{KTG/r}
+\end{aligned}
+\]</span></p>
+<p>Dengan t jumlah perlakuan, q memiliki asal statistik <em>studentized range</em>. Jika ulangan tak sama, r didekati:</p>
+<p><span class="math display">\[
+r_{h}=\frac{t}{\sum_{i=1}^t 1/r_{i}}
+\]</span></p>
+<p>Dengan langkah-langkah uji:</p>
+<ol type="1">
+<li>Urutkan rataan perlakuan dari yang terkecil sampai yang terbesar atau sebaliknya</li>
+<li>Nilai awal i=1 (dari kiri) dan j =1 (dari kanan)</li>
+<li>Hitung beda antara rataan perlakuan terkecil ke-i dengan terbesar ke-j kemudian bandingkan dengan nilai BNJ, jika beda rataan perlakuan lebih kecil lanjutkan ke langkah 5 (taktolak <span class="math inline">\(H_{0}\)</span>) dan jika tidak lanjutkan ke langkah 4</li>
+<li>Berikan j = j+1, jika j&lt;p kembali ke langkah 3</li>
+<li>Buatlah garis mulai rataan perlakuan ke-i sampai ke perlakuan ke-j</li>
+<li>Berikan I = i+1, jika i&lt;p kembali ke langkah 3</li>
+<li>Stop</li>
+</ol>
+<p>Implementasi uji tersebut di R adalah:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(aov_RAL, <span class="st">'Dosis'</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tukey<span class="sc">$</span>Dosis, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">" "</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">" Bawah"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">" Atas"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">" "</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" Taraf"</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">"Beda"</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">"Batas Selang Kepercayaan"</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">"P-Value"</span><span class="ot">=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "> Taraf</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Beda</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Batas Selang Kepercayaan</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">P-Value</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;">   </th>
+   <th style="text-align:right;">  Bawah </th>
+   <th style="text-align:right;">  Atas </th>
+   <th style="text-align:right;">   </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 16-0 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> -5.0708064 </td>
+   <td style="text-align:right;"> 5.0708064 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 32-0 </td>
+   <td style="text-align:right;"> -9.75 </td>
+   <td style="text-align:right;"> -14.8208064 </td>
+   <td style="text-align:right;"> -4.6791936 </td>
+   <td style="text-align:right;"> 0.0000306 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48-0 </td>
+   <td style="text-align:right;"> -20.00 </td>
+   <td style="text-align:right;"> -25.0708064 </td>
+   <td style="text-align:right;"> -14.9291936 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 64-0 </td>
+   <td style="text-align:right;"> -15.00 </td>
+   <td style="text-align:right;"> -20.0708064 </td>
+   <td style="text-align:right;"> -9.9291936 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 32-16 </td>
+   <td style="text-align:right;"> -9.75 </td>
+   <td style="text-align:right;"> -14.8208064 </td>
+   <td style="text-align:right;"> -4.6791936 </td>
+   <td style="text-align:right;"> 0.0000306 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48-16 </td>
+   <td style="text-align:right;"> -20.00 </td>
+   <td style="text-align:right;"> -25.0708064 </td>
+   <td style="text-align:right;"> -14.9291936 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 64-16 </td>
+   <td style="text-align:right;"> -15.00 </td>
+   <td style="text-align:right;"> -20.0708064 </td>
+   <td style="text-align:right;"> -9.9291936 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48-32 </td>
+   <td style="text-align:right;"> -10.25 </td>
+   <td style="text-align:right;"> -15.3208064 </td>
+   <td style="text-align:right;"> -5.1791936 </td>
+   <td style="text-align:right;"> 0.0000130 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 64-32 </td>
+   <td style="text-align:right;"> -5.25 </td>
+   <td style="text-align:right;"> -10.3208064 </td>
+   <td style="text-align:right;"> -0.1791936 </td>
+   <td style="text-align:right;"> 0.0393966 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 64-48 </td>
+   <td style="text-align:right;"> 5.00 </td>
+   <td style="text-align:right;"> -0.0708064 </td>
+   <td style="text-align:right;"> 10.0708064 </td>
+   <td style="text-align:right;"> 0.0548433 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Cara membaca tabel tersebut adalah melihat apakah selang kepercayaan (lwr dan upper) memiliki tanda positif dan negatif. Jika ada dua tanda, berarti nol termasuk di selang kepercayaan, sehingga kita belum dapat menyatakan rataan perlakuan tersebut beda. Proses tersebut dapat divisualisikan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tukey, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'dark blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="03-Bab3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Analisis di python dapat dimulai dengan melakukan reshape kepada data. Detail dari proses ini sudah dijelaskan sebelumnya:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>RALData <span class="op">=</span> pd.read_csv(<span class="st">"https://docs.google.com/spreadsheets/d/e/2PACX-1vT8sPRuEulqieCMFJK4sKReRjtuXOQD_xwTlI3RB619yYwSWwb776-Dmu5UY5P44hy5MsMPJPsjcZUp/pub?gid=0&amp;single=true&amp;output=csv"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>RALMeltpy<span class="op">=</span>pd.melt(RALData, id_vars<span class="op">=</span>[<span class="st">'Dosis'</span>], value_vars<span class="op">=</span>[<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">9</span>)])</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>RALMeltpy.rename(columns <span class="op">=</span> {<span class="st">'variable'</span>:<span class="st">'Ulangan'</span>, <span class="st">'value'</span>:<span class="st">'Produksi'</span>}, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>RALMeltpy.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Dosis Ulangan  Produksi
+0      0       1       100
+1     16       1       100
+2     32       1        90
+3     48       1        80
+4     64       1        90</code></pre>
+</div>
+</div>
+<p>Lalu, statsmodels memiliki fungsi <code>MultiComparison(respon, perlakuan)</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>C:\Users\Acer\AppData\Local\R\win-library\4.2\reticulate\python\rpytools\loader.py:39: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  module = _import(
+C:\Users\Acer\AppData\Local\Programs\Python\PYTHON~2\lib\site-packages\statsmodels\compat\pandas.py:65: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import Int64Index as NumericIndex</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.stats.multicomp <span class="im">as</span> multi </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>mcDosis <span class="op">=</span> multi.MultiComparison(RALMeltpy[<span class="st">'Produksi'</span>],RALMeltpy[<span class="st">'Dosis'</span>])</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>Results <span class="op">=</span> mcDosis.tukeyhsd()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Multiple Comparison of Means - Tukey HSD, FWER=0.05  
+======================================================
+group1 group2 meandiff p-adj   lower    upper   reject
+------------------------------------------------------
+     0     16      0.0    0.9  -5.0708   5.0708  False
+     0     32    -9.75  0.001 -14.8208  -4.6792   True
+     0     48    -20.0  0.001 -25.0708 -14.9292   True
+     0     64    -15.0  0.001 -20.0708  -9.9292   True
+    16     32    -9.75  0.001 -14.8208  -4.6792   True
+    16     48    -20.0  0.001 -25.0708 -14.9292   True
+    16     64    -15.0  0.001 -20.0708  -9.9292   True
+    32     48   -10.25  0.001 -15.3208  -5.1792   True
+    32     64    -5.25 0.0394 -10.3208  -0.1792   True
+    48     64      5.0 0.0549  -0.0708  10.0708  False
+------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Hasil sama seperti R. Hasil juga dapat di-plot dengan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>tukPlot<span class="op">=</span>Results.plot_simultaneous()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="03-Bab3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>Tingkat kepercayaan juga dapat diubah:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Results <span class="op">=</span> mcDosis.tukeyhsd(alpha<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Multiple Comparison of Means - Tukey HSD, FWER=0.01  
+======================================================
+group1 group2 meandiff p-adj   lower    upper   reject
+------------------------------------------------------
+     0     16      0.0    0.9  -6.2115   6.2115  False
+     0     32    -9.75  0.001 -15.9615  -3.5385   True
+     0     48    -20.0  0.001 -26.2115 -13.7885   True
+     0     64    -15.0  0.001 -21.2115  -8.7885   True
+    16     32    -9.75  0.001 -15.9615  -3.5385   True
+    16     48    -20.0  0.001 -26.2115 -13.7885   True
+    16     64    -15.0  0.001 -21.2115  -8.7885   True
+    32     48   -10.25  0.001 -16.4615  -4.0385   True
+    32     64    -5.25 0.0394 -11.4615   0.9615  False
+    48     64      5.0 0.0549  -1.2115  11.2115  False
+------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="uji-duncan" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="uji-duncan"><span class="header-section-number">3.3</span> Uji Duncan</h2>
+<p>Uji Duncan intinya mirip dengan uji Tukey, tetapi nilai pembanding di uji Duncan meningkat tergantung jarak dari perlakuan yang dibandingkan. Uji tersebut memiliki nilai kritis:</p>
+<p><span class="math display">\[
+\begin{aligned}
+R_{p}&amp;=r_{\alpha;t;db_{g}}S_{\bar{y}}\\
+S_{\bar{y}}&amp;=\sqrt{KTG/r}
+\end{aligned}
+\]</span></p>
+<p>Dan jika jumlah ulangan tak sama dapat didekati rataan harmonik juga. t adalah beda urutan perlakuan kedua kelompok. Misal membandingkan perlakuan terbesar (1) dan terkecil (4) dari 4 perlakuan akan menghasilkan t=3. Langkah uji mirip dengan Tukey, yaitu:</p>
+<ol type="1">
+<li>Urutkan rataan perlakuan dari yang terkecil sampai yang terbesar atau sebaliknya</li>
+<li>Nilai awal i=1 (dari kiri) dan j =1 (dari kanan)</li>
+<li>Hitung beda antara rataan perlakuan terkecil ke-i dengan terbesar ke-j kemudian bandingkan dengan nilai BNJ, jika beda rataan perlakuan lebih kecil lanjutkan ke langkah 5 (taktolak <span class="math inline">\(H_{0}\)</span>) dan jika tidak lanjutkan ke langkah 4</li>
+<li>Berikan j = j+1, jika j&lt;p kembali ke langkah 3</li>
+<li>Buatlah garis mulai rataan perlakuan ke-i sampai ke perlakuan ke-j</li>
+<li>Berikan I = i+1, jika i&lt;p kembali ke langkah 3</li>
+<li>Stop</li>
+</ol>
+<p>Langsung uji:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>duncan <span class="ot">&lt;-</span> <span class="fu">duncan.test</span>(aov_RAL, <span class="st">'Dosis'</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="co">#Bisa Model aov atau lm</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(duncan<span class="sc">$</span>duncan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Table </th>
+   <th style="text-align:right;"> CriticalRange </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:right;"> 2.871006 </td>
+   <td style="text-align:right;"> 3.580545 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:right;"> 3.018061 </td>
+   <td style="text-align:right;"> 3.763944 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:right;"> 3.113890 </td>
+   <td style="text-align:right;"> 3.883455 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:right;"> 3.182680 </td>
+   <td style="text-align:right;"> 3.969247 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(duncan<span class="sc">$</span>groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Perkecambahan </th>
+   <th style="text-align:left;"> groups </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:right;"> 100.00 </td>
+   <td style="text-align:left;"> a </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:right;"> 100.00 </td>
+   <td style="text-align:left;"> a </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 32 </td>
+   <td style="text-align:right;"> 90.25 </td>
+   <td style="text-align:left;"> b </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 64 </td>
+   <td style="text-align:right;"> 85.00 </td>
+   <td style="text-align:left;"> c </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:right;"> 80.00 </td>
+   <td style="text-align:left;"> d </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Dan dapat divisualisasikan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(duncan, <span class="at">horiz =</span> <span class="cn">TRUE</span>, <span class="at">las =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="03-Bab3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note bahwa Uji Tukey menyatakan dosis 64 tak beda dengan dosis 48, padahal uji Duncan dan LSD menyatakan dosis tersebut beda. Hal tersebut menunjukkan kurang sensitifnya uji Tukey.</p>
+</section>
+<section id="kontras" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="kontras"><span class="header-section-number">3.4</span> Kontras</h2>
+<p>Kontras merupakan kombinasi linear dari rataan perlakuan. Sebuah kombinasi linear tersusun atas seperangkat objek. Setiap objek dikalikan dengan suatu konstanta, dan hasil perkalian semua objek dan konstanta ditambahkan. Pada intinya, setiap rataan perlakuan akan dikalikan dengan suatu konstanta dan hasil perkalian tersebut akan ditambahkan. Bentuk umum kontras adalah:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;: c_{1}\mu_{1}+c_{2}\mu_{2}+\cdots+c_{t}\mu_{t}=\sum_{i=1}^t c_{i}\mu_{i}=0\\
+H_{1}&amp;: c_{1}\mu_{1}+c_{2}\mu_{2}+\cdots+c_{t}\mu_{t}=\sum_{i=1}^t c_{i}\mu_{i}\neq 0
+\end{aligned}
+\]</span></p>
+<p>Yang diduga dengan</p>
+<p><span class="math display">\[
+C=\sum_{i=1}^t c_{i}y_{i.}
+\]</span></p>
+<p>Dengan <span class="math inline">\(y_{i.}\)</span> adalah total di perlakuan ke-i. Kontras memiliki syarat:</p>
+<p><span class="math display">\[
+\sum_{i=1}^t c_{i}=0
+\]</span></p>
+<p>Selain itu, kontras disebut <em>ortogonal</em> jika hasil suatu uji tidak memengaruhi hasil uji lain. Sebagai contoh, kontras:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H^{(1)}_0\colon \mu_1 = \mu_2\\
+H^{(2)}_0\colon \mu_1 = \mu_3\\
+H^{(3)}_0\colon \mu_2 = \mu_3\\
+\end{aligned}
+\]</span></p>
+<p>Tidak ortogonal. Bayangkan bahwa kita menolak <span class="math inline">\(H_{0}^3\)</span>, tetapi tak tolak hipotesis lainnya. Ini merupakan kontradiksi karena <span class="math inline">\(\mu_{1}=\mu_{2}\)</span> dan <span class="math inline">\(\mu_{1}=\mu_{3}\)</span> secara logis memberi implikasi <span class="math inline">\(\mu_{2}=\mu_{3}\)</span>. Namun, uji mengatakan sebaliknya.</p>
+<p>Untuk melihat kenapa hal tersebut terjadi, kontras dapat dilihat lebih lanjut:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H^{(1)}_0\colon 1\mu_1-1\mu_{2}+0\mu_{3} = 0\\
+H^{(2)}_0\colon 1\mu_1+0\mu_2-1\mu_3=0\\
+H^{(3)}_0\colon 0\mu_1+1\mu_2-1\mu_3=0\\
+\end{aligned}
+\]</span></p>
+<p>Dapat dengan mudah diverifikasi bahwa semua <span class="math inline">\(\sum_{i=1}^t c_{i}\)</span> adalah nol. Namun, jika kita kalikan kontras pertama (<span class="math inline">\(c_{i}\)</span>) dan kontras kedua (<span class="math inline">\(d_{i}\)</span>) serta melihat hasilnya, maka kita akan temukan <span class="math inline">\(\sum_{i=1}^t c_{i}d_{i}=1+0+0=1\neq 0\)</span>. Bandingkan dengan contoh ini:</p>
+<blockquote class="blockquote">
+<p>Sebuah percobaan menguji efek pemberian nitrogen pada pertumbuhan rumput. Perlakuan dalam percobaan tersebut ada empat, yaitu tidak diberi nitrogen sebagai kontrol (1), diberi nitrogen di musim gugur (2), diberi nitrogen di musim semi (3), dan diberikan pada kedua musim (4). Ingin diketahui:</p>
+<ol type="1">
+<li>Apakah terdapat perbedaan pertumbuhan rumput dari yang tidak diberi nitrogen dengan diberi nitrogen?</li>
+<li>Apakah ada perbedaan pertumbuhan rumput jika diberikan nitrogen pada saat musim gugur dengan musim semi?</li>
+<li>Apakah ada perbedaan pertumbuhan rumput jika diberikan pada saat musim gugur atau musim semi dengan diberikan pada kedua musim tersebut?</li>
+</ol>
+</blockquote>
+<p>Kontras tersebut dapat disusun:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H^{(1)}_0\colon 3\mu_1-1\mu_{2}-1\mu_{3}-1\mu_{4} = 0\\
+H^{(2)}_0\colon 0\mu_1+1\mu_{2}-1\mu_{3}-0\mu_{4}=0\\
+H^{(3)}_0\colon 0\mu_1+1\mu_2+1\mu_3-2\mu_{4}=0\\
+\end{aligned}
+\]</span></p>
+<p>Alasan penyusunan kontras sebagai berikut dapat ditelusuri dari beberapa prinsip:</p>
+<ol type="1">
+<li>Di sebuah kontras, perlakuan yang tidak ingin dibandingkan mendapatkan <span class="math inline">\(c_{i}=2\)</span>. Misal, di kontras kedua hanya dibandingkan musim gugur (<span class="math inline">\(\mu_{2}\)</span>) dan musim semi (<span class="math inline">\(\mu_{3}\)</span>), sehingga koefisien di tanpa nitrogen dan kedua musim (<span class="math inline">\(\mu_{1},\mu_{4}\)</span>) nol. Begitu juga di kontras ketiga, perlakuan tanpa nitrogen tidak ingin dibandingkan sehingga koefisiennya nol.</li>
+<li>Pastikan bobot tiap perlakuan sama. Suatu kontras pada dasarnya membagi perlakuan menjadi dua kelompok yang hendak dibandingkan. Namun, agar perbandingan tersebut adil, bobot perlakuan harus sama. Misal, di hipotesis pertama, hanya ada 1 perlakuan tanpa nitrogen sedangkan ada 3 perlakuan dengan nitrogen. Jika kita membandingkan rata-rata 1 perlakuan tanpa nitrogen dengan hasil tambah <em>tiga</em> perlakuan dengan nitrogen, pasti tidak adil. Anggap saja <span class="math inline">\(\mu_{1}=\mu_{2}=\mu_{3}=\mu_{4}\)</span>, seharusnya kontras menunjukkan sisi kiri sama dengan sisi kanan. Namun, jika kita melakukan pertambahan secara naif, akan muncul perbandingan <span class="math inline">\(\mu_{1}\neq3\mu_{1}\)</span>. Oleh karena itu <span class="math inline">\(\mu_{1}\)</span> harus kita boboti 3 agar perbandingannya adil. Dalam kasus <span class="math inline">\(H_{0}\)</span> benar tadi, pembobotan <span class="math inline">\(\mu_{1}\)</span> dengan 3 menghasilkan <span class="math inline">\(3\mu_{1}=3\mu_{1}\)</span>.</li>
+<li>Pastikan tanda antara kelompok berbeda. Satu kelompok akan memiliki tanda positif dan satu kelompok memiliki tanda negatif. Ini dikarenakan jumlah koefisien nol sehingga perlu tanda positif dan negatif untuk menghasilkan angka tersebut.</li>
+</ol>
+<p>Sekarang, dapat dipikirkan secara logis implikasi dari tiap uji:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H^{(1)}_0&amp;\colon \mu_1=\frac{\mu_{2}+\mu_{3}+\mu_{4}}{3}\\
+H^{(2)}_0&amp;\colon \mu_{2}=\mu_{3}\\
+H^{(3)}_0&amp;\colon \frac{\mu_2+\mu_3}{2}=\mu_{4}\\
+\end{aligned}
+\]</span></p>
+<p>Tidak ada hipotesis yang saling berkontradiksi. Jika <span class="math inline">\(\mu_{2}\)</span> tidak sama dengan <span class="math inline">\(\mu_{3}\)</span>, misal, hipotesis pertama dan ketiga masih dapat benar ataupun salah. Jika dijabarkan dalam perkataan, pengujian mengenai efek dari pemberian nitrogen dibandingkan dengan tidak sama sekali tidak memberi informasi mengenai efek pemberian nitrogen di dua musim dibandingkan dengan satu musim. Begitu juga, kedua uji tersebut tidak memberi informasi mengenai efek perbandingan nitrogen di musim semi atau gugur.</p>
+<p>Secara formal, dapat kita lihat bahwa <span class="math inline">\(\sum_{i=1}^t c_{i}d_{i}=0\)</span> untuk tiap kombinasi kontras. Dari aljabar linear, jika <strong>c</strong> dan <strong>d</strong> merupakan vektor, ini sama dengan hasil kali transpose <strong>c</strong> dengan <strong>d</strong>. Maka, buktikan di R:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>kontras1<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>kontras2<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>kontras3<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#kali vektor</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(kontras1)<span class="sc">%*%</span>kontras2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    0</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(kontras1)<span class="sc">%*%</span>kontras3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    0</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(kontras2)<span class="sc">%*%</span>kontras3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    0</code></pre>
+</div>
+</div>
+<p>Oleh karena itu, kontras akan orthogonal jika <span class="math inline">\(\sum_{i=1}^t c_{i}d_{i}=0\)</span>. Keortogonalan berarti hasil satu uji bebas dari uji lain, sehingga jumlah kuadrat perlakuan dapat dipartisi.</p>
+<section id="menyusun-kontras-ortogonal" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="menyusun-kontras-ortogonal"><span class="header-section-number">3.4.1</span> Menyusun kontras ortogonal</h3>
+<p>Misalkan ada contoh:</p>
+<blockquote class="blockquote">
+<p>Ingin dibandingkan 5 populasi dari data. Sebelumnya, kita memiliki alasan untuk percaya bahwa populasi 2 dan 3 paling dekat. Populasi 4 dan 5 juga dekat, tetapi tidak sedekat populasi 2 dan 3. Populasi 1 lebih dekat ke populasi 2 dan 3 daripada populasi 4 dan 5.</p>
+</blockquote>
+<p>Kedekatan tersebut digambarkan dalam diagram:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Gambar/formula_59.gif" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Diagram pengelompokan populasi. Sumber: Department of Statistics, Pennsylvania State University (online.stat.psu.edu).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dari grafik dan soal tersebut, muncul empat pertanyaan: 1. Apakah populasi 2 dan 3 (yang dianggap sekelompok) beda? (D) 2. Apakah populasi 4 dan 5 beda? (C) 3. Apakah populasi 1 beda dengan populasi 2, 3? (B) 4. Apakah populasi 1, 2, 3, beda dengan populasi 4 dan 5? (A)</p>
+<p>Oleh karena itu, dapat dibentuk kontras:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Kontras</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">A</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">C</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">D</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>Keortogonalan kontras tersebut dapat dicek melalui matriks ragam peragam:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>C<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>D<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>contrasts<span class="ot">&lt;-</span><span class="fu">cbind</span>(A,B,C,D)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(contrasts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    A   B   C   D
+A 7.5 0.0 0.0 0.0
+B 0.0 1.5 0.0 0.0
+C 0.0 0.0 0.5 0.0
+D 0.0 0.0 0.0 0.5</code></pre>
+</div>
+</div>
+<p>Jika matriks diagonal, ini berarti koragam nol dan kontras saling orthogonal. Secara logis, hasil tiap uji tidak memberi informasi mengenai hasil uji lainnya.</p>
+<p>Contoh lain untuk mengilustrasikan kontras orthogonal adalah sebagai berikut</p>
+<blockquote class="blockquote">
+<p>Efektivitas suatu obat hendak dicek. Perlakuan 1 merupakan obat A berdosis rendah, perlakuan 2 merupakan obat A berdosis tinggi, perlakuan 3 merupakan obat B berdosis rendah, dan perlakuan 4 merupakan obat B berdosis tinggi.</p>
+</blockquote>
+<p>Tentu, terlihat beberapa arah perbandingan:</p>
+<ol type="1">
+<li>Obat - apakah obat A dan B beda?</li>
+<li>Dosis - apakah dosis tinggi dan rendah beda?</li>
+<li>Interaksi - apakah efek obat bergantung pada dosis?</li>
+</ol>
+<p>Sehingga dibuat kontras:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Kontras</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Obat</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Dosis</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Interaksi</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Cek ortogonalitas</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Obat<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Dosis<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>Interaksi<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>contrasts2<span class="ot">&lt;-</span><span class="fu">cbind</span>(Obat,Dosis,Interaksi)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(contrasts2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Obat    Dosis Interaksi
+Obat      1.333333 0.000000  0.000000
+Dosis     0.000000 1.333333  0.000000
+Interaksi 0.000000 0.000000  1.333333</code></pre>
+</div>
+</div>
+<p>Alasan penyusunan kontras obat dan dosis seperti di tabel cukup masuk akal. Bandingkan obat A dan B atau kelompok dosis tinggi dan dosis rendah. Penyusunan kontras interaksi sebenarnya sama saja dengan mengalikan efek-efek sebelumnya. Telah disusun obat A bertanda positif (+) dan obat B bertanda negatif (-). Dosis rendah bertanda positif (+) dan dosis tinggi bertanda negatif. Maka, kalikan saja tanda tersebut.</p>
+<p>Sebagai contoh lain, misal diberi tabel rata-rata perlakuan sebagai berikut:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Perlakuan</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">C</th>
+<th style="text-align: right;">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Rata-rata</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">12.3</td>
+<td style="text-align: right;">10.8</td>
+<td style="text-align: right;">6.8</td>
+</tr>
+</tbody>
+</table>
+<p>Dapat dilihat bahwa D tampak sangat berbeda dari perlakuan lain. A dan B tampak sangat mirip. C agak dekat ke A dan B. Oleh karena itu, susun kontras:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Kontras</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">C</th>
+<th style="text-align: right;">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">D vs ABC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">c vs AB</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">A vs B</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>Orthogonalitas kontras tersebut dapat diuji:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>DvABC<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>CvAB<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="dv">0</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>AvB<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>contrasts3<span class="ot">&lt;-</span><span class="fu">cbind</span>(DvABC,CvAB,AvB)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(contrasts3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      DvABC CvAB       AvB
+DvABC     4    0 0.0000000
+CvAB      0    2 0.0000000
+AvB       0    0 0.6666667</code></pre>
+</div>
+</div>
+</section>
+<section id="menghitung-kontras" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="menghitung-kontras"><span class="header-section-number">3.4.2</span> Menghitung Kontras</h3>
+<p>Setelah mengetahui cara membuat kontras, bagaimana perhitungannya? Untuk t-1 kontras orthogonal, dapat dilakukan uji F, dengan statistik uji sebagai berikut:</p>
+<p><span class="math display">\[
+\begin{aligned}
+JKC&amp;=KTC=\frac{\left(\sum_{i=1}^t c_{i}Y_{i.}\right)^2}{r\sum_{i=1}^t c_{i}^2}\\
+F&amp;=KTC/KTG=F_{\alpha,1,db_{g}}
+\end{aligned}
+\]</span></p>
+<p>Dapat dipraktekkan di R:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>dataKontras<span class="ot">&lt;-</span><span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/19lOrOm5Vb7ATet8tR6Xq5NEOnB1J2Jj7HXPDy6Sv9og/edit?usp=sharing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Reading from "Kontras".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Range 'Sheet1'.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(dataKontras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Perlakuan </th>
+   <th style="text-align:right;"> Kelompok 1 </th>
+   <th style="text-align:right;"> Kelompok 2 </th>
+   <th style="text-align:right;"> Kelompok 3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Kontrol </td>
+   <td style="text-align:right;"> 9.9 </td>
+   <td style="text-align:right;"> 12.3 </td>
+   <td style="text-align:right;"> 11.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Fall </td>
+   <td style="text-align:right;"> 11.4 </td>
+   <td style="text-align:right;"> 12.9 </td>
+   <td style="text-align:right;"> 12.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spring </td>
+   <td style="text-align:right;"> 12.1 </td>
+   <td style="text-align:right;"> 13.4 </td>
+   <td style="text-align:right;"> 12.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Split </td>
+   <td style="text-align:right;"> 10.1 </td>
+   <td style="text-align:right;"> 12.2 </td>
+   <td style="text-align:right;"> 11.9 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Tentu, data harus di-melt:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>KontrasMelted<span class="ot">&lt;-</span><span class="fu">melt</span>(dataKontras,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">id.vars=</span><span class="fu">c</span>(<span class="st">"Perlakuan"</span>),</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">measured.vars=</span><span class="fu">c</span>(<span class="st">"Kelompok 1"</span>, <span class="st">"Kelompok 2"</span>,<span class="st">"Kelompok 3"</span>),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">value.name=</span><span class="st">"Pertumbuhan"</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(KontrasMelted)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">"Kelompok"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Lalu, pastikan perlakuan dan kelompok adalah faktor dan buat kontras:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#faktor</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>KontrasMelted<span class="sc">$</span>Perlakuan<span class="ot">&lt;-</span><span class="fu">as.factor</span>(KontrasMelted<span class="sc">$</span>Perlakuan)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>KontrasMelted<span class="sc">$</span>Kelompok<span class="ot">&lt;-</span><span class="fu">as.factor</span>(KontrasMelted<span class="sc">$</span>Kelompok)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(KontrasMelted<span class="sc">$</span>Perlakuan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Fall"    "Kontrol" "Split"   "Spring" </code></pre>
+</div>
+</div>
+<p>Kita sudah mengetahui urutan faktor di R. Oleh karena itu, buat kontras:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#buat kontras</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(KontrasMelted<span class="sc">$</span>Perlakuan) <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(KontrasMelted<span class="sc">$</span>Perlakuan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1] [,2] [,3]
+Fall       1    1    1
+Kontrol   -3    0    0
+Split      1    0   -2
+Spring     1   -1    1</code></pre>
+</div>
+</div>
+<p>Lakukan ANOVA dan partisi:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>aovKontras<span class="ot">&lt;-</span><span class="fu">aov</span>(Pertumbuhan<span class="sc">~</span>Perlakuan<span class="sc">+</span>Kelompok,KontrasMelted)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary.aov</span>(aovKontras, <span class="at">split =</span> <span class="fu">list</span> (<span class="at">Perlakuan =</span> <span class="fu">list</span>(<span class="st">'K vs FSpSpl'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'F vs Sp'</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">'FSp vs Spl'</span> <span class="ot">=</span> <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Perlakuan                 3  5.200   1.733  19.439 0.001713 ** 
+  Perlakuan: K vs FSpSpl  1  2.151   2.151  24.125 0.002679 ** 
+  Perlakuan: F vs Sp      1  0.327   0.327   3.664 0.104123    
+  Perlakuan: FSp vs Spl   1  2.722   2.722  30.530 0.001480 ** 
+Kelompok                  2  7.172   3.586  40.215 0.000335 ***
+Residuals                 6  0.535   0.089                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Interpretasi dari partisi tersebut sesuai dengan hipotesis yang diuji. Jika menggunakan <span class="math inline">\(\alpha=5\%\)</span>, dinyatakan bahwa rata-rata kontrol dengan perlakuan lainnya berbeda signifikan, begitu juga rata-rata 2 musim dengan 1 musim. Namun, belum ditemukan bukti cukup untuk menyatakan rata-rata musim semi dan gugur berbeda signifikan.</p>
+</section>
+</section>
+<section id="polinomial-orthogonal" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="polinomial-orthogonal"><span class="header-section-number">3.5</span> Polinomial Orthogonal</h2>
+<p>Polinomial orthogonal dilakukan untuk menguji tren pengaruh perlakuan terhadap respon jika perlakuan bersifat kuantitatif dan berjarak sama. Model polinomial orthogonal dapat berbentuk linear, kuadratik, kubik, kuartik, dan lain-lain:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Linear: }&amp; Y_{i}=\beta_0+\beta_1X_i+\varepsilon_i\\
+\text{Kuadratik: }&amp; Y_{i}=\beta_0+\beta_1X_i+\beta_2X_i^2+\varepsilon_i\\
+\text{Kubik: }&amp; Y_{i}=\beta_0+\beta_1X_i+\beta_2X_i^2+\beta_3X_i^3+\varepsilon_i\\
+\end{aligned}
+\]</span></p>
+<p>Dengan bentuk umum polinomial ordo ke-N adalah:</p>
+<p><span class="math display">\[
+Y=\alpha_0P_0(X)+\alpha_1P_1(X)+\alpha_2P_2(X)+\ldots+\alpha_nP_n(X)+\varepsilon_i
+\]</span></p>
+<p>Dengan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P_0&amp;=1\\
+P_1&amp;=\lambda_1\left[\frac{X-\bar{X}}{d}\right]\\
+P_2&amp;=\lambda_2\left[\left(\frac{X-\bar{X}}{d}\right)^2-\left(\frac{a^2-1}{12}\right)\right]\\
+P_{n+1}(X)&amp;=\lambda_{n+1}\left[P_1(X)P_n(X)-\frac{n^2(a^2-n^2)}{4(4n^2-1)}P_{n-1}(X)\right]
+\end{aligned}
+\]</span></p>
+<p>Dengan:</p>
+<ol type="1">
+<li><span class="math inline">\(a\)</span>: banyaknya taraf faktor</li>
+<li><span class="math inline">\(d\)</span>: jarak antar faktor</li>
+<li><span class="math inline">\(n\)</span>: polinomial ordo ke-n</li>
+</ol>
+<p>Tabel kontras bagi polinomial orthogonal untuk <code>a</code> jumlah faktor dapat dihasilkan dengan <code>contr.poly(a)</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">contr.poly</span>(<span class="dv">5</span>), <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">"Linear"</span>,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Kuadratik"</span>,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Kubik"</span>,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Kuartik"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Linear </th>
+   <th style="text-align:right;"> Kuadratik </th>
+   <th style="text-align:right;"> Kubik </th>
+   <th style="text-align:right;"> Kuartik </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> -0.6324555 </td>
+   <td style="text-align:right;"> 0.5345225 </td>
+   <td style="text-align:right;"> -0.3162278 </td>
+   <td style="text-align:right;"> 0.1195229 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -0.3162278 </td>
+   <td style="text-align:right;"> -0.2672612 </td>
+   <td style="text-align:right;"> 0.6324555 </td>
+   <td style="text-align:right;"> -0.4780914 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> -0.5345225 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 0.7171372 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.3162278 </td>
+   <td style="text-align:right;"> -0.2672612 </td>
+   <td style="text-align:right;"> -0.6324555 </td>
+   <td style="text-align:right;"> -0.4780914 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.6324555 </td>
+   <td style="text-align:right;"> 0.5345225 </td>
+   <td style="text-align:right;"> 0.3162278 </td>
+   <td style="text-align:right;"> 0.1195229 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Untuk memperlihatkan cara kerja polinomial orthogonal, dapat dibuat suatu data yang memiliki taraf-taraf faktor kuantitatif:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>kerapatan <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>hasil <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.2</span>, <span class="fl">11.4</span>, <span class="fl">12.4</span>,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>           <span class="fl">16.0</span>, <span class="fl">15.5</span>, <span class="fl">16.5</span>, </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>           <span class="fl">18.6</span>, <span class="fl">20.2</span>, <span class="fl">18.2</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>           <span class="fl">17.6</span>, <span class="fl">19.3</span>, <span class="fl">17.1</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>           <span class="fl">18.0</span>, <span class="fl">16.4</span>, <span class="fl">16.6</span>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(kerapatan, hasil)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   15 obs. of  2 variables:
+ $ kerapatan: Factor w/ 5 levels "10","20","30",..: 1 1 1 2 2 2 3 3 3 4 ...
+ $ hasil    : num  12.2 11.4 12.4 16 15.5 16.5 18.6 20.2 18.2 17.6 ...</code></pre>
+</div>
+</div>
+<p>Sebelum menganalisis menggunakan polinomial, plot data sebagai cara eksploratif:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data2,<span class="fu">aes</span>(<span class="at">x=</span>kerapatan,<span class="at">y=</span>hasil))<span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span>mean, <span class="at">colour=</span><span class="st">"darkblue"</span>, <span class="at">geom=</span><span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="03-Bab3_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Tampaknya pengaruh kerapatan berbentuk kuadratik karena plot menarik, mencapai puncak, lalu menurun. Lalu, definisikan kontras dan lakukan ANOVA.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(data2<span class="sc">$</span>kerapatan) <span class="ot">&lt;-</span> <span class="fu">contr.poly</span>(<span class="dv">5</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>anova2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(hasil <span class="sc">~</span> kerapatan, <span class="at">data =</span> data2)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary.aov</span>(anova2, <span class="at">split =</span> <span class="fu">list</span> (<span class="at">kerapatan =</span> <span class="fu">list</span>(<span class="st">'Linear'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'Kuadratik'</span> <span class="ot">=</span> <span class="dv">2</span>,</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">'Kubik'</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">'Kuartik'</span> <span class="ot">=</span> <span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+kerapatan               4  87.60   21.90  29.278 1.69e-05 ***
+  kerapatan: Linear     1  43.20   43.20  57.754 1.84e-05 ***
+  kerapatan: Kuadratik  1  42.00   42.00  56.150 2.08e-05 ***
+  kerapatan: Kubik      1   0.30    0.30   0.401    0.541    
+  kerapatan: Kuartik    1   2.10    2.10   2.807    0.125    
+Residuals              10   7.48    0.75                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Nampaknya pengaruh kerpatan pada hasil berupa kuadratik, yang dapat dimodelkan sebagai:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hasil<span class="sc">~</span>kerapatan,data2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hasil ~ kerapatan, data = data2)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -0.90  -0.55  -0.40   0.45   1.30 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  16.4000     0.2233  73.441 5.35e-15 ***
+kerapatan.L   3.7947     0.4993   7.600 1.84e-05 ***
+kerapatan.Q  -3.7417     0.4993  -7.493 2.08e-05 ***
+kerapatan.C   0.3162     0.4993   0.633    0.541    
+kerapatan^4   0.8367     0.4993   1.676    0.125    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8649 on 10 degrees of freedom
+Multiple R-squared:  0.9213,    Adjusted R-squared:  0.8899 
+F-statistic: 29.28 on 4 and 10 DF,  p-value: 1.69e-05</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+Y=16.400+3.7947X_i-3.7417X_i^2   
+\]</span></p>
+<p>Kontras juga dapat diinput secara manual.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-Bab2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Percobaan Faktor Tunggal</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-Bab4.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Uji Asumsi</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<pre class="markdown" data-shortcodes="false"><code># Perbandingan Nilai Tengah Perlakuan
+ANOVA pada RAK, RAKL, dan RBSL hanya dapat menguji ketidaknolan efek perlakuan. Semisal diketahui setidaknya salah satu perlakuan tersebut memiliki efek, lalu bagaimana? Tentu ada pertanyaan-pertanyaan lain yang menarik, misal:
+
+1. Perlakuan mana yang memberi efek terbesar atau terkecil?
+2. Perlakuan mana yang memberi efek mirip?
+3. Apakah perlakuan dapat dikelompokkan?
+
+Dan pertanyaaan-pertanyaan lain. Pertanyaan itu dijawab **uji lanjut**.
+
+## LSD/BNT
+
+Uji BNT menguji perlakuan secara berpasangan. Menurut Carmer dan Swanson (1973) di Montgomery (2017), BNT efektif mendeteksi perbedaan rataan perlakuan jika diaplikasikan **setelah* uji-F di ANOVA signifikan di taraf 5 persen. Hipotesis perbandingan BNT sebagai berikut:
+$$
+\begin{aligned}
+H_{0}&amp;: \mu_{i}=\mu_{j}\\
+H_{1}&amp;:\mu_{i}\neq \mu_{j} 
+\end{aligned}
+$$
+Dengan nilai kritis BNT sebagai berikut:
+$$
+\begin{aligned}
+LSD&amp;=t_{\alpha/2,db_{g}}S_{\bar{y}_{i.}-\bar{y}_{j.}}\\
+S_{\bar{y}_{i.}-\bar{y}_{j.}}&amp;=\sqrt{KTG\left(\frac{1}{r_{i}}+\frac{1}{r_{j}}\right)}
+\end{aligned}
+$$
+Jika ulangan sama, $S_{\bar{y}_{i.}-\bar{y}_{j.}}=\sqrt{\frac{2KTG}{r}}$ (kenapa?). Prosedur uji tersebut adalah membandingkan $\bar{y}_{i.}-\bar{y}_{j.}$ dengan nilai kritis. Implementasi di R (dari data RAL sebelumnya) sebagai berikut:
+
+```{r warning=FALSE}
+library(googlesheets4)
+#baca sheet
+DataRAL&lt;-read_sheet("https://docs.google.com/spreadsheets/d/1Bzm_R2Zd4Zbij7BO7LGDJW83DU6T3Wh7R38NN5DHCBs/edit?usp=sharing")
+
+#reshaping
+library(reshape2)
+
+RALMelt&lt;- melt(DataRAL,
+               #variabel yang membedakan tiap baris di tabulasi asli:
+               id.vars=c("Dosis"),
+               
+               #kolom yang ingin digabung jadi 1
+               measured.vars=as.character(seq(1,8)),
+               value.name="Perkecambahan")
+colnames(RALMelt)[2]&lt;-"Ulangan"
+RALMelt$Dosis&lt;-as.factor(RALMelt$Dosis)
+
+#anova
+aov_RAL &lt;- aov(Perkecambahan ~ Dosis, data = RALMelt)
+summary(aov_RAL)
+```
+
+Gunakan library agricolae:
+quarto-executable-code-5450563D
+
+```r
+library(agricolae)
+LSD&lt;-agricolae::LSD.test(aov_RAL, "Dosis") #hasil anova, perlakuan
+
+
+knitr::kables(
+  list(
+    knitr::kable(LSD$statistics[6]), #tabel 1
+    knitr::kable(LSD$groups, col.names = c("Rata-Rata per Taraf",
+                                           "Kelompok")) #tabel 2
+  ),
+)
+```
+
+Atau susun argumen sebagai berikut,
+
+quarto-executable-code-5450563D
+
+```r
+library(agricolae)
+LSD2&lt;-agricolae::LSD.test(RALMelt$Perkecambahan, RALMelt$Dosis,35,12.4) #respon, perlakuan, dbg, KTG
+
+knitr::kables(
+  list(
+    knitr::kable(LSD2$statistics[6]) , #tabel 1
+    knitr::kable(LSD2$groups, col.names =c("Rata-Rata per Taraf",
+                                           "Kelompok")) #tabel 2
+    ),
+)
+```
+
+Dapat dicek sendiri bahwa pengelompokan tersebut benar. Dapat juga dibuat visualisasi:
+
+quarto-executable-code-5450563D
+
+```r
+plot(LSD,horiz=T)
+```
+
+Note, BNT menguji *semua* perlakuan secara berpasangan, sehingga tidak bisa memilih perbandingan tertentu saja (misal, rata-rata terbesar vs terkecil). Selain itu, BNT memiliki kelemahan, yaitu hanya dapat mengontrol tingkat kesalahan uji sepasang rata-rata saja. Jika ada beberapa pasang rata-rata, tingkat kesalahan berpotensial lebih besar. Banyak perbandingan $g=k(k-1)/2$ (dari permutasi), sehingga *family error rate* sebesar $1-(1-\alpha)^g$. Perhitungan tersebut hanya merupakan kebalikan dari perhitungan $P(\text{Tolak }H_{0}|H_{0} \text{ benar})$. $(1-\alpha)$. Jika diasumsikan perbandingan saling bebas, maka probabilitas tersebut menjadi $(1-\alpha)^g$.
+
+## BNJ
+Lalu, bagaimana cari membuat uji yang mengontrol *family error rate*? BNJ mengontrol kesalahan di t buah perlakuan sebesar $\alpha$, sehingga di tiap pasangan akan menarima kesalahan sebesar $\alpha/2g$ karena uji dua arah menggunakan $\alpha/2$ dan ada g ulangan. Jika jumlah perlakuan banyak, metode ini akan sangat ekstrim. Oleh karena itu, walaupun metode ini tidak terlalu sensitif, metode ini memisahkan perlakuan yang benar-benar beda. BNJ memiliki nilai kritis:
+$$
+\begin{aligned}
+BNJ&amp;=q_{\alpha;t;db_{g}}S_{\bar{y}}\\
+S_{\bar{y}}&amp;=\sqrt{KTG/r}
+\end{aligned}
+$$
+Dengan t jumlah perlakuan, q memiliki asal statistik *studentized range*. Jika ulangan tak sama, r didekati:
+$$
+r_{h}=\frac{t}{\sum_{i=1}^t 1/r_{i}}
+$$
+Dengan langkah-langkah uji:
+
+1. Urutkan rataan perlakuan dari yang terkecil sampai yang terbesar atau sebaliknya
+2. Nilai awal i=1 (dari kiri)  dan j =1 (dari kanan)
+3. Hitung beda antara rataan perlakuan terkecil ke-i dengan terbesar ke-j kemudian bandingkan dengan nilai BNJ, jika beda rataan perlakuan lebih kecil lanjutkan ke langkah 5 (taktolak $H_{0}$) dan jika tidak lanjutkan ke langkah 4
+4. Berikan j = j+1, jika j&lt;p kembali ke langkah 3
+5. Buatlah garis mulai rataan perlakuan ke-i sampai ke perlakuan ke-j
+6. Berikan I = i+1, jika i&lt;p kembali ke langkah 3
+7. Stop
+
+Implementasi uji tersebut di R adalah:
+
+quarto-executable-code-5450563D
+
+```r
+tukey &lt;- TukeyHSD(aov_RAL, 'Dosis', conf.level = 0.95)
+
+
+library(kableExtra)
+knitr::kable(tukey$Dosis, col.names = c(" ",
+                                        " Bawah",
+                                        " Atas",
+                                        " ")) %&gt;%
+add_header_above(c(" Taraf"=1, "Beda"=1, "Batas Selang Kepercayaan"=2, "P-Value"=1))
+```
+
+Cara membaca tabel tersebut adalah melihat apakah selang kepercayaan (lwr dan upper) memiliki tanda positif dan negatif. Jika ada dua tanda, berarti nol termasuk di selang kepercayaan, sehingga kita belum dapat menyatakan rataan perlakuan tersebut beda. Proses tersebut dapat divisualisikan:
+
+quarto-executable-code-5450563D
+
+```r
+plot(tukey, las = 1, col = 'dark blue')
+```
+
+Analisis di python dapat dimulai dengan melakukan reshape kepada data. Detail dari proses ini sudah dijelaskan sebelumnya:
+
+quarto-executable-code-5450563D
+
+```python
+import pandas as pd
+
+RALData = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT8sPRuEulqieCMFJK4sKReRjtuXOQD_xwTlI3RB619yYwSWwb776-Dmu5UY5P44hy5MsMPJPsjcZUp/pub?gid=0&amp;single=true&amp;output=csv")
+RALMeltpy=pd.melt(RALData, id_vars=['Dosis'], value_vars=[str(x) for x in range(1,9)])
+RALMeltpy.rename(columns = {'variable':'Ulangan', 'value':'Produksi'}, inplace = True)
+RALMeltpy.head()
+```
+
+Lalu, statsmodels memiliki fungsi `MultiComparison(respon, perlakuan)`:
+
+quarto-executable-code-5450563D
+
+```python
+import statsmodels.formula.api as smf
+import statsmodels.stats.multicomp as multi 
+
+mcDosis = multi.MultiComparison(RALMeltpy['Produksi'],RALMeltpy['Dosis'])
+Results = mcDosis.tukeyhsd()
+print(Results)
+```
+
+Hasil sama seperti R. Hasil juga dapat di-plot dengan:
+
+quarto-executable-code-5450563D
+
+```python
+import matplotlib.pyplot as plt
+
+tukPlot=Results.plot_simultaneous()
+plt.show()
+```
+
+
+Tingkat kepercayaan juga dapat diubah:
+
+quarto-executable-code-5450563D
+
+```python
+Results = mcDosis.tukeyhsd(alpha=0.01)
+print(Results)
+```
+
+## Uji Duncan
+
+Uji Duncan intinya mirip dengan uji Tukey, tetapi nilai pembanding di uji Duncan meningkat tergantung jarak dari perlakuan yang dibandingkan. Uji tersebut memiliki nilai kritis:
+$$
+\begin{aligned}
+R_{p}&amp;=r_{\alpha;t;db_{g}}S_{\bar{y}}\\
+S_{\bar{y}}&amp;=\sqrt{KTG/r}
+\end{aligned}
+$$
+Dan jika jumlah ulangan tak sama dapat didekati rataan harmonik juga. t adalah beda urutan perlakuan kedua kelompok. Misal membandingkan perlakuan terbesar (1) dan terkecil (4) dari 4 perlakuan akan menghasilkan t=3. Langkah uji mirip dengan Tukey, yaitu:
+
+1. Urutkan rataan perlakuan dari yang terkecil sampai yang terbesar atau sebaliknya
+2. Nilai awal i=1 (dari kiri)  dan j =1 (dari kanan)
+3. Hitung beda antara rataan perlakuan terkecil ke-i dengan terbesar ke-j kemudian bandingkan dengan nilai BNJ, jika beda rataan perlakuan lebih kecil lanjutkan ke langkah 5 (taktolak $H_{0}$) dan jika tidak lanjutkan ke langkah 4
+4. Berikan j = j+1, jika j&lt;p kembali ke langkah 3
+5. Buatlah garis mulai rataan perlakuan ke-i sampai ke perlakuan ke-j
+6. Berikan I = i+1, jika i&lt;p kembali ke langkah 3
+7. Stop
+
+Langsung uji:
+
+quarto-executable-code-5450563D
+
+```r
+duncan &lt;- duncan.test(aov_RAL, 'Dosis', alpha = 0.05) #Bisa Model aov atau lm
+knitr::kable(duncan$duncan)
+knitr::kable(duncan$groups)
+```
+
+Dan dapat divisualisasikan:
+
+quarto-executable-code-5450563D
+
+```r
+plot(duncan, horiz = TRUE, las = 1)
+```
+
+Note bahwa Uji Tukey menyatakan dosis 64 tak beda dengan dosis 48, padahal uji Duncan dan LSD menyatakan dosis tersebut beda. Hal tersebut menunjukkan kurang sensitifnya uji Tukey.
+
+## Kontras
+
+Kontras merupakan kombinasi linear dari rataan perlakuan. Sebuah kombinasi linear tersusun atas seperangkat objek. Setiap objek dikalikan dengan suatu konstanta, dan hasil perkalian semua objek dan konstanta ditambahkan. Pada intinya, setiap rataan perlakuan akan dikalikan dengan suatu konstanta dan hasil perkalian tersebut akan ditambahkan. Bentuk umum kontras adalah:
+$$
+\begin{aligned}
+H_{0}&amp;: c_{1}\mu_{1}+c_{2}\mu_{2}+\cdots+c_{t}\mu_{t}=\sum_{i=1}^t c_{i}\mu_{i}=0\\
+H_{1}&amp;: c_{1}\mu_{1}+c_{2}\mu_{2}+\cdots+c_{t}\mu_{t}=\sum_{i=1}^t c_{i}\mu_{i}\neq 0
+\end{aligned}
+$$
+Yang diduga dengan
+$$
+C=\sum_{i=1}^t c_{i}y_{i.}
+$$
+Dengan $y_{i.}$ adalah total di perlakuan ke-i. Kontras memiliki syarat:
+$$
+\sum_{i=1}^t c_{i}=0
+$$
+Selain itu, kontras disebut *ortogonal* jika hasil suatu uji tidak memengaruhi hasil uji lain. Sebagai contoh, kontras:
+$$
+\begin{aligned}
+H^{(1)}_0\colon \mu_1 = \mu_2\\
+H^{(2)}_0\colon \mu_1 = \mu_3\\
+H^{(3)}_0\colon \mu_2 = \mu_3\\
+\end{aligned}
+$$
+Tidak ortogonal. Bayangkan bahwa kita menolak $H_{0}^3$, tetapi tak tolak hipotesis lainnya. Ini merupakan kontradiksi karena $\mu_{1}=\mu_{2}$ dan $\mu_{1}=\mu_{3}$ secara logis memberi implikasi $\mu_{2}=\mu_{3}$. Namun, uji mengatakan sebaliknya. 
+
+Untuk melihat kenapa hal tersebut terjadi, kontras dapat dilihat lebih lanjut:
+$$
+\begin{aligned}
+H^{(1)}_0\colon 1\mu_1-1\mu_{2}+0\mu_{3} = 0\\
+H^{(2)}_0\colon 1\mu_1+0\mu_2-1\mu_3=0\\
+H^{(3)}_0\colon 0\mu_1+1\mu_2-1\mu_3=0\\
+\end{aligned}
+$$
+Dapat dengan mudah diverifikasi bahwa semua $\sum_{i=1}^t c_{i}$ adalah nol. Namun, jika kita kalikan kontras pertama ($c_{i}$) dan kontras kedua ($d_{i}$) serta melihat hasilnya, maka kita akan temukan $\sum_{i=1}^t c_{i}d_{i}=1+0+0=1\neq 0$. Bandingkan dengan contoh ini:
+
+&gt; Sebuah percobaan menguji efek pemberian nitrogen pada pertumbuhan rumput. Perlakuan dalam percobaan tersebut ada empat, yaitu tidak diberi nitrogen sebagai kontrol (1), diberi nitrogen di musim gugur (2), diberi nitrogen di musim semi (3), dan diberikan pada kedua musim (4). Ingin diketahui:
+&gt;
+&gt;1. Apakah terdapat perbedaan pertumbuhan rumput dari yang tidak diberi nitrogen dengan diberi nitrogen?
+&gt;2. Apakah ada perbedaan pertumbuhan rumput jika diberikan nitrogen pada saat musim gugur dengan musim semi?
+&gt;3. Apakah ada perbedaan pertumbuhan rumput jika diberikan pada saat musim gugur atau musim semi dengan diberikan pada kedua musim tersebut?
+
+Kontras tersebut dapat disusun:
+$$
+\begin{aligned}
+H^{(1)}_0\colon 3\mu_1-1\mu_{2}-1\mu_{3}-1\mu_{4} = 0\\
+H^{(2)}_0\colon 0\mu_1+1\mu_{2}-1\mu_{3}-0\mu_{4}=0\\
+H^{(3)}_0\colon 0\mu_1+1\mu_2+1\mu_3-2\mu_{4}=0\\
+\end{aligned}
+$$
+Alasan penyusunan kontras sebagai berikut dapat ditelusuri dari beberapa prinsip:
+
+1. Di sebuah kontras, perlakuan yang tidak ingin dibandingkan mendapatkan $c_{i}=2$. Misal, di kontras kedua hanya dibandingkan musim gugur ($\mu_{2}$) dan musim semi ($\mu_{3}$), sehingga koefisien di tanpa nitrogen dan kedua musim ($\mu_{1},\mu_{4}$) nol. Begitu juga di kontras ketiga, perlakuan tanpa nitrogen tidak ingin dibandingkan sehingga koefisiennya nol.
+2. Pastikan bobot tiap perlakuan sama. Suatu kontras pada dasarnya membagi perlakuan menjadi dua kelompok yang hendak dibandingkan. Namun, agar perbandingan tersebut adil, bobot perlakuan harus sama. Misal, di hipotesis pertama, hanya ada 1 perlakuan tanpa nitrogen sedangkan ada 3 perlakuan dengan nitrogen. Jika kita membandingkan rata-rata 1 perlakuan tanpa nitrogen dengan hasil tambah *tiga* perlakuan dengan nitrogen, pasti tidak adil. Anggap saja $\mu_{1}=\mu_{2}=\mu_{3}=\mu_{4}$, seharusnya kontras menunjukkan sisi kiri sama dengan sisi kanan. Namun, jika kita melakukan pertambahan secara naif, akan muncul perbandingan $\mu_{1}\neq3\mu_{1}$. Oleh karena itu $\mu_{1}$ harus kita boboti 3 agar perbandingannya adil. Dalam kasus $H_{0}$ benar tadi, pembobotan $\mu_{1}$ dengan 3 menghasilkan $3\mu_{1}=3\mu_{1}$.
+3. Pastikan tanda antara kelompok berbeda. Satu kelompok akan memiliki tanda positif dan satu kelompok memiliki tanda negatif. Ini dikarenakan jumlah koefisien nol sehingga perlu tanda positif dan negatif untuk menghasilkan angka tersebut.
+
+Sekarang, dapat dipikirkan secara logis implikasi dari tiap uji:
+$$
+\begin{aligned}
+H^{(1)}_0&amp;\colon \mu_1=\frac{\mu_{2}+\mu_{3}+\mu_{4}}{3}\\
+H^{(2)}_0&amp;\colon \mu_{2}=\mu_{3}\\
+H^{(3)}_0&amp;\colon \frac{\mu_2+\mu_3}{2}=\mu_{4}\\
+\end{aligned}
+$$
+Tidak ada hipotesis yang saling berkontradiksi. Jika $\mu_{2}$ tidak sama dengan $\mu_{3}$, misal, hipotesis pertama dan ketiga masih dapat benar ataupun salah. Jika dijabarkan dalam perkataan, pengujian mengenai efek dari pemberian nitrogen dibandingkan dengan tidak sama sekali tidak memberi informasi mengenai efek pemberian nitrogen di dua musim dibandingkan dengan satu musim. Begitu juga, kedua uji tersebut tidak memberi informasi mengenai efek perbandingan nitrogen di musim semi atau gugur.
+
+Secara formal, dapat kita lihat bahwa $\sum_{i=1}^t c_{i}d_{i}=0$ untuk tiap kombinasi kontras. Dari aljabar linear, jika **c** dan **d** merupakan vektor, ini sama dengan hasil kali transpose **c** dengan **d**. Maka, buktikan di R:
+
+quarto-executable-code-5450563D
+
+```r
+kontras1&lt;-c(3,-1,-1,-1)
+kontras2&lt;-c(0,1,-1,0)
+kontras3&lt;-c(0,1,1,-2)
+
+#kali vektor
+t(kontras1)%*%kontras2
+t(kontras1)%*%kontras3
+t(kontras2)%*%kontras3
+```
+
+Oleh karena itu, kontras akan orthogonal jika $\sum_{i=1}^t c_{i}d_{i}=0$. Keortogonalan berarti hasil satu uji bebas dari uji lain, sehingga jumlah kuadrat perlakuan dapat dipartisi.
+
+### Menyusun kontras ortogonal
+Misalkan ada contoh:
+
+&gt; Ingin dibandingkan 5 populasi dari data. Sebelumnya, kita memiliki alasan untuk percaya bahwa populasi 2 dan 3 paling dekat. Populasi 4 dan 5 juga dekat, tetapi tidak sedekat populasi 2 dan 3. Populasi 1 lebih dekat ke populasi 2 dan 3 daripada populasi 4 dan 5.
+
+Kedekatan tersebut digambarkan dalam diagram:
+
+```{r, echo=FALSE, fig.cap="Diagram pengelompokan populasi. Sumber: Department of Statistics, Pennsylvania State University (online.stat.psu.edu).", out.width='70%'}
+knitr::include_graphics("C:/Sem 6/Asprak - Rancob/ModulPrak-Rancob/Gambar/formula_59.gif")
+```
+
+Dari grafik dan soal tersebut, muncul empat pertanyaan:
+1. Apakah populasi 2 dan 3 (yang dianggap sekelompok) beda? (D)
+2. Apakah populasi 4 dan 5 beda? (C)
+3. Apakah populasi 1 beda dengan populasi 2, 3? (B)
+4. Apakah populasi 1, 2, 3, beda dengan populasi 4 dan 5? (A)
+
+Oleh karena itu, dapat dibentuk kontras:
+
+```{r , echo=FALSE, results='asis'}
+  cat('
+  | Kontras| 1| 2| 3| 4|5|
+  |------------:|-----------:|------------:|------------:|------------:|------------:|
+  |          A|         2|          2| 2 | -3 | -3 |
+  |          B|         2|          -1| -1 | 0 | 0 |
+  |          C|         0|         0| 0 | 1 |-1 |
+  |          D|         0|          1| -1| 0|0 |')
+```
+
+Keortogonalan kontras tersebut dapat dicek melalui matriks ragam peragam:
+
+quarto-executable-code-5450563D
+
+```r
+A&lt;-c(2,2,2,-3,-3)
+B&lt;-c(2,-1,-1,0,0)
+C&lt;-c(0,0,0,1,-1)
+D&lt;-c(0,1,-1,0,0)
+
+contrasts&lt;-cbind(A,B,C,D)
+cov(contrasts)
+```
+
+Jika matriks diagonal, ini berarti koragam nol dan kontras saling orthogonal. Secara logis, hasil tiap uji tidak memberi informasi mengenai hasil uji lainnya.
+
+Contoh lain untuk mengilustrasikan kontras orthogonal adalah sebagai berikut
+
+&gt;Efektivitas suatu obat hendak dicek. Perlakuan 1 merupakan obat A berdosis rendah, perlakuan 2 merupakan obat A berdosis tinggi, perlakuan 3 merupakan obat B berdosis rendah, dan perlakuan 4 merupakan obat B berdosis tinggi.
+
+Tentu, terlihat beberapa arah perbandingan:
+
+1. Obat - apakah obat A dan B beda?
+2. Dosis - apakah dosis tinggi dan rendah beda?
+3. Interaksi - apakah efek obat bergantung pada dosis?
+
+Sehingga dibuat kontras:
+```{r , echo=FALSE, results='asis'}
+  cat('
+  | Kontras| 1| 2| 3| 4|
+  |------------:|-----------:|------------:|------------:|------------:|
+  |          Obat|         1|          1| -1 | -1 | 
+  |          Dosis|         1|          -1| 1 | -1 | 
+  |          Interaksi|         1|          -1| -1| 1|')
+```
+
+Cek ortogonalitas
+
+quarto-executable-code-5450563D
+
+```r
+Obat&lt;-c(1,1,-1,-1)
+Dosis&lt;-c(1,-1,1,-1)
+Interaksi&lt;-c(1,-1,-1,1)
+
+contrasts2&lt;-cbind(Obat,Dosis,Interaksi)
+cov(contrasts2)
+```
+
+Alasan penyusunan kontras obat dan dosis seperti di tabel cukup masuk akal. Bandingkan obat A dan B atau kelompok dosis tinggi dan dosis rendah. Penyusunan kontras interaksi sebenarnya sama saja dengan mengalikan efek-efek sebelumnya. Telah disusun obat A bertanda positif (+) dan obat B bertanda negatif (-). Dosis rendah bertanda positif (+) dan dosis tinggi bertanda negatif. Maka, kalikan saja tanda tersebut.
+
+Sebagai contoh lain, misal diberi tabel rata-rata perlakuan sebagai berikut:
+
+```{r , echo=FALSE, results='asis'}
+  cat('
+  | Perlakuan| A| B| C| D|
+  |------------:|-----------:|------------:|------------:|------------:|
+  |          Rata-rata|         12.0|          12.3| 10.8 | 6.8 | ')
+```
+
+Dapat dilihat bahwa D tampak sangat berbeda dari perlakuan lain. A dan B tampak sangat mirip. C agak dekat ke A dan B. Oleh karena itu, susun kontras:
+
+```{r , echo=FALSE, results='asis'}
+  cat('
+  | Kontras| A| B| C| D|
+  |------------:|-----------:|------------:|------------:|------------:|
+  |          D vs ABC|         1|          1| 1 | -3 |
+  |          c vs AB|         1|          1| -2 | 0 |
+  |          A vs B|         1|          -1| 0 | 0 |')
+```
+
+Orthogonalitas kontras tersebut dapat diuji:
+
+quarto-executable-code-5450563D
+
+```r
+DvABC&lt;-c(1,1,1,-3)
+CvAB&lt;-c(1,1,-2,0)
+AvB&lt;-c(1,-1,0,0)
+
+contrasts3&lt;-cbind(DvABC,CvAB,AvB)
+cov(contrasts3)
+```
+
+### Menghitung Kontras
+
+Setelah mengetahui cara membuat kontras, bagaimana perhitungannya? Untuk t-1 kontras orthogonal, dapat dilakukan uji F, dengan statistik uji sebagai berikut:
+$$
+\begin{aligned}
+JKC&amp;=KTC=\frac{\left(\sum_{i=1}^t c_{i}Y_{i.}\right)^2}{r\sum_{i=1}^t c_{i}^2}\\
+F&amp;=KTC/KTG=F_{\alpha,1,db_{g}}
+\end{aligned}
+$$
+Dapat dipraktekkan di R:
+
+```{r warning=FALSE}
+library(googlesheets4)
+dataKontras&lt;-read_sheet("https://docs.google.com/spreadsheets/d/19lOrOm5Vb7ATet8tR6Xq5NEOnB1J2Jj7HXPDy6Sv9og/edit?usp=sharing")
+knitr::kable(dataKontras)
+```
+
+Tentu, data harus di-melt:
+
+quarto-executable-code-5450563D
+
+```r
+library(reshape2)
+KontrasMelted&lt;-melt(dataKontras,
+                    id.vars=c("Perlakuan"),
+                    measured.vars=c("Kelompok 1", "Kelompok 2","Kelompok 3"),
+                    value.name="Pertumbuhan")
+colnames(KontrasMelted)[2]&lt;-"Kelompok"
+```
+
+Lalu, pastikan perlakuan dan kelompok adalah faktor dan buat kontras:
+
+quarto-executable-code-5450563D
+
+```r
+#faktor
+KontrasMelted$Perlakuan&lt;-as.factor(KontrasMelted$Perlakuan)
+KontrasMelted$Kelompok&lt;-as.factor(KontrasMelted$Kelompok)
+
+levels(KontrasMelted$Perlakuan)
+```
+
+Kita sudah mengetahui urutan faktor di R. Oleh karena itu, buat kontras:
+
+quarto-executable-code-5450563D
+
+```r
+#buat kontras
+contrasts(KontrasMelted$Perlakuan) &lt;- cbind(c(1, -3, 1, 1), c(1, 0, 0, -1),
+                             c(1, 0, -2, 1))
+contrasts(KontrasMelted$Perlakuan)
+```
+
+Lakukan ANOVA dan partisi:
+
+quarto-executable-code-5450563D
+
+```r
+aovKontras&lt;-aov(Pertumbuhan~Perlakuan+Kelompok,KontrasMelted)
+summary.aov(aovKontras, split = list (Perlakuan = list('K vs FSpSpl' = 1, 'F vs Sp' = 2, 'FSp vs Spl' = 3)))
+```
+
+Interpretasi dari partisi tersebut sesuai dengan hipotesis yang diuji. Jika menggunakan $\alpha=5\%$, dinyatakan bahwa rata-rata kontrol dengan perlakuan lainnya berbeda signifikan, begitu juga rata-rata 2 musim dengan 1 musim. Namun, belum ditemukan bukti cukup untuk menyatakan rata-rata musim semi dan gugur berbeda signifikan.
+
+## Polinomial Orthogonal
+
+Polinomial orthogonal dilakukan untuk menguji tren pengaruh perlakuan terhadap respon jika perlakuan bersifat kuantitatif dan berjarak sama. Model polinomial orthogonal dapat berbentuk linear, kuadratik, kubik, kuartik, dan lain-lain:
+
+$$
+\begin{aligned}
+\text{Linear: }&amp; Y_{i}=\beta_0+\beta_1X_i+\varepsilon_i\\
+\text{Kuadratik: }&amp; Y_{i}=\beta_0+\beta_1X_i+\beta_2X_i^2+\varepsilon_i\\
+\text{Kubik: }&amp; Y_{i}=\beta_0+\beta_1X_i+\beta_2X_i^2+\beta_3X_i^3+\varepsilon_i\\
+\end{aligned}
+$$
+
+Dengan bentuk umum polinomial ordo ke-N adalah:
+
+$$
+Y=\alpha_0P_0(X)+\alpha_1P_1(X)+\alpha_2P_2(X)+\ldots+\alpha_nP_n(X)+\varepsilon_i
+$$
+
+Dengan:
+$$
+\begin{aligned}
+P_0&amp;=1\\
+P_1&amp;=\lambda_1\left[\frac{X-\bar{X}}{d}\right]\\
+P_2&amp;=\lambda_2\left[\left(\frac{X-\bar{X}}{d}\right)^2-\left(\frac{a^2-1}{12}\right)\right]\\
+P_{n+1}(X)&amp;=\lambda_{n+1}\left[P_1(X)P_n(X)-\frac{n^2(a^2-n^2)}{4(4n^2-1)}P_{n-1}(X)\right]
+\end{aligned}
+$$
+
+Dengan:
+
+1. $a$: banyaknya taraf faktor
+2. $d$: jarak antar faktor
+3. $n$: polinomial ordo ke-n
+
+Tabel kontras bagi polinomial orthogonal untuk `a` jumlah faktor dapat dihasilkan dengan `contr.poly(a)`:
+
+quarto-executable-code-5450563D
+
+```r
+knitr::kable(contr.poly(5), col.names=c("Linear",
+                                        "Kuadratik",
+                                        "Kubik",
+                                        "Kuartik"))
+```
+
+Untuk memperlihatkan cara kerja polinomial orthogonal, dapat dibuat suatu data yang memiliki taraf-taraf faktor kuantitatif:
+
+quarto-executable-code-5450563D
+
+```r
+kerapatan &lt;- factor(rep(c(10, 20, 30, 40, 50), each = 3))
+hasil &lt;- c(12.2, 11.4, 12.4,
+           16.0, 15.5, 16.5, 
+           18.6, 20.2, 18.2,
+           17.6, 19.3, 17.1,
+           18.0, 16.4, 16.6)
+data2 &lt;- data.frame(kerapatan, hasil)
+str(data2)
+```
+
+Sebelum menganalisis menggunakan polinomial, plot data sebagai cara eksploratif:
+
+quarto-executable-code-5450563D
+
+```r
+library(ggplot2)
+
+ggplot(data2,aes(x=kerapatan,y=hasil))+
+  geom_point()+
+  stat_summary(fun.y=mean, colour="darkblue", geom="line", aes(group = 1))+
+  theme_bw()
+```
+
+Tampaknya pengaruh kerapatan berbentuk kuadratik karena plot menarik, mencapai puncak, lalu menurun. Lalu, definisikan kontras dan lakukan ANOVA.
+
+quarto-executable-code-5450563D
+
+```r
+contrasts(data2$kerapatan) &lt;- contr.poly(5)
+
+anova2 &lt;- aov(hasil ~ kerapatan, data = data2)
+summary.aov(anova2, split = list (kerapatan = list('Linear' = 1, 'Kuadratik' = 2,
+                                                    'Kubik' = 3, 'Kuartik' = 4)))
+```
+
+Nampaknya pengaruh kerpatan pada hasil berupa kuadratik, yang dapat dimodelkan sebagai:
+
+quarto-executable-code-5450563D
+
+```r
+summary(lm(hasil~kerapatan,data2))
+```
+
+$$
+Y=16.400+3.7947X_i-3.7417X_i^2   
+$$
+
+Kontras juga dapat diinput secara manual.</code></pre>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

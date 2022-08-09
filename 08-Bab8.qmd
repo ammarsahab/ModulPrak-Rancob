@@ -1,0 +1,69 @@
+# ANCOVA
+
+Terkadang, ada sumber variasi dalam percobaan yang dapat diamati secara kuantitatif, tetapi tidak dapat dikendalikan. Sumber variasi tersebut merupakan *peubah konkomitan*. Pada saat pengaruh sumber variasi tersebut diperhitungkan dalam analisis, kemungkinan:
+
+1. Variasi peubah respon yang tidak dapat dijelaskan model berkurang, sehingga galat dapat dikendalikan.
+2. Efek dari perlakuan dapat disesuaikan dengan peubah konkomitan tersebut.
+
+## Data
+
+Untuk melihat pelaksanaan ANCOVA, akan digunakan studi kasus tersebut: 
+
+> Suatu percobaan di bidang industri ingin mempelajari pengaruh mesin terhadap respons kekuatan serat yang dihasilkan yang  dipergunakan dalam industri tekstil. Terdapat tiga perlakuan mesin yang dirancang dengan RAL, masing-masing diulang 5 kali. Telah diketahui bahwa kekuatan serat yang  dihasilkan juga tergantung pada diameter serat tersebut. Untuk itu, dalam percobaan ini digunakan peubah penyerta (X) yaitu diameter serat yang dihasilkan. Respon kekuatan serat yang dihasilkan (Y) diukur dalam satuan tertentu. Diameter serat (X) diukur dalam 10^{-3} cm .
+
+Semua analisis dimulai dengan membaca data. Sintaks pipa dari dplyr akan digunakan untuk memperjelas kode.
+
+```{r message=FALSE}
+library(dplyr)
+
+url<- "https://docs.google.com/spreadsheets/d/1YdRTf455ajZAc7--MdwYTqbCpGKmMkdmxIZcUXcwS3I/edit?usp=sharing"
+
+googlesheets4::read_sheet(url) %>%
+  knitr::kable()
+```
+
+Dari output tabel, dapat dilihat suatu masalah di tabulasi data. Kita ingin tabel akhir memiliki 4 kolom, yaitu ulangan, mesin, X, dan Y. Beda dengan *reshaping* biasa yang menggabungkan beberapa kolom menjadi satu, kita harus menggabungkan kolom itu menjadi sejumlah kolom. `tidyr` memiliki metode reshaping yang lebih komprehensif dari `reshape2`, jadi akan dipakai library tersebut.
+
+Fungsi `pivot_longer` mengubah data dari wide ke long. Dalam kasus ini, tiap kolom di data awal memiliki format X/Y_Mesin. Terlihat bahwa kolom tersebut dapat dipisah menjadi "X" atau "Y" dan "Mesin" menggunakan underscore. Tentu, yang kita inginkan adalah komputer menyadari kolom yang diawali "X" lalu dimasukkan ke kolom X di tabel akhir, begitu juga untuk Y. Argumen `names_sep` akan memisahkan X atau Y dengan keterangan mesin di underscore (_).
+
+Lalu, satu kolom yang telah dipisahkan tersebut harus dimasukkan ke kolom baru. `names_to` menunjukkan kolom baru yang akan dimunculkan. Argumen `.value` memberi keterangan bahwa bagian pertama dari nama kolom data asli memberi keterangan kolom (X atau Y).
+
+```{r}
+dat2 <- googlesheets4::read_sheet(url) %>%
+  tidyr::pivot_longer( 
+             !Ulangan,
+             names_to = c(".value", "Mesin"), 
+             names_sep = "_") %>%
+  mutate(Mesin=stringr::str_sub(Mesin, -1))
+```
+
+Data sudah benar.
+
+## Visualisasi ANCOVA
+
+Sebelum melakukan perhitungan, kita dapat coba untuk memvisualisasi proses ANOVA dan ANCOVA. Pertama, mulai dengan data peubah respon saja, tanpa perlakuan ataupun peubah konkomitan. Buat scatterplot (`geom_point`). Penduga untuk tiap observasi yang logis adalah rerata, yang dimunculkan dari `stat_summary(fun="mean")`.
+
+```{r}
+library(ggplot2)
+
+ggplot(data=dat2, aes(x="", y=Y))+
+  geom_point(fill="#FFFFFF", shape=21)+  
+  stat_summary(fun=mean, size=1)+
+  theme_bw()+
+  xlab("")+ylab("")+
+  ggtitle("Kekuatan Serat")
+```
+
+Beberapa argumen di akhir kosmetik saja. `theme_bw()` membuat plot hitam-putih yang lebih rapih. Sekarang, tambahkan perlakuan. Tentu sekarang penduga logis bagi observasi di tiap perlakuan adalah rerata perlakuannya.
+
+```{r}
+library(tayloRswift)
+
+ggplot(data=dat2, aes(x=NA, y=Y, group=Mesin, colour=Mesin))+
+  geom_point(fill="#FFFFFF", shape=21)+  
+  stat_summary(fun=mean, size=1)+
+  theme_bw()+
+  scale_color_taylor(palette="taylor1989")+
+  xlab("")+ylab("")+
+  ggtitle("Produksi per Mesin")
+```

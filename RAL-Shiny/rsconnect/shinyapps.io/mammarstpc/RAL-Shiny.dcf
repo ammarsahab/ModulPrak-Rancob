@@ -1,0 +1,13 @@
+name: RAL-Shiny
+title: RAL-Shiny
+username:
+account: mammarstpc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5495734
+bundleId: 5500916
+url: https://mammarstpc.shinyapps.io/RAL-Shiny/
+when: 1643010335.08265
+lastSyncTime: 1643010335.08265
+asMultiple: FALSE
+asStatic: FALSE

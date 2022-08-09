@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.426">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modul Praktikum Perancangan Percobaan - 1&nbsp; Konsep Dasar Perancangan Percobaan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./02-Bab2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Konsep Dasar Perancangan Percobaan</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modul Praktikum Perancangan Percobaan</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Pendahuluan</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Bab1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Konsep Dasar Perancangan Percobaan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Bab2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Percobaan Faktor Tunggal</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Bab3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Perbandingan Nilai Tengah Perlakuan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Bab4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Uji Asumsi</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Bab5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rancangan Faktorial</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Bab6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Rancangan Petak Terpisah (Split Plot Design)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Bab7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rancangan Split Blok</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Bab8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANCOVA</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#percobaan" id="toc-percobaan" class="nav-link active" data-scroll-target="#percobaan"> <span class="header-section-number">1.1</span> Percobaan</a>
+  <ul class="collapse">
+  <li><a href="#observasi-terkadang-tidak-cukup" id="toc-observasi-terkadang-tidak-cukup" class="nav-link" data-scroll-target="#observasi-terkadang-tidak-cukup"> <span class="header-section-number">1.1.1</span> Observasi terkadang tidak cukup</a></li>
+  <li><a href="#prinsip-prinsip-percobaan" id="toc-prinsip-prinsip-percobaan" class="nav-link" data-scroll-target="#prinsip-prinsip-percobaan"> <span class="header-section-number">1.1.2</span> Prinsip-prinsip percobaan</a></li>
+  <li><a href="#aplikasikan-konsep-konsep-tersebut" id="toc-aplikasikan-konsep-konsep-tersebut" class="nav-link" data-scroll-target="#aplikasikan-konsep-konsep-tersebut"> <span class="header-section-number">1.1.3</span> Aplikasikan konsep-konsep tersebut!</a></li>
+  </ul></li>
+  <li><a href="#istilah-dalam-percobaan" id="toc-istilah-dalam-percobaan" class="nav-link" data-scroll-target="#istilah-dalam-percobaan"> <span class="header-section-number">1.2</span> Istilah dalam percobaan</a>
+  <ul class="collapse">
+  <li><a href="#satuan-percobaan-respons-dan-pengamatan" id="toc-satuan-percobaan-respons-dan-pengamatan" class="nav-link" data-scroll-target="#satuan-percobaan-respons-dan-pengamatan"> <span class="header-section-number">1.2.1</span> Satuan percobaan, respons, dan pengamatan</a></li>
+  <li><a href="#faktor-taraf-perlakuan-dan-interaksi" id="toc-faktor-taraf-perlakuan-dan-interaksi" class="nav-link" data-scroll-target="#faktor-taraf-perlakuan-dan-interaksi"> <span class="header-section-number">1.2.2</span> Faktor, taraf, perlakuan, dan interaksi</a></li>
+  <li><a href="#model-tetap-acak-dan-campuran-aplikasi-teori" id="toc-model-tetap-acak-dan-campuran-aplikasi-teori" class="nav-link" data-scroll-target="#model-tetap-acak-dan-campuran-aplikasi-teori"> <span class="header-section-number">1.2.3</span> Model tetap, acak, dan campuran (aplikasi teori)</a></li>
+  <li><a href="#rancangan-perlakuan-pengedalian-lingkungan-dan-respon" id="toc-rancangan-perlakuan-pengedalian-lingkungan-dan-respon" class="nav-link" data-scroll-target="#rancangan-perlakuan-pengedalian-lingkungan-dan-respon"> <span class="header-section-number">1.2.4</span> Rancangan perlakuan, pengedalian lingkungan, dan respon</a></li>
+  <li><a href="#aplikasi-studi-studi-kasus" id="toc-aplikasi-studi-studi-kasus" class="nav-link" data-scroll-target="#aplikasi-studi-studi-kasus"> <span class="header-section-number">1.2.5</span> Aplikasi: studi-studi kasus</a></li>
+  </ul></li>
+  <li><a href="#percobaan-ke-uji-perancangan-percobaan" id="toc-percobaan-ke-uji-perancangan-percobaan" class="nav-link" data-scroll-target="#percobaan-ke-uji-perancangan-percobaan"> <span class="header-section-number">1.3</span> Percobaan ke uji: perancangan percobaan</a>
+  <ul class="collapse">
+  <li><a href="#penentuan-ulangan" id="toc-penentuan-ulangan" class="nav-link" data-scroll-target="#penentuan-ulangan"> <span class="header-section-number">1.3.1</span> Penentuan ulangan</a></li>
+  </ul></li>
+  <li><a href="#pengayaan" id="toc-pengayaan" class="nav-link" data-scroll-target="#pengayaan"> <span class="header-section-number">1.4</span> Pengayaan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Konsep Dasar Perancangan Percobaan</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Di bab ini, kita akan membedakan suatu percobaan dengan penelitian observasional dan prinsip dari percobaan tersebut, mengilustrasikan istilah-istilah dalam percobaan, menjelaskan konsep perancangan percobaan, dan mencoba beberapa metode penghitungan ukuran sampel.</p>
+<section id="percobaan" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="percobaan"><span class="header-section-number">1.1</span> Percobaan</h2>
+<section id="observasi-terkadang-tidak-cukup" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="observasi-terkadang-tidak-cukup"><span class="header-section-number">1.1.1</span> Observasi terkadang tidak cukup</h3>
+<p>Sebuah penelitian mungkin dimulai dengan <strong>mengamati</strong> dunia sekitar, atau observasi. Mungkin kalian mengamati bahwa pedagang dengan harga murah memiliki lebih banyak pelanggan, atau kalian mengamati bahwa mahasiswa yang lebih banyak belajar memiliki nilai yang lebih tinggi. Namun, kadang hubungan yang ditemukan dalam suatu observasi lebih kompleks dari yang kita amati.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Gambar/ludomil-sawicki-lsXbZtrVSdQ-unsplash.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Kapal layar dan nahkodanya. Foto dari Ludomil Sawicki (Unsplash).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Bayangkan ada seorang nahkoda<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Kapal yang dikendalikan oleh nahkoda tersebut berada di tengah angin yang membelokkan kapal tersebut ke kanan dan kiri. Anggap bahwa nahkoda tersebut ingin kapal berlayar lurus, dan nahkoda ini sudah sangat berpengalaman sehingga dia dapat membelokkan kapalnya dengan tepat. Seorang pengamat akan melihat nahkoda tersebut membelokkan kemudi kapalnya ke kanan dan ke kiri, tetapi kapal tetap lurus. Pengamat yang tidak memiliki pengetahuan tentang kapal mungkin menyimpulkan bahwa kemudi tidak berpengaruh pada laju kapal!</p>
+<p>Kasus ini merupakan contoh <strong>galat sistematis</strong>. Kita ingin mengetahui pengaruh arah belok kapal ke arah laju kapal, tetapi Nahkoda tidak membelokkan kapal secara acak, melainkan sesuai dengan kondisi angin agar kapal tetap melaju lurus.</p>
+</section>
+<section id="prinsip-prinsip-percobaan" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="prinsip-prinsip-percobaan"><span class="header-section-number">1.1.2</span> Prinsip-prinsip percobaan</h3>
+<p>Lalu, bagaimana kita dapat mengetahui hubungan antara kemudi kapal dan laju kapal?</p>
+<p>Pertama, mungkin kita dapat menyuruh nahkoda untuk membelokkkan kemudinya secara acak. Sebuah koin dapat dilempar, dan sisi yang muncul<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> menentukan pembelokan kapal. Ini adalah <strong>pengacakan</strong> - sebelumnya, jika terjadi angin tertentu, nahkoda pasti membelokkan kapal berkebalikan dengan pengaruh angin tersebut. Peluang kemudi diputar ke kanan dan kiri tidak seimbang. Sekarang, peluang tersebut sama, apapun kondisinya.</p>
+<p>Kedua, mungkin ada hal-hal lain yang menyebabkan berubahnya hubungan kemudi dengan laju kapal. Mungkin kapal yang berbeda memiliki sistem kemudi yang berbeda, atau nahkoda berbeda memiliki kemampuan mengemudi berbeda. Oleh karena itu, kita ingin <strong>mengendalikan lingkungan</strong>: kapal homogen, nahkoda homogen. Atau, kita dapat mengulangi percobaan tersebut di kombinasi kapal dan nahkoda berbeda. Rancangan ini dapat disebut Rancangan Bujur Sangkar Latin, yang mengendalikan keragaman dari dua arah. Rancangan Acak Kelompok Lengkap mengendalikan keragaman dari satu arah, dan rancangan pengendalian lingkungan lainnya yang lebih kompleks dapat mengendalikan keragaman dari berbagai arah<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Namun, rancangan <strong>pengendalian lingkungan</strong> tersebut tidak perlu dipakai jika kondisi unit percobaaan sudah <strong>homogen</strong> - tidak ada sumber keragaman dari arah manapun.</p>
+<p>Ketiga, ada <strong>variabilitas</strong> di percobaan ini. Kita tidak dapat mengobservasi semua sumber keragaman. Teori-teori yang dimiliki tentang cara dunia bekerja selalu berubah - beberapa waktu lalu, orang menganggap penyakit disebabkan oleh cairan tubuh (misal, darah) yang tidak seimbang, bukan jasad-jasad seperti bakteri dan virus. Kemungkinan bahwa teori yang paling mutakhir sekalipun belum dapat mengidentifikasi semua sumber keragaman sangat mungkin benar. Bahkan jika ada faktor yang dapat kita observasi, belum tentu semua faktor tersebut dapat dikendalikan. Mungkin, misal, tiba-tiba muncul ikan besar yang menabrak kapal saat belok, sehingga lajunya berubah<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. OLeh karena itu, laju kapal pasti tetap beragam.</p>
+<p>Agar keragaman tersebut dapat diukur, perlu lebih dari satu pengamatan. Kalau hanya ada satu pengamatan, simpangan baku akan menjadi nol. Selain itu, makin banyak ulangan, makin kecil ragam sebaran contoh rata-rata<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Ini adalah inti percobaan: kita mengumpulkan respon (laju kapal) dari individu yang dikondisikan tertentu (nahkoda yang disuruh belok kanan atau kiri). Kita melakukan pengacakan, kontrol lingkungan, dan ulangan.</p>
+</section>
+<section id="aplikasikan-konsep-konsep-tersebut" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="aplikasikan-konsep-konsep-tersebut"><span class="header-section-number">1.1.3</span> Aplikasikan konsep-konsep tersebut!</h3>
+<p>Setelah mengetahui perbedaan observasi dan prinsip dari percobaan, coba pikirkan:</p>
+<ol type="1">
+<li>Masalah apa yang mungkin muncul jika kita lakukan observasi dalam kasus harga dagangan dan waktu belajar mahasiswa? Mengapa masalah itu terjadi? Bagaimana Anda akan membuat percobaan untuk mengatasi masalah tersebut?</li>
+<li>Ambil satu hal yang dapat diteliti di sekitar Anda. Apa yang Anda dapat simpulkan dari observasi? Apa yang Anda <strong>tidak</strong> dapat simpulkan dari observasi? Mengapa? Bagaimana Anda akan membuat percobaan untuk meneliti hal tersebut.</li>
+<li>Buat <em>cause and effects diagram</em> dari kasus yang Anda ambil.</li>
+</ol>
+</section>
+</section>
+<section id="istilah-dalam-percobaan" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="istilah-dalam-percobaan"><span class="header-section-number">1.2</span> Istilah dalam percobaan</h2>
+<p>Untuk memperkuat pengertian mengenai istilah percobaan yang Anda miliki, perhatikan contoh tersebut:</p>
+<blockquote class="blockquote">
+<p>Seorang peneliti agronomi melakukan percobaan pada tanaman jagung varietas Arjuna. Jarak tanam di tiap petak diatur berebda-beda, yaitu 20 x 30 <span class="math inline">\(\text{cm}^2\)</span>, 30 x 30 <span class="math inline">\(\text{cm}^2\)</span>, dan 30 x 40 <span class="math inline">\(\text{cm}^2\)</span>. Jenis pupuk yang diberi selama penelitian adalah pupuk campuran NPK dengan dosis 100, 200, 300, dan 400 kg/ha. Untuk semua unit percobaan dilakukan penyiangan sebanyak 2 kali yaitu pada umur 3 dan 5 minggu setelah tanam.</p>
+<p>— Mattjik dan Sumertajaya (2002)</p>
+</blockquote>
+<section id="satuan-percobaan-respons-dan-pengamatan" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="satuan-percobaan-respons-dan-pengamatan"><span class="header-section-number">1.2.1</span> Satuan percobaan, respons, dan pengamatan</h3>
+<p><strong>Satuan percobaan</strong> dalam kasus ini adalah <strong>petak</strong>. Ingat bahwa satuan percobaan adalah unit terkecil yang diberi perlakuan. Tentu, jarak tanam hanya dapat ditentukan jika ada beberapa tanaman yang disusun di suatu petak; jika hanya ada satu tanaman, tidak mungkin dihitung jarak tanam. Dengan logika yang sama, sangat susah untuk melakukan pemupukan pada satu tanaman tertentu. Pupuk mungkin terbawa ke tanaman lain di petak yang sama oleh angin, air, atau faktor alam lain. Oleh karena itu, unit terkecil yang diberi perlakuan adalah petak.</p>
+<p><strong>Satuan pengamatan</strong> tergatung tujuan dari apa yang ingin <strong>diamati</strong>. Perubahan apa yang kita ingin amati? Misal <strong>respons</strong> kita adalah produktivitas. Produktivitas mungkin diukur dengan membandingkan berat jagung yang dihasilkan oleh petak tertentu - misal dengan satuan kg/ha. Maka, <strong>satuan pengamatan</strong> adalah petak, karena <strong>respons</strong> diukur di petak. Namun, jika kita ingin mengamati tinggi tanaman, maka yang diukur adalah tanaman, sehingga <strong>satuan pengamatan</strong> adalah tanaman.</p>
+</section>
+<section id="faktor-taraf-perlakuan-dan-interaksi" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="faktor-taraf-perlakuan-dan-interaksi"><span class="header-section-number">1.2.2</span> Faktor, taraf, perlakuan, dan interaksi</h3>
+<p><strong>Faktor</strong> dalam kasus ini adalah jarak tanam dan pupuk. Varietas dan penyiangan bukan faktor. Mengapa? Jarak tanam dan pupuk <strong>berbeda</strong> di tiap petak (satuan percobaan), tetapi semua petak ditanam varietas sama dan diberi penyiangan sama. Dalam menentukan faktor, pertanyaan yang penting adalah apa yang akan berbeda di tiap satuan percobaan.</p>
+<p><strong>Taraf</strong> adalah nilai dari faktor yang dicobakan. Dalam kasus ini, ada tiga jarak tanam berbeda (20 x 30 <span class="math inline">\(\text{cm}^2\)</span>, 30 x 30 <span class="math inline">\(\text{cm}^2\)</span>, 30 x 40 <span class="math inline">\(\text{cm}^2\)</span>) yang merupakan <strong>taraf</strong> dari <strong>faktor</strong> jarak tanam. Ada empat dosis pupuk berbeda (100 kg/ha, 200 kg/ha, 300 kg/ha, 400 kg/ha) yang menjadi taraf faktor dosis pupuk.</p>
+<p><strong>Perlakuan</strong> adalah suatu prosedur atau metode yang diterapkan pada satuan percobaan. Asumsikan bahwa peneliti ingin menerapkan semua kombinasi taraf faktor pada satuan percobaan. Anggap <span class="math inline">\(d_{i}\)</span> adalah jarak tanam ke-i dan <span class="math inline">\(p_{j}\)</span> adalah dosis pupuk ke-j (misal <span class="math inline">\(p_{j=1}\)</span> adalah 100 kg/ha, <span class="math inline">\(p_{j=2}\)</span> adalah 200 kg/ha, dan seterusnya). Oleh karena itu, kita dapat menyusun (di LaTeX):</p>
+<pre><code>$$
+\begin{bmatrix}
+d_{1}p_{1} &amp; d_{2}p_{1} &amp; d_{3}p_{1}\\
+d_{1}p_{2} &amp; d_{2}p_{2} &amp; d_{3}p_{2}\\
+d_{1}p_{3} &amp; d_{2}p_{3} &amp; d_{3}p_{3}\\
+d_{1}p_{4} &amp; d_{2}p_{4} &amp; d_{3}p_{4}
+\end{bmatrix}
+$$
+
+</code></pre>
+<p><span class="math display">\[
+\begin{bmatrix}
+d_{1}p_{1} &amp; d_{2}p_{1} &amp; d_{3}p_{1}\\
+d_{1}p_{2} &amp; d_{2}p_{2} &amp; d_{3}p_{2}\\
+d_{1}p_{3} &amp; d_{2}p_{3} &amp; d_{3}p_{3}\\
+d_{1}p_{4} &amp; d_{2}p_{4} &amp; d_{3}p_{4}
+\end{bmatrix}
+\]</span></p>
+<p>Kita temukan bahwa jumlah perlakuan adalah <span class="math inline">\(3\cdot 4=12\)</span>, dan tiap perlakuan diberikan dalam matriks tersebut. Jika kita mengetahui <strong>ulangan</strong>, kita dapat menghitung <strong>jumlah unit percobaan</strong> dengan mengalikan perlakuan dan ulangan.</p>
+<p>Anggap kita temukan bahwa pengaruh dosis pupuk selalu sama di tiap jarak tanam yang berbeda. Situasi ini berarti tidak ada <strong>interaksi</strong>. Namun, mungkin pengaruh dosis pupuk akan berbeda di jarak tanam yang berbeda - mungkin pengaruh pupuk lebih kecil di jarak tanam yang kecil karena tanaman berkompetisi mencari nutrisi. Kasus ini disebut <strong>interaksi</strong>, di mana pengaruh suatu level dari faktor berbeda jika level faktor lain berbeda.</p>
+</section>
+<section id="model-tetap-acak-dan-campuran-aplikasi-teori" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="model-tetap-acak-dan-campuran-aplikasi-teori"><span class="header-section-number">1.2.3</span> Model tetap, acak, dan campuran (aplikasi teori)</h3>
+<p>Anggap Anda bertanya ke peneliti mengenai cara dia memilih taraf dari dosis pupuk dan jarak tanam. Model apa yang tepat berdasarkan jawaban peneliti?</p>
+<ol type="1">
+<li>Dosis pupuk dan jarak tanam dipilih oleh peneliti secara langsung<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</li>
+<li>Peneliti melakukan proses pengacakan dari semua nilai dosis pupuk dan jarak tanam yang ada (misal dengan mengocok dan mengambil kertas berisi nilai dosis dan jarak tertentu)<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</li>
+<li>Peneliti mengacak nilai jarak tanam, tapi dosis pupuk dipilih sendiri<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</li>
+</ol>
+</section>
+<section id="rancangan-perlakuan-pengedalian-lingkungan-dan-respon" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="rancangan-perlakuan-pengedalian-lingkungan-dan-respon"><span class="header-section-number">1.2.4</span> Rancangan perlakuan, pengedalian lingkungan, dan respon</h3>
+<p>Dalam penjelasan sebelumnya, kita telah menyentuh rancangan perlakuan dengan mengasumsikan bahwa peneliti ingin tahu pengaruh kombinasi tiap taraf dari kedua faktor. Ini disebut <strong>rancangan bersilang</strong> karena taraf dari tiap faktor saling bebas. Namun, bisa jadi beberapa dosis pupuk tertentu tidak bisa dipakai di jarak tanam kecil. Misal, untuk melakukan pemupukan 400 kg/ha perlu mesin tertentu yang terlalu besar di petak dengan jarak tanam 20 x 30 <span class="math inline">\(\text{cm}^2\)</span>. Taraf dari faktor tidak saling bebas, sehingga dia <strong>bersarang</strong>. Taraf-taraf tertentu bersarang pada taraf lain, misal pupuk 400 kg/ha hanya bersarang di jarak tanam besar, tidak bisa pergi ke jarak tanam kecil.</p>
+<p>Lalu, bagaimana jika petak-petak tersebut memiliki kesuburan yang berbeda? Misal sebagian dari petak berada di hutan, sebagian lagi berada di dekat sungai, sebagian berada di gunung. Tentu, kondisi petak sebagai unit percobaan harus dikendalikan agar homogen - ini adalah <strong>rancangan pengendalian lingkungan</strong>.</p>
+<p>Terakhir, misal Anda ingin mengukur tinggi tanaman. Apakah Anda ingin mengukur menggunakan penggaris? Meteran? Software? Jawaban pertanyaan ini adalah <strong>rancangan respon</strong>.</p>
+</section>
+<section id="aplikasi-studi-studi-kasus" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="aplikasi-studi-studi-kasus"><span class="header-section-number">1.2.5</span> Aplikasi: studi-studi kasus</h3>
+<p>Temukan faktor, level, perlakuan, pengendalian lingkungan, satuan percobaan dan satuan pengamatan, jumlah ulangan, serta respons dari percobaan. Soal ini diambil dari Mattjik dan Sumertajaya (2002):</p>
+<ol type="1">
+<li>Suatu Lembaga Penelitian Padi melakukan percobaan untuk mengetahui pengaruh penggunaan berbagai pestisida cair terhadap produksi padi. Percobaan dilakukan pada satu hamparan sawah yang mempunyai tingkat kesuburan atau kandungan bahan organik yang relatif sama. Masing-masing perlakuan diberikan pada lahan seluas 4 x 5 <span class="math inline">\(\text{m}^2\)</span>. Perlakuan yang dicobakan ada 7, yaitu Dol-Mix (1 kg), Dol-Mix (2 kg), DDT + <span class="math inline">\(\gamma-\)</span>BHC, Azodrin, Dimecron-Boom, Dimecron-Knap, dan tanpa pestisida (sebagai kontrol), masing-masing diulang 4 kali. Respon yang diukur adalah produksi gabah per kg/ha. Hasil dari setiap petakan dikonversi ke dalam kg/ha.</li>
+<li>Percobaan lain pada Balai Penelitian Padi tersebut adalah ingin mengetahui pengaruh kerapatan benih terhadap produksi padi (kg/ha) pada varietas IR8. Kerapatan benih yang dicobakan adalah 25 kg benih/ha, 50 kg benih/ha, 75 kg benih/ha, 100 kg benih/ha, 125 kg benih/ha, 150 kg benih/ha. Lahan yang digunakan di perbuktin (lereng bukit), sehingga tingkat kesuburan tidak sama. Untuk itu petak dibagi jadi 4 kelompok. Masing-masing benih ditebarkan pada lahan seluas 5 x 5 <span class="math inline">\(\text{m}^2\)</span> serta hasilnya dikonversi ke satuan kg/ha.</li>
+<li>Sebuah balai penelitian ingin mengetahui pengaruh varietas dan dosis pupuk terhadap tinggi tanaman tomat (cm). Dosis pupuk yang digunakan adalah 15, 30, dan 45. Jenis varietas yang digunakan adalah varietas 1, 2, dan 3. Tiap perlakuan diulang sebanyak 4 kali. Selain kombinasi perlakuan yang diberikan, semua kondisi relartif homogen. Setiap petak terdiri dari 10 tanaman tomat.</li>
+<li>Terdapat 3 jenis material untuk pembuatan baterai (A, B, C) yang dicobakan pada 3 temperatur (15 oF, 70 oF, 125 oF). Masing-masing perlakuan diulang sebanyak 3 kali. Dari percobaan tersebut ingin diketahui apakah jenis material dan suhu mempengaruhi daya tahan baterai? Apakah jenis material tertentu cocok untuk suhu tertentu?</li>
+</ol>
+</section>
+</section>
+<section id="percobaan-ke-uji-perancangan-percobaan" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="percobaan-ke-uji-perancangan-percobaan"><span class="header-section-number">1.3</span> Percobaan ke uji: perancangan percobaan</h2>
+<p>Kita telah melihat dua contoh percobaan (nahkoda dan varietas jagung). Bagaimana kita menarik kesimpulan dari percobaan tersebut? Suatu <strong>hipotesis</strong> mengenai keadaan dunia (misal, bahwa pengaruh faktor ke respon sebesar <span class="math inline">\(\beta\)</span>) harus diuji. Fungsi <strong>perancangan percobaan</strong> adalah pembuatan dan pengujian hipotesis tersebut.</p>
+<section id="penentuan-ulangan" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="penentuan-ulangan"><span class="header-section-number">1.3.1</span> Penentuan ulangan</h3>
+<p>Ada tiga metode penetuan ulangan:</p>
+<ol type="1">
+<li>Minimal 3</li>
+<li>Minimal derajat bebas galat 15</li>
+<li>Menggunakan formula di bawah:</li>
+</ol>
+<p><span class="math display">\[
+r\geq 2\left(Z_{\alpha/2}+Z_{\beta}\right)^2\left(\frac{\sigma}{\delta}\right)^2
+\]</span></p>
+<pre><code>$$
+r\geq 2\left(Z_{\alpha/2}+Z_{\beta}\right)^2\left(\frac{\sigma}{\delta}\right)^2
+$$
+
+</code></pre>
+<p>Metode 2 dan 3 berkaitan erat dengan pengujian suatu hipotesis. Perhatikan bahwa:</p>
+<ol type="1">
+<li>Uji-F yang digunakan di dalam ANOVA berupa rasio kuadrat tengah: KT perlakuan/KT galat. Sedangkan, kuadrat tengah galat adalah jumlah kuadrat galat dibagi derajat bebas galat. Pada saat kita memberi jumlah minimal pada derajat bebas galat, secara tidak langsung kita memengaruhi besar kuadrat tengah galat, yang memengaruhi staistik uji-F.</li>
+<li>Formula (3) sangat berkaitan dengan uji. <span class="math inline">\(\alpha\)</span> adalah peluang menolak <span class="math inline">\(H_{0}\)</span> jika <span class="math inline">\(H_{0}\)</span> benar dalam suatu uji. Sedangkan <span class="math inline">\(\beta\)</span> adalah peluang menerima <span class="math inline">\(H_{0}\)</span> jika <span class="math inline">\(H_{1}\)</span> benar<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Selain itu, <span class="math inline">\(\delta\)</span> adalah perbedaan rataan yang diinginkan. Benang merah yang dapat diambil dari formula ini adalah menentukan jumlah ulangan, jika dalam menggunakan uji dapat mendeteksi perbedaan rataan sebesar <span class="math inline">\(\delta\)</span> dengan peluang kesalahan sebesar <span class="math inline">\(\alpha\)</span> dan <span class="math inline">\(\beta\)</span>, jika diketahui ragam populasi <span class="math inline">\(\sigma^2\)</span>.</li>
+</ol>
+<p>Bagaimana kita menghitung nilai tersebut di R? Untuk formula 2, anggap kita menghitung RAL, sehingga rumus db galat adalah <span class="math inline">\(t(r-1)\)</span>. Oleh karena itu:</p>
+<p><span class="math display">\[
+\begin{align*}
+t(r-1)&amp;\geq15\\
+r-1&amp;\geq \frac{15}{t}\\
+r&amp;\geq \frac{15}{t}+1
+\end{align*}
+\]</span></p>
+<pre><code>$$
+\begin{align*}
+t(r-1)&amp;\geq15\\
+r-1&amp;\geq \frac{15}{t}\\
+r&amp;\geq \frac{15}{t}+1
+\end{align*}
+$$
+
+</code></pre>
+<p>Anggap ada empat perlakuan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ceiling dipakai untuk membulatkan ke atas</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="dv">15</span><span class="sc">/</span>t<span class="sc">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Bagaimana cara kita menghitung formula ketiga? Selain secara manual, dapat dibuat fungsi di R:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>jmlUlangan<span class="ot">&lt;-</span><span class="cf">function</span>(alpha,beta,popvar,delta)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Temukan nilai Z. Note bahwa alpha dibagi 2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#lower.tail=T akan membuat nilai Z negatif, karena akan menghitung kuantil dari kiri.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  Za<span class="ot">=</span><span class="fu">qnorm</span>(alpha<span class="sc">/</span><span class="dv">2</span>,<span class="at">lower.tail=</span>F)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  Zb<span class="ot">=</span><span class="fu">qnorm</span>(beta,<span class="at">lower.tail=</span>F)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  r<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span>((Za<span class="sc">+</span>Zb)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(popvar<span class="sc">/</span>delta)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">ceiling</span>(r))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">jmlUlangan</span>(<span class="fl">0.05</span>,<span class="fl">0.10</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jmlUlangan</span>(<span class="fl">0.05</span>,<span class="fl">0.10</span>,<span class="fl">0.3</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Kalian dapt mengubah argumen dari fungsi tersebut untuk mencoba kombinasi nilai ukuran sampel yang berbeda. Note, hasil-hasil perhitungan dibulatkan ke atas karena:</p>
+<ol type="1">
+<li>Jumlah ulangan pasti bilangan bulat. Perlakuan tidak mungkin diulang 3.5 kali, misal.</li>
+<li>Semua metode tersebut mensyaratkan <strong>minimal</strong>. Dalam kata lain, jumlah ulangan lebih dari sama dengan hasil rumus tersebut. Jika kita membulatkan saja, ada risiko angka tersebut dibulatkan menjadi angka yang lebih kecil dari hasil rumus. Oleh karena itu, pembulatan ke atas memastikan angka yang dibulatkan lebih besar atau sama dengan hasil rumus yang digunakan.</li>
+</ol>
+</section>
+</section>
+<section id="pengayaan" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="pengayaan"><span class="header-section-number">1.4</span> Pengayaan</h2>
+<p>Ukuran sampel juga dapat dihitung dengan fungsi <code>power.anova.test</code> di R. Power adalah kuasa uji, yang didefinisikan sebagai probabilitas suatu hipotesis nol ditolak jika hipotesis nol tersebut memang salah. Masukkan jumlah kelompok, ragam antara kelompok, ragam dalam kelompok, kuasa uji, dan taraf nyata yang diinginkan. Jumlah sampel diasumsikan <code>NULL</code>.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="dv">4</span>, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">between.var =</span> <span class="dv">3</span>, <span class="at">within.var =</span> <span class="dv">5</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">power=</span><span class="fl">0.90</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Balanced one-way analysis of variance power calculation 
+
+         groups = 4
+              n = 8.91936
+    between.var = 3
+     within.var = 5
+      sig.level = 0.05
+          power = 0.9
+
+NOTE: n is number in each group</code></pre>
+</div>
+</div>
+<p>Jika kita memiliki rata-rata per kelompok, rata-rata tersebut dapat dimasukkan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ratakel <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">550</span>, <span class="dv">598</span>, <span class="dv">598</span>, <span class="dv">646</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="fu">length</span>(ratakel), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">between.var =</span> <span class="fu">var</span>(ratakel), <span class="at">within.var =</span> <span class="dv">6400</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">power=</span><span class="fl">0.9</span>,<span class="at">sig.level=</span><span class="fl">0.05</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n=</span><span class="cn">NULL</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Balanced one-way analysis of variance power calculation 
+
+         groups = 4
+              n = 20.68861
+    between.var = 1536
+     within.var = 6400
+      sig.level = 0.05
+          power = 0.9
+
+NOTE: n is number in each group</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Contoh ini dijelaskan di buku <a href="https://mixtape.scunning.com">Causal Inference: The Mixtape</a> buatan Scott Cunningham<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Misal jika muncul uang belok kanan, dan sebaliknya.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Rancangan Greko-Latin, misal, dapat mengendalikan tiga sumber keragaman<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Kecuali Anda bisa berbicara dengan ikan, hal ini susah dikontrol<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Ragam populasi adalah <span class="math inline">\(\sigma^2\)</span>, sedangkan ragam sebaran contoh rata-rata <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Model tetap.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>Model acak.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p>Model campuran<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote"><p>Sehingga <span class="math inline">\(H_{0}\)</span> salah.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Pendahuluan</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-Bab2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Percobaan Faktor Tunggal</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Konsep Dasar Perancangan Percobaan</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Di bab ini, kita akan membedakan suatu percobaan dengan penelitian observasional dan prinsip dari percobaan tersebut, mengilustrasikan istilah-istilah dalam percobaan, menjelaskan konsep perancangan percobaan, dan mencoba beberapa metode penghitungan ukuran sampel.</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Percobaan</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### Observasi terkadang tidak cukup</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Sebuah penelitian mungkin dimulai dengan **mengamati** dunia sekitar, atau observasi. Mungkin kalian mengamati bahwa pedagang dengan harga murah memiliki lebih banyak pelanggan, atau kalian mengamati bahwa mahasiswa yang lebih banyak belajar memiliki nilai yang lebih tinggi. Namun, kadang hubungan yang ditemukan dalam suatu observasi lebih kompleks dari yang kita amati.</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pressure, echo=FALSE, fig.cap="Kapal layar dan nahkodanya. Foto dari Ludomil Sawicki (Unsplash).", out.width='70%'}</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"Gambar/ludomil-sawicki-lsXbZtrVSdQ-unsplash.jpg"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>Bayangkan ada seorang nahkoda^<span class="co">[</span><span class="ot">Contoh ini dijelaskan di buku [Causal Inference: The Mixtape](https://mixtape.scunning.com) buatan Scott Cunningham</span><span class="co">]</span>. Kapal yang dikendalikan oleh nahkoda tersebut berada di tengah angin yang membelokkan kapal tersebut ke kanan dan kiri. Anggap bahwa nahkoda tersebut ingin kapal berlayar lurus, dan nahkoda ini sudah sangat berpengalaman sehingga dia dapat membelokkan kapalnya dengan tepat. Seorang pengamat akan melihat nahkoda tersebut membelokkan kemudi kapalnya ke kanan dan ke kiri, tetapi kapal tetap lurus. Pengamat yang tidak memiliki pengetahuan tentang kapal mungkin menyimpulkan bahwa kemudi tidak berpengaruh pada laju kapal!</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>Kasus ini merupakan contoh **galat sistematis**. Kita ingin mengetahui pengaruh arah belok kapal ke arah laju kapal, tetapi Nahkoda tidak membelokkan kapal secara acak, melainkan sesuai dengan kondisi angin agar kapal tetap melaju lurus.</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prinsip-prinsip percobaan</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>Lalu, bagaimana kita dapat mengetahui hubungan antara kemudi kapal dan laju kapal?</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>Pertama, mungkin kita dapat menyuruh nahkoda untuk membelokkkan kemudinya secara acak. Sebuah koin dapat dilempar, dan sisi yang muncul^<span class="co">[</span><span class="ot">Misal jika muncul uang belok kanan, dan sebaliknya.</span><span class="co">]</span> menentukan pembelokan kapal. Ini adalah **pengacakan** - sebelumnya, jika terjadi angin tertentu, nahkoda pasti membelokkan kapal berkebalikan dengan pengaruh angin tersebut. Peluang kemudi diputar ke kanan dan kiri tidak seimbang. Sekarang, peluang tersebut sama, apapun kondisinya.</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>Kedua, mungkin ada hal-hal lain yang menyebabkan berubahnya hubungan kemudi dengan laju kapal. Mungkin kapal yang berbeda memiliki sistem kemudi yang berbeda, atau nahkoda berbeda memiliki kemampuan mengemudi berbeda. Oleh karena itu, kita ingin **mengendalikan lingkungan**: kapal homogen, nahkoda homogen. Atau, kita dapat mengulangi percobaan tersebut di kombinasi kapal dan nahkoda berbeda. Rancangan ini dapat disebut Rancangan Bujur Sangkar Latin, yang mengendalikan keragaman dari dua arah. Rancangan Acak Kelompok Lengkap mengendalikan keragaman dari satu arah, dan rancangan pengendalian lingkungan lainnya yang lebih kompleks dapat mengendalikan keragaman dari berbagai arah^[Rancangan Greko-Latin, misal, dapat mengendalikan tiga sumber keragaman]. Namun, rancangan **pengendalian lingkungan** tersebut tidak perlu dipakai jika kondisi unit percobaaan sudah **homogen** - tidak ada sumber keragaman dari arah manapun.</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>Ketiga, ada **variabilitas** di percobaan ini. Kita tidak dapat mengobservasi semua sumber keragaman. Teori-teori yang dimiliki tentang cara dunia bekerja selalu berubah - beberapa waktu lalu, orang menganggap penyakit disebabkan oleh cairan tubuh (misal, darah) yang tidak seimbang, bukan jasad-jasad seperti bakteri dan virus. Kemungkinan bahwa teori yang paling mutakhir sekalipun belum dapat mengidentifikasi semua sumber keragaman sangat mungkin benar. Bahkan jika ada faktor yang dapat kita observasi, belum tentu semua faktor tersebut dapat dikendalikan. Mungkin, misal, tiba-tiba muncul ikan besar yang menabrak kapal saat belok, sehingga lajunya berubah^<span class="co">[</span><span class="ot">Kecuali Anda bisa berbicara dengan ikan, hal ini susah dikontrol</span><span class="co">]</span>. OLeh karena itu, laju kapal pasti tetap beragam. </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>Agar keragaman tersebut dapat diukur, perlu lebih dari satu pengamatan. Kalau hanya ada satu pengamatan, simpangan baku akan menjadi nol. Selain itu, makin banyak ulangan, makin kecil ragam sebaran contoh rata-rata^<span class="co">[</span><span class="ot">Ragam populasi adalah $\sigma^2$, sedangkan ragam sebaran contoh rata-rata $\frac{\sigma^2}{n}$.</span><span class="co">]</span>.</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>Ini adalah inti percobaan: kita mengumpulkan respon (laju kapal) dari individu yang dikondisikan tertentu (nahkoda yang disuruh belok kanan atau kiri). Kita melakukan pengacakan, kontrol lingkungan, dan ulangan.</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### Aplikasikan konsep-konsep tersebut!</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>Setelah mengetahui perbedaan observasi dan prinsip dari percobaan, coba pikirkan:</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Masalah apa yang mungkin muncul jika kita lakukan observasi dalam kasus harga dagangan dan waktu belajar mahasiswa? Mengapa masalah itu terjadi? Bagaimana Anda akan membuat percobaan untuk mengatasi masalah tersebut?</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Ambil satu hal yang dapat diteliti di sekitar Anda. Apa yang Anda dapat simpulkan dari observasi? Apa yang Anda **tidak** dapat simpulkan dari observasi? Mengapa? Bagaimana Anda akan membuat percobaan untuk meneliti hal tersebut.</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Buat *cause and effects diagram* dari kasus yang Anda ambil.</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Istilah dalam percobaan</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>Untuk memperkuat pengertian mengenai istilah percobaan yang Anda miliki, perhatikan contoh tersebut:</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Seorang peneliti agronomi melakukan percobaan pada tanaman jagung varietas Arjuna. Jarak tanam di tiap petak diatur berebda-beda, yaitu 20 x 30 $\text{cm}^2$, 30 x 30 $\text{cm}^2$, dan 30 x 40 $\text{cm}^2$. Jenis pupuk yang diberi selama penelitian adalah pupuk campuran NPK dengan dosis 100, 200, 300, dan 400 kg/ha. Untuk semua unit percobaan dilakukan penyiangan sebanyak 2 kali yaitu pada umur 3 dan 5 minggu setelah tanam.</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; --- Mattjik dan Sumertajaya (2002)</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### Satuan percobaan, respons, dan pengamatan</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>**Satuan percobaan** dalam kasus ini adalah **petak**. Ingat bahwa satuan percobaan adalah unit terkecil yang diberi perlakuan. Tentu, jarak tanam hanya dapat ditentukan jika ada beberapa tanaman yang disusun di suatu petak; jika hanya ada satu tanaman, tidak mungkin dihitung jarak tanam. Dengan logika yang sama, sangat susah untuk melakukan pemupukan pada satu tanaman tertentu. Pupuk mungkin terbawa ke tanaman lain di petak yang sama oleh angin, air, atau faktor alam lain. Oleh karena itu, unit terkecil yang diberi perlakuan adalah petak.</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>**Satuan pengamatan** tergatung tujuan dari apa yang ingin **diamati**. Perubahan apa yang kita ingin amati? Misal **respons** kita adalah produktivitas. Produktivitas mungkin diukur dengan membandingkan berat jagung yang dihasilkan oleh petak tertentu - misal dengan satuan kg/ha. Maka, **satuan pengamatan** adalah petak, karena **respons** diukur di petak. Namun, jika kita ingin mengamati tinggi tanaman, maka yang diukur adalah tanaman, sehingga **satuan pengamatan** adalah tanaman.</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="fu">### Faktor, taraf, perlakuan, dan interaksi</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>**Faktor** dalam kasus ini adalah jarak tanam dan pupuk. Varietas dan  penyiangan bukan faktor. Mengapa? Jarak tanam dan pupuk **berbeda** di tiap petak (satuan percobaan), tetapi semua petak ditanam varietas sama dan diberi penyiangan sama. Dalam menentukan faktor, pertanyaan yang penting adalah apa yang akan berbeda di tiap satuan percobaan.</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>**Taraf** adalah nilai dari faktor yang dicobakan. Dalam kasus ini, ada tiga jarak tanam berbeda (20 x 30 $\text{cm}^2$, 30 x 30 $\text{cm}^2$, 30 x 40 $\text{cm}^2$) yang merupakan **taraf** dari **faktor** jarak tanam. Ada empat dosis pupuk berbeda (100 kg/ha, 200 kg/ha, 300 kg/ha, 400 kg/ha) yang menjadi taraf faktor dosis pupuk.</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>**Perlakuan** adalah suatu prosedur atau metode yang diterapkan pada satuan percobaan. Asumsikan bahwa peneliti ingin menerapkan semua kombinasi taraf faktor pada satuan percobaan. Anggap $d_{i}$ adalah jarak tanam ke-i dan $p_{j}$ adalah dosis pupuk ke-j (misal $p_{j=1}$ adalah 100 kg/ha, $p_{j=2}$ adalah 200 kg/ha, dan seterusnya). Oleh karena itu, kita dapat menyusun (di LaTeX):</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{bmatrix}</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="in">d_{1}p_{1} &amp; d_{2}p_{1} &amp; d_{3}p_{1}\\</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="in">d_{1}p_{2} &amp; d_{2}p_{2} &amp; d_{3}p_{2}\\</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">d_{1}p_{3} &amp; d_{2}p_{3} &amp; d_{3}p_{3}\\</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="in">d_{1}p_{4} &amp; d_{2}p_{4} &amp; d_{3}p_{4}</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="in">\end{bmatrix}</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>d_{1}p_{1} &amp; d_{2}p_{1} &amp; d_{3}p_{1}<span class="sc">\\</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>d_{1}p_{2} &amp; d_{2}p_{2} &amp; d_{3}p_{2}<span class="sc">\\</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>d_{1}p_{3} &amp; d_{2}p_{3} &amp; d_{3}p_{3}<span class="sc">\\</span></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>d_{1}p_{4} &amp; d_{2}p_{4} &amp; d_{3}p_{4}</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>Kita temukan bahwa jumlah perlakuan adalah $3\cdot 4=12$, dan tiap perlakuan diberikan dalam matriks tersebut. Jika kita mengetahui **ulangan**, kita dapat menghitung **jumlah unit percobaan** dengan mengalikan perlakuan dan ulangan.</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>Anggap kita temukan bahwa pengaruh dosis pupuk selalu sama di tiap jarak tanam yang berbeda. Situasi ini berarti tidak ada **interaksi**. Namun, mungkin pengaruh dosis pupuk akan berbeda di jarak tanam yang berbeda - mungkin pengaruh pupuk lebih kecil di jarak tanam yang kecil karena tanaman berkompetisi mencari nutrisi. Kasus ini disebut **interaksi**, di mana pengaruh suatu level dari faktor berbeda jika level faktor lain berbeda. </span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model tetap, acak, dan campuran (aplikasi teori)</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>Anggap Anda bertanya ke peneliti mengenai cara dia memilih taraf dari dosis pupuk dan jarak tanam. Model apa yang tepat berdasarkan jawaban peneliti?</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Dosis pupuk dan jarak tanam dipilih oleh peneliti secara langsung^<span class="co">[</span><span class="ot">Model tetap.</span><span class="co">]</span>.</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Peneliti melakukan proses pengacakan dari semua nilai dosis pupuk dan jarak tanam yang ada (misal dengan mengocok dan mengambil kertas berisi nilai dosis dan jarak tertentu)^<span class="co">[</span><span class="ot">Model acak.</span><span class="co">]</span>.</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Peneliti mengacak nilai jarak tanam, tapi dosis pupuk dipilih sendiri^<span class="co">[</span><span class="ot">Model campuran</span><span class="co">]</span>.</span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Rancangan perlakuan, pengedalian lingkungan, dan respon</span></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>Dalam penjelasan sebelumnya, kita telah menyentuh rancangan perlakuan dengan mengasumsikan bahwa peneliti ingin tahu pengaruh kombinasi tiap taraf dari kedua faktor. Ini disebut **rancangan bersilang** karena taraf dari tiap faktor saling bebas. Namun, bisa jadi beberapa dosis pupuk tertentu tidak bisa dipakai di jarak tanam kecil. Misal, untuk melakukan pemupukan 400 kg/ha perlu mesin tertentu yang terlalu besar di petak dengan jarak tanam 20 x 30 $\text{cm}^2$. Taraf dari faktor tidak saling bebas, sehingga dia **bersarang**. Taraf-taraf tertentu bersarang pada taraf lain, misal pupuk 400 kg/ha hanya bersarang di jarak tanam besar, tidak bisa pergi ke jarak tanam kecil.</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>Lalu, bagaimana jika petak-petak tersebut memiliki kesuburan yang berbeda? Misal sebagian dari petak berada di hutan, sebagian lagi berada di dekat sungai, sebagian berada di gunung. Tentu, kondisi petak sebagai unit percobaan harus dikendalikan agar homogen - ini adalah **rancangan pengendalian lingkungan**.</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>Terakhir, misal Anda ingin mengukur tinggi tanaman. Apakah Anda ingin mengukur menggunakan penggaris? Meteran? Software? Jawaban pertanyaan ini adalah **rancangan respon**.</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### Aplikasi: studi-studi kasus</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>Temukan faktor, level, perlakuan, pengendalian lingkungan, satuan percobaan dan satuan pengamatan, jumlah ulangan, serta respons dari percobaan. Soal ini diambil dari Mattjik dan Sumertajaya (2002):</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Suatu Lembaga Penelitian Padi melakukan percobaan untuk mengetahui pengaruh penggunaan berbagai pestisida cair terhadap produksi padi. Percobaan dilakukan pada satu hamparan sawah yang mempunyai tingkat kesuburan atau kandungan bahan organik yang relatif sama. Masing-masing perlakuan diberikan pada lahan seluas 4 x 5 $\text{m}^2$. Perlakuan yang dicobakan ada 7, yaitu Dol-Mix (1 kg), Dol-Mix (2 kg), DDT + $\gamma-$BHC, Azodrin, Dimecron-Boom, Dimecron-Knap, dan tanpa pestisida (sebagai kontrol), masing-masing diulang 4 kali. Respon yang diukur adalah produksi gabah per kg/ha. Hasil dari setiap petakan dikonversi ke dalam kg/ha.</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Percobaan lain pada Balai Penelitian Padi tersebut adalah ingin mengetahui pengaruh kerapatan benih terhadap produksi padi (kg/ha) pada varietas IR8. Kerapatan benih yang dicobakan adalah 25 kg benih/ha, 50 kg benih/ha, 75 kg benih/ha, 100 kg benih/ha, 125 kg benih/ha, 150 kg benih/ha. Lahan yang digunakan di perbuktin (lereng bukit), sehingga tingkat kesuburan tidak sama. Untuk itu petak dibagi jadi 4 kelompok. Masing-masing benih ditebarkan pada lahan seluas 5 x 5 $\text{m}^2$ serta hasilnya dikonversi ke satuan kg/ha.</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Sebuah balai penelitian ingin mengetahui pengaruh varietas dan dosis pupuk terhadap tinggi tanaman tomat (cm). Dosis pupuk yang digunakan adalah 15, 30, dan 45. Jenis varietas yang digunakan adalah varietas 1, 2, dan 3. Tiap perlakuan diulang sebanyak 4 kali. Selain kombinasi perlakuan yang diberikan, semua kondisi relartif homogen. Setiap petak terdiri dari 10 tanaman tomat.</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Terdapat 3 jenis material untuk pembuatan baterai (A, B, C) yang dicobakan pada 3 temperatur (15 oF, 70 oF, 125 oF). Masing-masing perlakuan diulang sebanyak 3 kali. Dari percobaan tersebut ingin diketahui apakah jenis material dan suhu mempengaruhi daya tahan baterai? Apakah jenis material tertentu cocok untuk suhu tertentu?</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Percobaan ke uji: perancangan percobaan</span></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>Kita telah melihat dua contoh percobaan (nahkoda dan varietas jagung). Bagaimana kita menarik kesimpulan dari percobaan tersebut? Suatu **hipotesis** mengenai keadaan dunia (misal, bahwa pengaruh faktor ke respon sebesar $\beta$) harus diuji. Fungsi **perancangan percobaan** adalah pembuatan dan pengujian hipotesis tersebut.</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="fu">### Penentuan ulangan</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>Ada tiga metode penetuan ulangan:</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Minimal 3</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Minimal derajat bebas galat 15</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Menggunakan formula di bawah:</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>r\geq 2\left(Z_{\alpha/2}+Z_{\beta}\right)^2\left(\frac{\sigma}{\delta}\right)^2</span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="in">r\geq 2\left(Z_{\alpha/2}+Z_{\beta}\right)^2\left(\frac{\sigma}{\delta}\right)^2</span></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>Metode 2 dan 3 berkaitan erat dengan pengujian suatu hipotesis. Perhatikan bahwa:</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Uji-F yang digunakan di dalam ANOVA berupa rasio kuadrat tengah: KT perlakuan/KT galat. Sedangkan, kuadrat tengah galat adalah jumlah kuadrat galat dibagi derajat bebas galat. Pada saat kita memberi jumlah minimal pada derajat bebas galat, secara tidak langsung kita memengaruhi besar kuadrat tengah galat, yang memengaruhi staistik uji-F.</span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Formula (3) sangat berkaitan dengan uji. $\alpha$ adalah peluang menolak $H_{0}$ jika $H_{0}$ benar dalam suatu uji. Sedangkan $\beta$ adalah peluang menerima $H_{0}$ jika $H_{1}$ benar^[Sehingga $H_{0}$ salah.]. Selain itu, $\delta$ adalah perbedaan rataan yang diinginkan. Benang merah yang dapat diambil dari formula ini adalah menentukan jumlah ulangan, jika dalam menggunakan uji dapat mendeteksi perbedaan rataan sebesar $\delta$ dengan peluang kesalahan sebesar $\alpha$ dan $\beta$, jika diketahui ragam populasi $\sigma^2$.</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>Bagaimana kita menghitung nilai tersebut di R? Untuk formula 2, anggap kita menghitung RAL, sehingga rumus db galat adalah $t(r-1)$. Oleh karena itu:</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>t(r-1)&amp;\geq15<span class="sc">\\</span></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>r-1&amp;\geq \frac{15}{t}<span class="sc">\\</span></span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>r&amp;\geq \frac{15}{t}+1</span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{align*}</span></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="in">t(r-1)&amp;\geq15\\</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a><span class="in">r-1&amp;\geq \frac{15}{t}\\</span></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="in">r&amp;\geq \frac{15}{t}+1</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="in">\end{align*}</span></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a><span class="in">$$</span></span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>Anggap ada empat perlakuan:</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a><span class="co">#ceiling dipakai untuk membulatkan ke atas</span></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="dv">15</span><span class="sc">/</span>t<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>Bagaimana cara kita menghitung formula ketiga? Selain secara manual, dapat dibuat fungsi di R:</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>jmlUlangan<span class="ot">&lt;-</span><span class="cf">function</span>(alpha,beta,popvar,delta)</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Temukan nilai Z. Note bahwa alpha dibagi 2</span></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>  <span class="co">#lower.tail=T akan membuat nilai Z negatif, karena akan menghitung kuantil dari kiri.</span></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>  Za<span class="ot">=</span><span class="fu">qnorm</span>(alpha<span class="sc">/</span><span class="dv">2</span>,<span class="at">lower.tail=</span>F)</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>  Zb<span class="ot">=</span><span class="fu">qnorm</span>(beta,<span class="at">lower.tail=</span>F)</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>  r<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span>((Za<span class="sc">+</span>Zb)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(popvar<span class="sc">/</span>delta)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">ceiling</span>(r))</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a><span class="fu">jmlUlangan</span>(<span class="fl">0.05</span>,<span class="fl">0.10</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="fu">jmlUlangan</span>(<span class="fl">0.05</span>,<span class="fl">0.10</span>,<span class="fl">0.3</span>,<span class="dv">3</span>)</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>Kalian dapt mengubah argumen dari fungsi tersebut untuk mencoba kombinasi nilai ukuran sampel yang berbeda. Note, hasil-hasil perhitungan dibulatkan ke atas karena:</span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Jumlah ulangan pasti bilangan bulat. Perlakuan tidak mungkin diulang 3.5 kali, misal.</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Semua metode tersebut mensyaratkan **minimal**. Dalam kata lain, jumlah ulangan lebih dari sama dengan hasil rumus tersebut. Jika kita membulatkan saja, ada risiko angka tersebut dibulatkan menjadi angka yang lebih kecil dari hasil rumus. Oleh karena itu, pembulatan ke atas memastikan angka yang dibulatkan lebih besar atau sama dengan hasil rumus yang digunakan.</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pengayaan</span></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a>Ukuran sampel juga dapat dihitung dengan fungsi <span class="in">`power.anova.test`</span> di R. Power adalah kuasa uji, yang didefinisikan sebagai probabilitas suatu hipotesis nol ditolak jika hipotesis nol tersebut memang salah. Masukkan jumlah kelompok, ragam antara kelompok, ragam dalam kelompok, kuasa uji, dan taraf nyata yang diinginkan. Jumlah sampel diasumsikan <span class="in">`NULL`</span>.</span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="dv">4</span>, </span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>                 <span class="at">between.var =</span> <span class="dv">3</span>, <span class="at">within.var =</span> <span class="dv">5</span>, </span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>                 <span class="at">power=</span><span class="fl">0.90</span>, <span class="at">sig.level=</span><span class="fl">0.05</span>,</span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n=</span><span class="cn">NULL</span>)</span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>Jika kita memiliki rata-rata per kelompok, rata-rata tersebut dapat dimasukkan:</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>ratakel <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">550</span>, <span class="dv">598</span>, <span class="dv">598</span>, <span class="dv">646</span>)</span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="fu">length</span>(ratakel), </span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>                      <span class="at">between.var =</span> <span class="fu">var</span>(ratakel), <span class="at">within.var =</span> <span class="dv">6400</span>, </span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>                      <span class="at">power=</span><span class="fl">0.9</span>,<span class="at">sig.level=</span><span class="fl">0.05</span>,</span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n=</span><span class="cn">NULL</span>)</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>p</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

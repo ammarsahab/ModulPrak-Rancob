@@ -1,0 +1,269 @@
+# Rancangan Split Blok
+
+Filosofi dasar rancangan split blok mirip dengan strip plot - ada petak utama dan anak petak. Anak petak tersebut mengandung suatu aspek dari percobaan yang ingin ditekankan (diketahui pengaruhnya dengan ketepatan lebih tinggi). Dalam split blok kasus ini yang ditekankan bukan satu faktor, melainkan interaksi antara faktor. Oleh karena itu, faktor menjadi petak utama.
+
+Rancangan split blok hanya dapat diterapkan dalam RAKL, tidak di RAL. Unit percobaan harus dipisahkan menjadi blok, lalu petak utama diacak di lajur dan baris blok tersebut. Pengacakan semua faktor di lajur dan baris tidak mungkin terjadi di satu unit percobaan yang hanya mengandung satu perlakuan atau satu kombinasi faktor sehingga dibutuhkan blok agar pengacakan semua kombinasi tersebut dapat dilakukan.
+
+## Pengacakan
+
+Langkah pengacakannya adalah sebagai berikut:
+
+- Pilihlah kelompok unit percobaan secara acak 
+- Tempatkan taraf-taraf faktor A secara acak pada setiap kelompok 
+mengikuti plot lajur
+- Tempatkan taraf-taraf faktor B secara acak pada setiap kelompok 
+mengikuti plot baris.
+
+### Pengacakan di agricolae
+
+Sebelum langkah-langkah pengacakan di atas diikuti, akan didefinisikan faktor yang akan dicobakan dan tarafnya. Hendak dicobakan pupuk dengan taraf "Kontrol", "PK", "N", "NP", "NK", dan "NPK" serta genotipe beras dengan taraf IR-64 dan S-969.
+
+```{r}
+P<-c("Kontrol", "PK", "N", "NP", "NK","NPK")
+G<-c("IR-64","S-969")
+```
+
+Pengacakan split blok di agricolae cukup sederhana. Nama lain dari split blok adalah strip-plot, dan ada fungsi `design.strip(faktor1, faktor2, nblok)` di package tersebut:
+
+```{r}
+baganSplitB<-agricolae::design.strip(P,G,r=4,serie=1)
+```
+
+Perlihatkan bagan percobaan:
+
+```{r}
+knitr::kable(head(baganSplitB$book, n=10),
+             col.names= c("Petak", "Blok",
+                          "Pupuk", "Genotipe"))
+```
+
+### Pengacakan di edibble
+
+Dalam rancangan strip plot, ada empat unit percobaan. Pengaruh blok tentu diaplikasikan ke blok, lalu pengaruh faktor ditaruh di lajur dan baris, serta interaksi di tiap unit. Maka, di edibble buat empat unit. Blok, lalu kolom dan baris yang `nested_in(blok)`, dan petak yang di dalam blok - `nested_in(blok)` dan `crossed_by(baris, kolom)` - tiap petak merupakan gabungan dari baris dan kolom. Cara mendefinisikan kasus ini adalah dengan menyatakan bahwa petak `crossed_by()` terlebih dahulu, lalu `nested_in()` - di tiap blok, petak merupakan gabungan baris dan kolom. Karena operasi dalam kurung dilaksanakan terlebih dahulu, bentuknya menjadi `nested_in(blok, crossed_by())`.
+
+Lalu, pengacakan dilakukan ke baris dan kolom.
+
+```{r}
+library(edibble)
+
+desSBlok<-design(name="Padi") %>%
+  set_units(blok=4,
+            baris=nested_in(blok,2),
+            kolom=nested_in(blok,6),
+            petak=nested_in(blok,crossed_by(baris,kolom))) %>%
+  set_trts(Genotipe=G,
+           Pupuk=P) %>%
+  allot_trts(Genotipe~baris,
+             Pupuk~kolom) %>%
+  assign_trts("random", seed=420) %>% serve_table
+
+knitr::kable(head(desSBlok,n=10))
+```
+
+Plot rancangan tersebut:
+
+```{r}
+deggust::autoplot(desSBlok)
+```
+
+Bandingkan dengan default edibble:
+
+```{r}
+strip <- takeout(menu_strip(t1 = 2, t2 = 6, r = 4, seed=420))
+examine_recipe(strip)
+```
+
+Plotnya akan relatif sama:
+
+```{r}
+deggust::autoplot(strip)
+```
+
+## ANOVA
+
+### Teori
+
+Model linear aditif bagi split plot RAL adalah:
+$$
+y_{ijk} = \mu + \alpha_i + K_{k}+ \delta_{ik} + \beta_j + \gamma_{jk}+(\alpha\beta)_{ij} + \epsilon_{ijk}
+$$
+
+Dengan:
+
+1. $y_{ijk}$ adalah nilai pengamatan pada faktor A taraf ke-i dan faktor B taraf ke-j pada blok ke-k.
+2. $\mu$ komponen aditif dari rataan umum.
+3. $\alpha_i$ pengaruh utama faktor A. Diasumsikan $\sum_{i=1}^a \alpha_i=0$ bagi model tetap dan $\alpha\sim N(0,\sigma_a^2)$ bagi model acak.
+4. $\beta_{j}$ pengaruh utama faktor B. Diasumsikan $\sum_{j=1}^b \beta_j=0$ bagi model tetap dan $\beta\sim N(0,\sigma_b^2)$ bagi model acak.
+5. $K_{k}$ pengaruh utama kelompok.
+6. $(\alpha\beta)_{ij}$ komponen interaksi faktor A dan faktor B. Diasumsikan $\sum_{i=1}^p(\alpha\beta)_{ij}=\sum_{i=1}^t (\alpha\beta)_{ij}=0$ bagi model tetap dan $(\alpha\beta)_{ij}\sim N(0,\sigma_{ab}^2)$ bagi model acak.
+7. $\delta_{ik}\sim N(0,\sigma_{\delta}^2)$ komponen acak dari faktor A.
+8. $\gamma_{jk}\sim N(0,\sigma_{\gamma}^2)$ komponen acak dari faktor B.
+8. $\epsilon_{ijk}\sim N(0,\sigma^2)$ komponen acak interaksi dari faktor A dan B.
+
+Dan hipotesis pengaruh petak utama, anak petak, dan interaksi.
+$$
+\begin{aligned}
+&\text{Pengaruh petak utama (Faktor A)}:\\
+H_{0}&:\alpha_{1}=\ldots=\alpha_{a}=0 \\
+&\text{ faktor A tidak berpengaruh pada respon}\\
+H_{1}&: \text{Paling sedikit ada satu i di mana }\alpha_{i}\neq 0\\
+\\
+&\text{Pengaruh anak petak (Faktor B)}:\\
+H_{0}&:\beta_{1}=\ldots=\beta_{b}=0 \\
+&\text{ faktor B tidak berpengaruh pada respon}\\
+H_{1}&: \text{Paling sedikit ada satu j di mana }\beta_{j}\neq 0\\
+\\
+&\text{Pengaruh interaksi }:\\
+H_{0}&:(\alpha\beta)_{11}=(\alpha\beta)_{12}=\ldots=(\alpha\beta)_{ab}=0 \\
+&\text{ interaksi tidak berpengaruh pada respon}\\
+H_{1}&: \text{Paling sedikit ada sepasang ij di mana }(\alpha\beta)_{ij}\neq 0\\
+\\
+&\text{Pengaruh kelompok}:\\
+H_{0}&:K_{1}=\ldots=K_{k}=0 \\
+&\text{ Kelompok tidak berpengaruh pada respon}\\
+H_{1}&: \text{Paling sedikit ada satu k di mana }K_{k}\neq 0\\
+
+\end{aligned}
+$$
+
+Dan tabel ANOVA:
+```{r , echo=FALSE, results='asis'}
+  cat('
+  | Sumber Keragaman| db| JK| KT| F-hit|F(dbP,dbG)|
+  |------------:|-----------:|------------:|------------:|------------:|------------:|
+  |          Blok|         r-1|          JKK| JKK/dbA | KTK/KTGA | |
+  |          A|         a-1|          JKA| JKA/dbA | KTA/KTGA | |
+  |          Galat (a)|         (a-1)(r-1)|          JKGA| JKGA/dbGA | | |
+  |          B|         (b-1)|         JKB| JKB/dbB | KTB/KTGB | |
+  |          Galat (b)|         (b-1)(r-1)|          JKGA| JKGA/dbGB | | |
+  |          AB|         (a-1)(b-1)|         JKAB| JKAB/dbAB | KTAB/KTGC | |
+  |          Galat (c)|       (a-1)(b-1)(r-1)|         JKGC| JKGC/dbGC | | |
+  |          Total|         abr-1|          JKT| | | |')
+```
+
+Untuk bagian pertama tabel, jumlah kuadrat dihitung dengan:
+
+$$
+\begin{aligned}
+FK&=\frac{y^2_{...}}{abr}\\
+
+JKT&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(y_{ijk}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r y_{ijk}^2-FK\\
+
+JKST_a&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i.k}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{k=1}^r \frac{y_{i.k}^2}{b}-FK\\
+
+JKA&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i..}-\bar{y}_{...}\right)^2=\sum_{i=1}^a \frac{y_{i..}^2}{br}-FK\\
+
+JKK&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r \left(\bar{y}_{..k}-\bar{y}_{...}\right)^2=\sum_{k=1}^r \frac{y_{..k}^2}{ab}-FK\\
+
+JKG_{a}&=JKST_a-JKA-JKK\\
+\end{aligned}
+$$
+
+Untuk bagian kedua tabel:
+
+$$
+\begin{aligned}
+JKB&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{.j.}-\bar{y}_{...}\right)^2=\sum_{j=1}^b \frac{y_{.j.}^2}{ar}-FK\\
+JKST_{b}&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2=\sum_{k=1}^r\sum_{j=1}^b \frac{y_{.jk}^2}{a}-FK\\
+JKG_{b}&=JKST_{b}-JKB\\
+\end{aligned}
+$$
+
+Dan untuk bagian terakhir tabel:
+
+$$
+\begin{aligned}
+JKP&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij}-\bar{y}_{..}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\frac{y_{ij.}^2}{r}-FK\\
+JKAB&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{i..}-\bar{y}_{.j.}+\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2-JKA-JKB\\
+&=JKP-JKB-JKA\\
+JKG_{c}&=JKT-JKP-JKK-JKG_{a}-JKG_{b}
+\end{aligned}
+$$
+
+### Analisis dengan R
+
+Load data:
+
+```{r cache=TRUE}
+library(googlesheets4)
+library(data.table)
+
+Data.SB<-as.data.table(read_sheet("https://docs.google.com/spreadsheets/d/1meWerIyAv1X8jtHXoFCTysvzPy91ptQL6F9sO_-RUNs/edit?usp=sharing"))
+
+knitr::kable(Data.SB)
+```
+
+Karena data belum berbentuk *long* - satu baris adalah satu observasi, melt data tersebut. Tiap baris dalam data awal diidentifikasi oleh kombinasi pupuk dan genotipe, sehingga `id.vars` adalag `c("P","G")`:
+
+```{r}
+Data.SB<-melt(
+  Data.SB,
+  id.vars=c("P","G"),
+  value.name = "H"
+)
+
+knitr::kable(head(Data.SB,10))
+```
+
+Ubah kolom `variable` menjadi blok:
+
+```{r}
+setnames(Data.SB,"variable", "B")
+```
+
+Untuk melakukan ANOVA, perlu ada struktur error yang khusus. Pada dasarnya, akan ada error khusus untuk faktor serta interaksinya, sehingga tulis `Error(B:(P*G))` - akan dihitung `Error(B:P)`, `Error(B:G)`, dan `Error(B:(G:P))`, atau error tiap faktor dan interaksinya di tiap ulangan (blok). Spesifikasi lain adalah:
+
+```{r}
+aov.SB<-aov(H~P*G+B+Error(B:(P*G)),Data.SB)
+summary(aov.SB)
+aov.SB1<-aov(H~P*G+B+Error(B:P*B:G),Data.SB)
+summary(aov.SB1)
+```
+
+Pastikan ada kurung, karena anova akan salah tanpa kurung:
+
+```{r}
+aov.SB1<-aov(H~P*G+B+Error(B:P*G),Data.SB)
+summary(aov.SB1)
+```
+
+Atau, dapat digunakan fungsi `strip.plot(blok, faktor 1, faktor 2, respon)` dari agricolae:
+
+```{r}
+library(agricolae)
+
+out1<-with(Data.SB,strip.plot(B,P,G,H))
+```
+
+Uji lanjut untuk tiap faktor dapat mudah dilakukan. gl.a adalah derajat bebas galat a, dan Ea galat A.
+
+```{r}
+test1<-agricolae::LSD.test(Data.SB$H, Data.SB$P, out1$gl.a, out1$Ea)
+test1$statistics
+plot(test1)
+```
+
+Namun, tampaknya tidak dilakukan penyesuaian pada KTG sehingga perlu dilakukan perhitungan manual jika ingin ada penyesuaian tersebut:
+
+### Latihan: Huasahuasi
+
+Sedang diteliti ambang batas curah hujan sebagai dukungan untuk aplikasi fungisida waktu dalam pengendalian penyakit busuk daun kentang di Peru menggunakan strip plot. 
+
+
+```{r}
+library(agricolae)
+
+data(huasahuasi)
+str(huasahuasi)
+```
+
+Karena ada dua data.frame, ambil `data.frame` YIELD:
+
+```{r}
+YIELD<-huasahuasi$YIELD
+str(YIELD)
+```
+
+Ada y1da, y2da, dan y3da. Respon yield merupakan penjumlahan dari ketiga respon tersebut - `YIELD$yield<- y1da+y2da+y3da`, dan perlakuan ada di trt dan clon. 
+
+Buat bagan percobaan dengan edibble dan lakukan ANOVA!

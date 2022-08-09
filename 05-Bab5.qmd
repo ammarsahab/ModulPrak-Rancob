@@ -1,0 +1,497 @@
+# Rancangan Faktorial
+
+Di kebanyakan aplikasi percangan percobaan, ada lebih dari satu faktor yang memengaruhi respon tertentu. Misal, produksi suatu petak tanah ditentukan oleh pemupukan, varietas yang ditanam, irigasi, dan lain-lain. Bahkan, pengujian pengaruh satu faktor belum tentu valid jika level faktor-faktor lain berbeda. Misal, dalam kondisi irigasi yang cukup, varietas yang berbeda akan memiliki produktivitas berbeda. Namun, irigasi yang tidak cukup akan menyebabkan semua varietas mati kekurangan air sehingga produksi semua varietas sama-sama nol. Contoh tersebut cukup ekstrim, tetapi intinya adalah respon merupakan akibat dari berbagai faktor secara simultan, tidak terpisah (**interaksi**). Belum tentu, misal, tambahan pemumpukan 1 $kg$ selalu menambah produktivitas 1 $kg/ha$ - efek tersebut mungkin lebih besar di kondisi tertentu (varietas yang reseptif pada pupuk, irigasi baik). Oleh karena itu, perlu rancangan percobaan dengan lebih dari satu faktor untuk beberapa aplikasi tertentu. Selain itu, semua **kombinasi** taraf faktor harus dicobakan, karena pengaruh taraf suatu faktor dapat berbeda-beda jika dipasangkan dengan taraf faktor lain yang berbeda.
+
+Note, hal ini berarti faktor-faktor harus bersilang, tidak bersarang. Jika level faktor tertentu hanya muncul saat faktor memiliki level tertentu juga, tidak dapat diuji semua kombinasi perlakuan. Jika saat kerapatan tanaman tinggi, misal, varietas tertentu tidak dapat ditanam, tidak mungkin dilakukan rancangan faktorial.
+
+## Faktorial RAL
+
+### Pembuatan bagan percobaan
+
+Karena perlakuan di suatu percobaan faktorial merupakan semua kombinasi taraf faktor yang diteliti, pembuatan bagan percobaan diawali dengan penjabaran taraf-taraf faktor tersebut. Lalu digunakan fungsi expand.grid dari package data.table untuk mengkombinasikan taraf-taraf faktor:
+
+```{r message=FALSE}
+library(data.table)
+trt1<-c("A","B","C")
+trt2<-c("D","E","F")
+perlakuan<-data.frame(expand.grid(trt1,trt2)) #buat kombinasi
+colnames(perlakuan)<-c("Faktor 1", "Faktor 2") #penamaan faktor, berupa kosmetik
+knitr::kable(perlakuan)
+```
+
+Terlihat bahwa tiap baris merupakan kombinasi unik dari taraf faktor satu dan dua. Jumlah baris juga tepat, yaitu $3 \times 3=9$. Lalu, kode bagi tiap kombinasi tersebut dapat diekstraksi dan dibuat. Tiap kombinasi dapat dikodekan dengan angka, atau dengan teks yang merupakan gabungan dari nama taraf faktor pertama dan kedua.
+
+```{r}
+perlakuan$kode<-seq(1,nrow(perlakuan)) #angka
+perlakuan$kode2<-paste(perlakuan$`Faktor 1`,perlakuan$`Faktor 2`,sep="") #gabungan nama taraf; sep=pemisah -> "" berarti tak ada pemisah
+knitr::kable(perlakuan)
+```
+
+Lalu, buat saja bagan tersebut melalui design.crd (RAL) di library agricolae. Masukkan jumlah ulangan yang diinginkan juga. Akan ditunjukkan sepuluh unit percobaan pertama sebagai ilustrasi:
+
+```{r}
+library(agricolae)
+baganFRAL<-design.crd(trt=perlakuan$kode2,r=4,seed=16,serie=0)
+
+#akses output -> hasil design.crd$book
+knitr::kable(head(baganFRAL$book,n=10))
+```
+
+Dapat diverifikasi bahwa jumlah unit percobaan merupakan $9 \times 4=36$.
+```{r}
+nrow(baganFRAL$book)
+```
+
+#### Pengacakan edibble
+
+Karena rancangan pengendalian lingkungan berupa RAL, hanya ada satu jenis unit. Lalu, ada dua perlakuan di `set_trts` yang semuanya dialokasikan ke unit secara bersamaan. Oleh karena itu, tulis `c(P1.,P2.)` untuk menggabungkan kedua perlakuan, lalu `allot_trts(c(P1.,P2.)~unit)` untuk mengalokasikan semua kombinasi perlakuan tersebut ke unit.
+
+```{r}
+library(edibble)
+
+desFaktRAL<-design(name="Faktorial RAL") %>%
+  set_units(unit=36) %>%
+  set_trts(P1.=trt1,
+           P2.=trt2) %>%
+  allot_trts(c(P1.,P2.) ~unit) %>%
+  assign_trts("random", seed=420) %>% serve_table
+
+knitr::kable(head(desFaktRAL,n=10))
+```
+
+Lalu, plot-kan:
+
+```{r}
+deggust::autoplot(desFaktRAL)
+```
+
+Bandingkan dengan default edibble:
+
+```{r}
+fac <- takeout(menu_factorial(trt = c(3, 3), r=4, seed=420))
+examine_recipe(fac)
+deggust::autoplot(fac)
+```
+
+Cara pembuatan dan plot sama di kedua kasus.
+
+### Model Linear Aditif
+
+Model bagi faktorial RAL adalah sebagai berikut:
+$$
+y_{ijk}=\mu+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\varepsilon_{ijk}
+$$
+
+Dengan:
+
+1. $Y_{ijk}$ adalah nilai pengamatan pada faktor A taraf ke-i dan faktor B taraf ke-j pada ulangan ke-k.
+2. $\mu$ adalah komponen aditif dari rataan umum.
+3. $\alpha_i$ adalah komponen aditif dari pengaruh faktor A pada taraf ke-i.
+4. $\beta_j$ adalah komponen aditif dari pengaruh faktor B pada taraf ke-j.
+5. $(\alpha\beta)_{ij}$ adalah komponen interaksi faktor A dan faktor B.
+6. $\varepsilon_{ijk}\sim N(0,\sigma_\varepsilon^2)$ adalah komponen acak pada tiap pengamatan
+
+Oleh karena itu, terdapat tiga hipotesis yang diuji, yaitu hipotesis mengenai pengaruh faktor A, pengaruh faktor B, dan pengaruh interaksi:
+
+$$
+\begin{aligned}
+&\textbf{Pengaruh faktor A:}\\
+H_0&: \alpha_1=\cdots=\alpha_a=0 \\
+&\text{ (faktor A tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada satu i di mana }\alpha_i\neq0\\
+\\
+&\textbf{Pengaruh faktor B:}\\
+H_0&: \beta_1=\cdots=\beta_b=0 \\
+& \text{ (faktor B tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada satu j di mana }\beta_j\neq0\\
+\\
+&\textbf{Pengaruh interaksi:}\\
+H_0&: (\alpha\beta)_{11}=(\alpha\beta)_{12}=\cdots=(\alpha\beta)_{ab}=0 \\
+& \text{ (Interaksi faktor A dan B tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada sepasang } (i,j) \text{ di mana }(\alpha\beta)_{ij}\neq0
+
+\end{aligned}
+$$
+
+Hipotesis tersebut diuji dengan uji-F, yang disimpulkan di tabel sidik ragam:
+
+```{r}
+  cat('
+  | Sumber Keragaman| db| JK| KT| F-hit|F(dbP,dbG)|
+  |------------:|-----------:|------------:|------------:|------------:|------------:|
+  |         A|         a-1|          JKA| JKP/dbA | KTA/KTG | |
+  |         B|         b-1|          JKB| JKB/dbB | KTB/KTG | |
+  |         A*B|         (a-1)(b-1)|          JKAB| JKAB/dbAB | KTAB/KTG | |
+  |          Galat|         ab(r-1)|         JKG| JKG/dbG | | |
+  |          Total|         abr-1|          JKT| | | |')
+```
+
+Di mana jumlah kuadrat tersebut dihitung dengan:
+$$
+\begin{align*}
+FK&=\frac{y^2_{...}}{abr}\\
+JKT&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(y_{ijk}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r y_{ijk}^2-FK\\
+JKA&=\sum_{i=1}^a\left(\bar{y}_{i..}-\bar{y}_{...}\right)^2=\sum_{i=1}^a \frac{y_{i..}^2}{br}-FK\\
+JKB&=\sum_{j=1}^b\left(\bar{y}_{.j.}-\bar{y}_{...}\right)^2=\sum_{j=1}^b \frac{y_{.j.}^2}{ar}-FK\\
+JKP&=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b \frac{y_{ij.}^2}{r}-FK\\
+JKAB&=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{i..}-\bar{y}_{.j.}+\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2-JKA-JKB\\
+&=JKP-JKB-JKA\\
+JKG&=JKP-JKT
+\end{align*}
+$$
+
+### ANOVA dengan R
+
+Akan digunakan kasus berikut dari Mattjik dan Sumertajaya:
+
+> Balai Karantina ingin mengetahui pengaruh pemberian fumigasi dengan berbagai dosis (0, 16, 32, 48, 64; $g/m^3$) dengan lama fumigasi yang berbeda (2 dan 4 jam) terhadap daya kecambah benih tomat. Metode perkecambahan yang digunakan adalah *Growing on Test*. Unit percobaan diasumsikan homogen.
+
+Pertama, baca data terlebih dahulu:
+```{r message=FALSE, warning=FALSE}
+library(googlesheets4)
+
+Fact<-read_sheet("https://docs.google.com/spreadsheets/d/1HuYXEBHlpJCXY2v-XJfmiUoFSN05plULDE1T7E1vnPo/edit?usp=sharing")
+knitr::kable(Fact)
+```
+
+Terlihat bahwa baris pertama merupakan taraf-taraf dari faktor dosis. Oleh karena itu, baris tersebut sebaiknya dihilangkan. Selain itu, kolom ketiga sampai terakhir hendak diberi nama sesuai dosis diberikan.
+
+```{r message=FALSE, warning=FALSE}
+Fact<-read_sheet("https://docs.google.com/spreadsheets/d/1HuYXEBHlpJCXY2v-XJfmiUoFSN05plULDE1T7E1vnPo/edit?usp=sharing")[-1,]
+colnames(Fact)[seq(3,ncol(Fact))]<-seq(0,64,16)
+```
+
+Lalu, data tersebut dirubah ke format *long* di mana tiap baris menunjukkan unit percobaan individu, bukan kombinasi nama ulangan dan dosis fumigasi. Seperti biasa, id.vars merupakan pembeda individu di format wide awal (dalam kasus ini, tiap individu adalah kombinasi LamaFumigasi dan Ulangan). Lalu, value.vars merupakan kolom-kolom yang digabung menjadi satu, dalam kasus ini dosis-dosis dari 0 sampai 64.
+
+```{r message=FALSE, warning=FALSE}
+library(reshape2)
+
+Fact2<-melt(Fact,
+               #variabel yang membedakan tiap baris di tabulasi asli:
+               id.vars=c("LamaFumigasi","Ulangan"),
+               value.vars=seq(0,64,16),
+               value.name="Perkecambahan")
+colnames(Fact2)[3]<-"Dosis" #kolom ketiga akan disebut "variable"
+```
+
+Setelah tabulasi data benar, pastikan tiap faktor sudah dibuat menjadi objek data yang benar; lakukan ANOVA dan lihat hasil:
+
+```{r}
+Fact2$LamaFumigasi<-as.factor(Fact2$LamaFumigasi)
+Fact2$Dosis<-as.factor(Fact2$Dosis)
+aovFact<-aov(Perkecambahan~LamaFumigasi+Dosis+LamaFumigasi:Dosis,Fact2)
+summary(aovFact)
+```
+Analisis di python dapat dilakukan dengan membaca CSV dan mengambil row ke-2 sampai akhir. Note bahwa indeks di Python dimulai dari 0, sehingga baris ke-2 dinotasikan dengan 1.
+
+```{python}
+import pandas as pd
+
+fum=pd.read_csv("https://docs.google.com/spreadsheets/d/1HuYXEBHlpJCXY2v-XJfmiUoFSN05plULDE1T7E1vnPo/export?gid=0&format=csv")
+fumn=fum.iloc[1:]
+```
+
+Lalu, ubah nama kolom:
+
+```{python}
+print(fumn.columns)
+```
+
+Ambil elemen pertama dan kedua (0, 1) - indexing di Python dimulai dari 0 dan berakhir di elemen $n-1$ sehingga ambil elemen [0:2]. Elemen tersebut diubah menjadi list. Lalu tambahkan angka 0, 16, 32, 48, 64 kepada list tersebut. Lalu masukkan list tersebut ke kolom-kolom dataset:
+
+```{python}
+fumn.columns=list(fumn.columns[0:2])+[str(x) for x in range(0,80,16)]
+fumn.head()
+```
+
+Melt data:
+
+```{python}
+FaktRALMelt=pd.melt(fumn, id_vars=['LamaFumigasi','Ulangan'], value_vars=[str(x) for x in range(0,80,16)])
+```
+
+Lakukan ANOVA. Gunakan `*` untuk mendapat interaksi, dan `C()` untuk membuat peubah kategorik:
+
+```{python}
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+FaktRALlm= ols('value ~ C(LamaFumigasi)*C(variable)',data=FaktRALMelt)
+fitRAL=FaktRALlm.fit()
+
+table = sm.stats.anova_lm(fitRAL) 
+print(table)
+```
+
+
+### Tabel dan Plot Interaksi
+
+Sekarang, dapat dicari rata-rata pengaruh perlakuan di tiap kombinasi faktor A dan B. Fungsi yang akan digunakan adalah aggregate dari base R. Argumen pertama merupakan fungsi agregasi yang ingin dilakukan - sintaks ini mirip dengan aov atau lm (respon~perlakuan), argumen kedua merupakan faktor, dan argumen terakhir merupakan fungsi agregasi yang dipakai (dalam kasus ini, mean):
+```{r}
+knitr::kable(aggregate(Perkecambahan~Dosis+LamaFumigasi,data=Fact2,FUN=mean))
+```
+
+Lalu, buat tiap baris menjadi taraf faktor A (Lama Fumigasi), dan tiap kolom menjadi taraf faktor B. Gunakan fungsi dcast, dengan sintaks dcast(tabel, fungsi: baris~kolom, peubah respon).
+
+```{r warning=FALSE, message=FALSE}
+SumTab<-reshape2::dcast(aggregate(Perkecambahan~Dosis+LamaFumigasi,data=Fact2,FUN=mean),LamaFumigasi~Dosis,value.var="Perkecambahan") #(tabel: agregasi, fungsi: baris~kolom)
+knitr::kable(SumTab)
+```
+
+Lalu, tambahkan rerata tiap baris (rowMeans). Namun, kolom pertama (lama fumigasi) tidak merupakan peubah respon dan tidak diperhitungkan:
+
+```{r warning=FALSE, message=FALSE}
+SumTab$Rerata<-rowMeans(SumTab[,-1])
+knitr::kable(SumTab)
+```
+
+Lalu, tambahkan rerata per kolom:
+
+```{r}
+SumTab<-rbind(SumTab,colMeans(SumTab[,-1]))
+knitr::kable(SumTab)
+```
+
+Tabel rata-rata perlakuan telah terbentuk. Tabel ini dapat digunakan untuk pembuatan plot interaksi secara manual. Di R, plot interaksi dibuat dengan:
+
+```{r}
+interaction.plot(Fact2$Dosis, Fact2$LamaFumigasi, Fact2$Perkecambahan) #(faktor 1, faktor 2, respon)
+```
+
+Atau, dapat dibuat plot interaksi melalui library phia. Library phia hanya menerima input berupa lm - ubah olah data menggunakan lm terlebih dahulu. Phia menyediakan tabel rata-rata perlakuan, serta dapat di-plotkan menjadi plot interaksi.
+
+```{r message=FALSE}
+library(phia)
+mod<-lm(Perkecambahan~LamaFumigasi+Dosis+LamaFumigasi:Dosis,data=Fact2)
+im=interactionMeans(mod)
+knitr::kable(im) # tabel
+plot(im) # plot
+```
+
+### Uji lanjut
+
+Uji lanjut dapat dilakukan dengan library emmeans. Pada dasarnya, emmeans menghasilkan output yang mirip dengan uji lanjut seperti TukeyHSD:
+
+```{r}
+library(emmeans)
+marginal = emmeans(mod,~ LamaFumigasi:Dosis)
+knitr::kable(head(pairs(marginal,adjust="Tukey"),n=5))
+knitr::kable(head(TukeyHSD(aovFact, conf.level=.95)$`LamaFumigasi:Dosis`),n=5) #metode tukey, tapi bisa saja cara lain seperti bonferroni
+```
+
+Urutan pengurangannya berbeda saja, sehingga hasil emmeans memiliki beda positif dan TukeyHSD memiliki beda negatif. Library multcomp memiliki output yang lebih rapi, yaitu langsung berupa pengelompokan:
+
+```{r}
+library(multcomp)
+knitr::kable(cld(marginal,
+alpha=0.05,
+Letters=letters, 
+adjust="tukey"))
+```
+
+Selain itu, dapat diuji kontras orthogonal dari data ini. Karena hanya ada dua taraf untuk lama fumigasi, kontras hanya dapat dibuat untuk dosis. Misal dibuat kontras untuk membandingkan pengaruh ada dosis (dosis 0 vs lainnya), dosis rendah vs tinggi (16,32 vs 48,64), serta perbandingan antara dosis 16 vs 32 dan 48 vs 64:
+
+```{r}
+levels(Fact2$Dosis)
+contrasts(Fact2$Dosis)<- cbind(c(1, -1/4, -1/4, -1/4,-1/4), c(0, 1/2,1/2, -1/2, -1/2), 
+                              c(0, 1,-1, 0, 0), c(0,0,0,1,-1))
+contrasts(Fact2$Dosis)
+aovFact1<-aov(Perkecambahan~LamaFumigasi+Dosis+LamaFumigasi:Dosis,Fact2)
+summary.aov(aovFact1,split=list(Dosis=list("0 vs ada"=1,"16,32 vs 48,64"=2,"16 vs 32"=3,"48 vs 64"=4)))
+```
+
+Dapat juga dibuat polinomial orthogonal, dengan koefisien-koefisien sesuai yang ditentukan saat taraf faktor tersebut 4.
+
+```{r}
+contrasts(Fact2$Dosis) <- cbind(c(-2, -1, 0, 1, 2), c(2, -1, -2, -1, 2),
+                                c(-1, 2, 0, -2, 1), c(1, -4, 6, -4, 1))
+contrasts(Fact2$Dosis)
+aovFact2<-aov(Perkecambahan~LamaFumigasi+Dosis+LamaFumigasi:Dosis,Fact2)
+summary.aov(aovFact2,split=list(Dosis=list("Linear"=1,"Kuadratik"=2,"Kubik"=3,"Kuartik"=4)))
+```
+
+## Faktorial RAKL
+
+Jika kondisi unit percobaan tidak sepenuhnya homogen, dapat digunakan Faktorial RAKL. Sama seperti RAKL pada kasus satu faktor, tiap perlakuan diacak dan diulang sekali di tiap kelompok.
+
+### Pengacakan
+
+Pertama, buat tiap kombinasi perlakuan:
+
+```{r warning=FALSE, message=FALSE}
+library(data.table)
+
+vari<-c("V1","V2","V3")
+pupu<-c("N0","N1","N2","N3")
+KLperlakuan<-expand.grid(vari,pupu) #buat kombinasi
+colnames(KLperlakuan)<-c("Varietas","Pupuk") #ubah nama kolom
+knitr::kable(KLperlakuan)
+```
+
+Lalu, beri penomoran bagi tiap kombinasi perlakuan tersebut:
+
+```{r}
+KLperlakuan$Nomor<-paste(KLperlakuan$Varietas,KLperlakuan$Pupuk,sep="")
+knitr::kable(KLperlakuan)
+```
+
+Dari tiap perlakuan tersebut, lakukan pengacakan di tiap kelompok. Di R, ini dilakukan dengan design.rcbd dari agricolae:
+
+```{r}
+library(agricolae)
+
+baganFakt_RAKL<-design.rcbd(KLperlakuan$Nomor,3,seed=78) #kombinasi perlakuan, jml kelompok
+knitr::kable(baganFakt_RAKL$sketch)
+```
+
+#### Pengacakan edibble
+
+Pada dasarnya, struktur perlakuan akan sama, tetapi struktur unit dibuat sesuai dengan RAKL, yaitu membuat unit kelompok dan petak yang `nested_in(kelompok)`. Perlakuan masih diacak ke petak (unit):
+
+```{r}
+desFaktRAKL<-design(name="Faktorial RAKL") %>%
+  set_units(kelompok=3,
+            petak=nested_in(kelompok, 12)) %>%
+  set_trts(varietas=vari,
+           pupuk=pupu) %>%
+  allot_trts(c(varietas,pupuk)~petak) %>%
+  assign_trts("random", seed=420) %>% serve_table
+
+knitr::kable(head(desFaktRAKL,n=10))
+```
+
+Plot dari rancangan tersebut dapat dilihat:
+
+```{r}
+deggust::autoplot(desFaktRAKL)
+```
+
+### Model Linear Aditif
+
+Model bagi faktorial RAL adalah sebagai berikut:
+$$
+y_{ijk}=\mu+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\rho_k+\varepsilon_{ijk}
+$$
+
+Dengan:
+
+1. $Y_{ijk}$ adalah nilai pengamatan pada faktor A taraf ke-i dan faktor B taraf ke-j pada ulangan ke-k.
+2. $\mu$ adalah komponen aditif dari rataan umum.
+3. $\alpha_i$ adalah komponen aditif dari pengaruh faktor A pada taraf ke-i.
+4. $\beta_j$ adalah komponen aditif dari pengaruh faktor B pada taraf ke-j.
+5. $(\alpha\beta)_{ij}$ adalah komponen interaksi faktor A dan faktor B.
+6. $\rho_k$ adalah pengaruh aditif dari kelompok dan diasumsikan tidak berinteraksi dengan perlakuan (bersifat aditif) / pengaruh kelompok ke-k
+7. $\varepsilon_{ijk}\sim N(0,\sigma_\varepsilon^2)$ adalah komponen acak pada tiap pengamatan
+
+Oleh karena itu, terdapat empat hipotesis yang diuji, yaitu hipotesis mengenai pengaruh faktor A, pengaruh faktor B, pengaruh interaksi, dan pengaruh kelompok:
+
+$$
+\begin{align*}
+&\textbf{Pengaruh faktor A:}\\
+H_0&: \alpha_1=\cdots=\alpha_a=0 \\
+&\text{ (faktor A tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada satu i di mana }\alpha_i\neq0\\
+\\
+&\textbf{Pengaruh faktor B:}\\
+H_0&: \beta_1=\cdots=\beta_b=0 \\
+&\text{ (faktor B tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada satu j di mana }\beta_j\neq0\\
+\\
+&\textbf{Pengaruh interaksi:}\\
+H_0&: (\alpha\beta)_{11}=(\alpha\beta)_{12}=\cdots=(\alpha\beta)_{ab}=0 \\
+&\text{ (Interaksi faktor A dan B tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada sepasang } (i,j) \text{ di mana }(\alpha\beta)_{ij}\neq0\\
+\\
+&\textbf{Pengaruh pengelompokan:}\\
+H_0&: \rho_1=\cdots=\rho_r=0 \\&
+\text{ (blok tidak berpengaruh pada respon yang diamati)}\\
+H_1&: \text{paling sedikit ada satu k di mana }\rho_k\neq0\\
+\\
+
+
+\end{align*}
+$$
+
+Hipotesis tersebut diuji dengan uji-F, yang disimpulkan di tabel sidik ragam:
+
+```{r, echo=FALSE,results='asis'}
+  cat('
+  | Sumber Keragaman| db| JK| KT| F-hit|F(dbP,dbG)|
+  |------------:|-----------:|------------:|------------:|------------:|------------:|
+  |         A|         a-1|          JKA| JKP/dbA | KTA/KTG | |
+  |         B|         b-1|          JKB| JKB/dbB | KTB/KTG | |
+  |         A*B|         (a-1)(b-1)|          JKAB| JKAB/dbAB | KTAB/KTG | |
+  |          Blok|         (r-1)|         JKK| JKK/dbK | | |
+  |          Galat|         (ab-1)(r-1)|         JKG| JKG/dbG | | |
+  |          Total|         abr-1|          JKT| | | |')
+```
+
+Jumlah kuadrat tersebut dihitung dengan:
+$$
+\begin{align*}
+FK&=\frac{y^2_{...}}{abr}\\
+JKT&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(y_{ijk}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r y_{ijk}^2-FK\\
+JKA&=\sum_{i=1}^a\left(\bar{y}_{i..}-\bar{y}_{...}\right)^2=\sum_{i=1}^a \frac{y_{i..}^2}{br}-FK\\
+JKB&=\sum_{j=1}^b\left(\bar{y}_{.j.}-\bar{y}_{...}\right)^2=\sum_{j=1}^b \frac{y_{.j.}^2}{ar}-FK\\
+JKP&=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b \frac{y_{ij.}^2}{r}-FK\\
+JKAB&=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{i..}-\bar{y}_{.j.}+\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2-JKA-JKB\\
+&=JKP-JKB-JKA\\
+JKK&=\sum_{k=1}^r \left(\bar{y}_{..k}-\bar{y}_{...}\right)^2=\sum_{k=1}^r \frac{y_{..k}^2}{ab}-FK\\
+JKG&=JKP-JKK-JKT
+\end{align*}
+$$
+
+### ANOVA dengan R
+
+> Seorang peneliti akan melakukan percobaan pada sebuah tanaman dengan mengamati pertumbuhan tinggi tanaman di sebuah green house. Tanaman  diberikan 2 jenis perlakuan yang pertama adalah jenis varietas yang terdiri dari Varietas 1(V1), Varietas 2(V2), dan Varietas 3(V3) dan perlakuan kedua adalah dosis pupuk terdiri dari N1, N2, N3, N4, N5. Percobaan ini dilakukan di 3 spot berbeda.  Rancangan apakah yang sebaiknya digunakan peneliti?  Bagaimana alur  percobaan jika dilakukan sesuai rancangan yang anda sarankan? Lalu uji apakah perlakuan yang dicobakan berpengaruh signifikan, jika didapatkan data seperti dibawah ini?
+
+Karena percobaan dilakukan di tiga *spot* berebeda, maka rancangan adalah faktorial RAKL. Ambil data:
+
+```{r message=FALSE}
+library(googlesheets4)
+
+FactRAKL<-read_sheet("https://docs.google.com/spreadsheets/d/1PqOsMGjb6aBwF-3NsWxsXk3-eevUJBq6sGMGHMLct-A/edit?usp=sharing")
+knitr::kable(FactRAKL)
+```
+
+Lalu, melt data frame tersebut. Seperti biasa, id.vars merupakan pembeda individu di format wide yang menjadi bentuk awal data frame (dalam kasus ini, tiap individu adalah kombinasi Varietas dan Kelompok). Lalu, value.vars merupakan kolom-kolom yang digabung menjadi satu, dalam kasus ini pupuk dari N1 sampai N5.
+
+```{r message=FALSE, warning=FALSE}
+library(reshape2)
+
+FactRAKL2<-melt(FactRAKL,
+               #variabel yang membedakan tiap baris di tabulasi asli:
+               id.vars=c("Varietas","kelompok"),
+               value.vars=c("N1","N2","N3","N4","N5"),
+               value.name="Tinggi")
+colnames(FactRAKL2)[3]<-"Pupuk" #kolom ketiga akan disebut "variable"
+knitr::kable(FactRAKL2)
+```
+
+Setelah tabulasi data benar, pastikan tiap faktor sudah dibuat menjadi objek data yang benar; lakukan ANOVA dan lihat hasil:
+
+```{r}
+FactRAKL2$Varietas<-as.factor(FactRAKL2$Varietas)
+FactRAKL2$Pupuk<-as.factor(FactRAKL2$Pupuk)
+FactRAKL2$kelompok<-as.factor(FactRAKL2$kelompok)
+aovFactRAKL<-aov(Tinggi~Varietas*Pupuk+kelompok,FactRAKL2)
+summary(aovFactRAKL)
+```
+
+Operasi-operasi lanjutan, seperti uji asumsi, uji lanjut, ataupun pembuatan plot interaksi, dapat diadopsi dari contoh-contoh sebelumnya.
+```{r warning=FALSE, message=FALSE}
+SumTabRAKFakt<-reshape2::dcast(aggregate(Tinggi~Varietas+Pupuk,data=FactRAKL2,FUN=mean),Varietas~Pupuk,value.var="Tinggi") #(tabel: agregasi, fungsi: baris~kolom)
+knitr::kable(SumTabRAKFakt)
+```
+
+Dan plot interaksinya:
+
+```{r message=FALSE}
+library(phia)
+mod2<-lm(Tinggi~Varietas*Pupuk+kelompok,data=FactRAKL2)
+im2=interactionMeans(mod2)
+knitr::kable(head(im2),n=5) # tabel
+plot(im2) # plot
+```
+
+Terlihat bahwa pengelompokan memenuhi asumsi tak ada interaksi.

@@ -1,0 +1,38 @@
+project:
+  type: book
+  
+book:
+  title: "Modul Praktikum Perancangan Percobaan"
+  author: "Fardilla Rahmawati, Muhammad Ammar Sahab"
+  date: "24 Januari 2022"
+  chapters:
+    - index.qmd
+    - 01-Bab1.qmd
+    - 02-Bab2.qmd
+    - 03-Bab3.qmd
+    - 04-Bab4.qmd
+    - 05-Bab5.qmd
+    - 06-Bab6.qmd
+    - 07-Bab7.qmd
+    - 08-Bab8.qmd
+bibliography: [book.bib, packages.bib]
+
+format:
+  html:
+    theme: simplex
+    code-fold: true
+    code-tools: true
+    highlight-style: arrow
+    code-block-border-left: true
+  pdf:
+    documentclass: scrreport
+  epub:
+    cover-image: cover.png
+
+
+delete_merged_file: true
+language:
+  label:
+    fig: "Gambar "
+  ui:
+    chapter_name: "Bab "
