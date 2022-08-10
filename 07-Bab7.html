@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modul Praktikum Perancangan Percobaan - 7&nbsp; Rancangan Split Blok</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-Bab8.html" rel="next">
+<link href="./06-Bab6.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rancangan Split Blok</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modul Praktikum Perancangan Percobaan</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Pendahuluan</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Bab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Konsep Dasar Perancangan Percobaan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Bab2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Percobaan Faktor Tunggal</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Bab3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Perbandingan Nilai Tengah Perlakuan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Bab4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Uji Asumsi</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Bab5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rancangan Faktorial</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Bab6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Rancangan Petak Terpisah (Split Plot Design)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Bab7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rancangan Split Blok</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Bab8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANCOVA</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#pengacakan" id="toc-pengacakan" class="nav-link active" data-scroll-target="#pengacakan"> <span class="header-section-number">7.1</span> Pengacakan</a>
+  <ul class="collapse">
+  <li><a href="#pengacakan-di-agricolae" id="toc-pengacakan-di-agricolae" class="nav-link" data-scroll-target="#pengacakan-di-agricolae"> <span class="header-section-number">7.1.1</span> Pengacakan di agricolae</a></li>
+  <li><a href="#pengacakan-di-edibble" id="toc-pengacakan-di-edibble" class="nav-link" data-scroll-target="#pengacakan-di-edibble"> <span class="header-section-number">7.1.2</span> Pengacakan di edibble</a></li>
+  </ul></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"> <span class="header-section-number">7.2</span> ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#teori" id="toc-teori" class="nav-link" data-scroll-target="#teori"> <span class="header-section-number">7.2.1</span> Teori</a></li>
+  <li><a href="#analisis-dengan-r" id="toc-analisis-dengan-r" class="nav-link" data-scroll-target="#analisis-dengan-r"> <span class="header-section-number">7.2.2</span> Analisis dengan R</a></li>
+  <li><a href="#latihan-huasahuasi" id="toc-latihan-huasahuasi" class="nav-link" data-scroll-target="#latihan-huasahuasi"> <span class="header-section-number">7.2.3</span> Latihan: Huasahuasi</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rancangan Split Blok</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Filosofi dasar rancangan split blok mirip dengan strip plot - ada petak utama dan anak petak. Anak petak tersebut mengandung suatu aspek dari percobaan yang ingin ditekankan (diketahui pengaruhnya dengan ketepatan lebih tinggi). Dalam split blok kasus ini yang ditekankan bukan satu faktor, melainkan interaksi antara faktor. Oleh karena itu, faktor menjadi petak utama.</p>
+<p>Rancangan split blok hanya dapat diterapkan dalam RAKL, tidak di RAL. Unit percobaan harus dipisahkan menjadi blok, lalu petak utama diacak di lajur dan baris blok tersebut. Pengacakan semua faktor di lajur dan baris tidak mungkin terjadi di satu unit percobaan yang hanya mengandung satu perlakuan atau satu kombinasi faktor sehingga dibutuhkan blok agar pengacakan semua kombinasi tersebut dapat dilakukan.</p>
+<section id="pengacakan" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="pengacakan"><span class="header-section-number">7.1</span> Pengacakan</h2>
+<p>Langkah pengacakannya adalah sebagai berikut:</p>
+<ul>
+<li>Pilihlah kelompok unit percobaan secara acak</li>
+<li>Tempatkan taraf-taraf faktor A secara acak pada setiap kelompok mengikuti plot lajur</li>
+<li>Tempatkan taraf-taraf faktor B secara acak pada setiap kelompok mengikuti plot baris.</li>
+</ul>
+<section id="pengacakan-di-agricolae" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="pengacakan-di-agricolae"><span class="header-section-number">7.1.1</span> Pengacakan di agricolae</h3>
+<p>Sebelum langkah-langkah pengacakan di atas diikuti, akan didefinisikan faktor yang akan dicobakan dan tarafnya. Hendak dicobakan pupuk dengan taraf “Kontrol”, “PK”, “N”, “NP”, “NK”, dan “NPK” serta genotipe beras dengan taraf IR-64 dan S-969.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>P<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Kontrol"</span>, <span class="st">"PK"</span>, <span class="st">"N"</span>, <span class="st">"NP"</span>, <span class="st">"NK"</span>,<span class="st">"NPK"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>G<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"IR-64"</span>,<span class="st">"S-969"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Pengacakan split blok di agricolae cukup sederhana. Nama lain dari split blok adalah strip-plot, dan ada fungsi <code>design.strip(faktor1, faktor2, nblok)</code> di package tersebut:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>baganSplitB<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">design.strip</span>(P,G,<span class="at">r=</span><span class="dv">4</span>,<span class="at">serie=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Perlihatkan bagan percobaan:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(baganSplitB<span class="sc">$</span>book, <span class="at">n=</span><span class="dv">10</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names=</span> <span class="fu">c</span>(<span class="st">"Petak"</span>, <span class="st">"Blok"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Pupuk"</span>, <span class="st">"Genotipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Petak</th>
+<th style="text-align: left;">Blok</th>
+<th style="text-align: left;">Pupuk</th>
+<th style="text-align: left;">Genotipe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">S-969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">IR-64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">S-969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">IR-64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">S-969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">IR-64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NPK</td>
+<td style="text-align: left;">S-969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NPK</td>
+<td style="text-align: left;">IR-64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">S-969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">IR-64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="pengacakan-di-edibble" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="pengacakan-di-edibble"><span class="header-section-number">7.1.2</span> Pengacakan di edibble</h3>
+<p>Dalam rancangan strip plot, ada empat unit percobaan. Pengaruh blok tentu diaplikasikan ke blok, lalu pengaruh faktor ditaruh di lajur dan baris, serta interaksi di tiap unit. Maka, di edibble buat empat unit. Blok, lalu kolom dan baris yang <code>nested_in(blok)</code>, dan petak yang di dalam blok - <code>nested_in(blok)</code> dan <code>crossed_by(baris, kolom)</code> - tiap petak merupakan gabungan dari baris dan kolom. Cara mendefinisikan kasus ini adalah dengan menyatakan bahwa petak <code>crossed_by()</code> terlebih dahulu, lalu <code>nested_in()</code> - di tiap blok, petak merupakan gabungan baris dan kolom. Karena operasi dalam kurung dilaksanakan terlebih dahulu, bentuknya menjadi <code>nested_in(blok, crossed_by())</code>.</p>
+<p>Lalu, pengacakan dilakukan ke baris dan kolom.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edibble)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>desSBlok<span class="ot">&lt;-</span><span class="fu">design</span>(<span class="at">name=</span><span class="st">"Padi"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(<span class="at">blok=</span><span class="dv">4</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">baris=</span><span class="fu">nested_in</span>(blok,<span class="dv">2</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">kolom=</span><span class="fu">nested_in</span>(blok,<span class="dv">6</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">petak=</span><span class="fu">nested_in</span>(blok,<span class="fu">crossed_by</span>(baris,kolom))) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_trts</span>(<span class="at">Genotipe=</span>G,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">Pupuk=</span>P) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">allot_trts</span>(Genotipe<span class="sc">~</span>baris,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>             Pupuk<span class="sc">~</span>kolom) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign_trts</span>(<span class="st">"random"</span>, <span class="at">seed=</span><span class="dv">420</span>) <span class="sc">%&gt;%</span> serve_table</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(desSBlok,<span class="at">n=</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">blok</th>
+<th style="text-align: left;">baris</th>
+<th style="text-align: left;">kolom</th>
+<th style="text-align: left;">petak</th>
+<th style="text-align: left;">Genotipe</th>
+<th style="text-align: left;">Pupuk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris1</td>
+<td style="text-align: left;">kolom1</td>
+<td style="text-align: left;">petak1</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">NPK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris2</td>
+<td style="text-align: left;">kolom1</td>
+<td style="text-align: left;">petak2</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">NPK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris1</td>
+<td style="text-align: left;">kolom2</td>
+<td style="text-align: left;">petak3</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">Kontrol</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris2</td>
+<td style="text-align: left;">kolom2</td>
+<td style="text-align: left;">petak4</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">Kontrol</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris1</td>
+<td style="text-align: left;">kolom3</td>
+<td style="text-align: left;">petak5</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris2</td>
+<td style="text-align: left;">kolom3</td>
+<td style="text-align: left;">petak6</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">PK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris1</td>
+<td style="text-align: left;">kolom4</td>
+<td style="text-align: left;">petak7</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">NP</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris2</td>
+<td style="text-align: left;">kolom4</td>
+<td style="text-align: left;">petak8</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">NP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris1</td>
+<td style="text-align: left;">kolom5</td>
+<td style="text-align: left;">petak9</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">N</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blok1</td>
+<td style="text-align: left;">baris2</td>
+<td style="text-align: left;">kolom5</td>
+<td style="text-align: left;">petak10</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">N</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Plot rancangan tersebut:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>deggust<span class="sc">::</span><span class="fu">autoplot</span>(desSBlok)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="07-Bab7_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Bandingkan dengan default edibble:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>strip <span class="ot">&lt;-</span> <span class="fu">takeout</span>(<span class="fu">menu_strip</span>(<span class="at">t1 =</span> <span class="dv">2</span>, <span class="at">t2 =</span> <span class="dv">6</span>, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">seed=</span><span class="dv">420</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">examine_recipe</span>(strip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>design("Strip-Plot Design | Strip-Unit Design") %&gt;%
+  set_units(block = 4,
+            row = nested_in(block, 2),
+            col = nested_in(block, 6),
+            unit = nested_in(block, crossed_by(row, col))) %&gt;%
+  set_trts(trt1 = 2,
+           trt2 = 6) %&gt;%
+  allot_trts(trt1 ~ row,
+             trt2 ~ col) %&gt;%
+  assign_trts("random", seed = 420) %&gt;%
+  serve_table()</code></pre>
+</div>
+</div>
+<p>Plotnya akan relatif sama:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>deggust<span class="sc">::</span><span class="fu">autoplot</span>(strip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="07-Bab7_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="anova" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="anova"><span class="header-section-number">7.2</span> ANOVA</h2>
+<section id="teori" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="teori"><span class="header-section-number">7.2.1</span> Teori</h3>
+<p>Model linear aditif bagi split plot RAL adalah:</p>
+<p><span class="math display">\[
+y_{ijk} = \mu + \alpha_i + K_{k}+ \delta_{ik} + \beta_j + \gamma_{jk}+(\alpha\beta)_{ij} + \epsilon_{ijk}
+\]</span></p>
+<p>Dengan:</p>
+<ol type="1">
+<li><span class="math inline">\(y_{ijk}\)</span> adalah nilai pengamatan pada faktor A taraf ke-i dan faktor B taraf ke-j pada blok ke-k.</li>
+<li><span class="math inline">\(\mu\)</span> komponen aditif dari rataan umum.</li>
+<li><span class="math inline">\(\alpha_i\)</span> pengaruh utama faktor A. Diasumsikan <span class="math inline">\(\sum_{i=1}^a \alpha_i=0\)</span> bagi model tetap dan <span class="math inline">\(\alpha\sim N(0,\sigma_a^2)\)</span> bagi model acak.</li>
+<li><span class="math inline">\(\beta_{j}\)</span> pengaruh utama faktor B. Diasumsikan <span class="math inline">\(\sum_{j=1}^b \beta_j=0\)</span> bagi model tetap dan <span class="math inline">\(\beta\sim N(0,\sigma_b^2)\)</span> bagi model acak.</li>
+<li><span class="math inline">\(K_{k}\)</span> pengaruh utama kelompok.</li>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span> komponen interaksi faktor A dan faktor B. Diasumsikan <span class="math inline">\(\sum_{i=1}^p(\alpha\beta)_{ij}=\sum_{i=1}^t (\alpha\beta)_{ij}=0\)</span> bagi model tetap dan <span class="math inline">\((\alpha\beta)_{ij}\sim N(0,\sigma_{ab}^2)\)</span> bagi model acak.</li>
+<li><span class="math inline">\(\delta_{ik}\sim N(0,\sigma_{\delta}^2)\)</span> komponen acak dari faktor A.</li>
+<li><span class="math inline">\(\gamma_{jk}\sim N(0,\sigma_{\gamma}^2)\)</span> komponen acak dari faktor B.</li>
+<li><span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span> komponen acak interaksi dari faktor A dan B.</li>
+</ol>
+<p>Dan hipotesis pengaruh faktor petak utama:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;:\alpha_{1}=\ldots=\alpha_{a}=0 \\
+&amp;\text{ faktor A tidak berpengaruh pada respon}\\
+H_{1}&amp;: \text{Paling sedikit ada satu i di mana }\alpha_{i}\neq 0\\
+\end{aligned}
+\]</span></p>
+<p>Hipotesis pengaruh faktor anak petak:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;:\beta_{1}=\ldots=\beta_{b}=0 \\
+&amp;\text{ faktor B tidak berpengaruh pada respon}\\
+H_{1}&amp;: \text{Paling sedikit ada satu j di mana }\beta_{j}\neq 0\\
+\end{aligned}
+\]</span></p>
+<p>Hipotesis pengaruh interaksi:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;:(\alpha\beta)_{11}=(\alpha\beta)_{12}=\ldots=(\alpha\beta)_{ab}=0 \\
+&amp;\text{ interaksi tidak berpengaruh pada respon}\\
+H_{1}&amp;: \text{Paling sedikit ada sepasang ij di mana }(\alpha\beta)_{ij}\neq 0\\
+\end{aligned}
+\]</span></p>
+<p>Dan hipotesis pengaruh kelompok:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;:K_{1}=\ldots=K_{k}=0 \\
+&amp;\text{ Kelompok tidak berpengaruh pada respon}\\
+H_{1}&amp;: \text{Paling sedikit ada satu k di mana }K_{k}\neq 0\\
+\end{aligned}
+\]</span></p>
+<p>Dan tabel ANOVA:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Sumber Keragaman</th>
+<th style="text-align: right;">db</th>
+<th style="text-align: right;">JK</th>
+<th style="text-align: right;">KT</th>
+<th style="text-align: right;">F-hit</th>
+<th style="text-align: right;">F(dbP,dbG)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Blok</td>
+<td style="text-align: right;">r-1</td>
+<td style="text-align: right;">JKK</td>
+<td style="text-align: right;">JKK/dbA</td>
+<td style="text-align: right;">KTK/KTGA</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">A</td>
+<td style="text-align: right;">a-1</td>
+<td style="text-align: right;">JKA</td>
+<td style="text-align: right;">JKA/dbA</td>
+<td style="text-align: right;">KTA/KTGA</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Galat (a)</td>
+<td style="text-align: right;">(a-1)(r-1)</td>
+<td style="text-align: right;">JKGA</td>
+<td style="text-align: right;">JKGA/dbGA</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">(b-1)</td>
+<td style="text-align: right;">JKB</td>
+<td style="text-align: right;">JKB/dbB</td>
+<td style="text-align: right;">KTB/KTGB</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Galat (b)</td>
+<td style="text-align: right;">(b-1)(r-1)</td>
+<td style="text-align: right;">JKGA</td>
+<td style="text-align: right;">JKGA/dbGB</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">AB</td>
+<td style="text-align: right;">(a-1)(b-1)</td>
+<td style="text-align: right;">JKAB</td>
+<td style="text-align: right;">JKAB/dbAB</td>
+<td style="text-align: right;">KTAB/KTGC</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Galat (c)</td>
+<td style="text-align: right;">(a-1)(b-1)(r-1)</td>
+<td style="text-align: right;">JKGC</td>
+<td style="text-align: right;">JKGC/dbGC</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Total</td>
+<td style="text-align: right;">abr-1</td>
+<td style="text-align: right;">JKT</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>Untuk bagian pertama tabel, jumlah kuadrat dihitung dengan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+FK&amp;=\frac{y^2_{...}}{abr}\\
+JKT&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(y_{ijk}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r y_{ijk}^2-FK\\
+JKST_a&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i.k}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{k=1}^r \frac{y_{i.k}^2}{b}-FK\\
+JKA&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i..}-\bar{y}_{...}\right)^2=\sum_{i=1}^a \frac{y_{i..}^2}{br}-FK\\
+JKK&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r \left(\bar{y}_{..k}-\bar{y}_{...}\right)^2=\sum_{k=1}^r \frac{y_{..k}^2}{ab}-FK\\
+JKG_{a}&amp;=JKST_a-JKA-JKK\\
+\end{aligned}
+\]</span></p>
+<p>Untuk bagian kedua tabel:</p>
+<p><span class="math display">\[
+\begin{aligned}
+JKB&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{.j.}-\bar{y}_{...}\right)^2=\sum_{j=1}^b \frac{y_{.j.}^2}{ar}-FK\\
+JKST_{b}&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2=\sum_{k=1}^r\sum_{j=1}^b \frac{y_{.jk}^2}{a}-FK\\
+JKG_{b}&amp;=JKST_{b}-JKB\\
+\end{aligned}
+\]</span></p>
+<p>Dan untuk bagian terakhir tabel:</p>
+<p><span class="math display">\[
+\begin{aligned}
+JKP&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij}-\bar{y}_{..}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\frac{y_{ij.}^2}{r}-FK\\
+JKAB&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{i..}-\bar{y}_{.j.}+\bar{y}_{...}\right)^2\\ &amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2-JKA-JKB\\
+&amp;=JKP-JKB-JKA\\
+JKG_{c}&amp;=JKT-JKP-JKK-JKG_{a}-JKG_{b}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="analisis-dengan-r" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="analisis-dengan-r"><span class="header-section-number">7.2.2</span> Analisis dengan R</h3>
+<p>Load data:</p>
+<div class="cell" data-hash="07-Bab7_cache/html/unnamed-chunk-9_1c7e0781140d496d309af215fe362ac2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Data.SB<span class="ot">&lt;-</span><span class="fu">as.data.table</span>(<span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1meWerIyAv1X8jtHXoFCTysvzPy91ptQL6F9sO_-RUNs/edit?usp=sharing"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>! Using an auto-discovered, cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  See gargle's "Non-interactive auth" vignette for more details:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  &lt;https://gargle.r-lib.org/articles/non-interactive-auth.html&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googlesheets4 package is using a cached token for
+  'muh.ammarsahab@apps.ipb.ac.id'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✓ Reading from "Data P10 STA1222".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✓ Range 'Sheet1'.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(Data.SB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">P</th>
+<th style="text-align: left;">G</th>
+<th style="text-align: right;">B1</th>
+<th style="text-align: right;">B2</th>
+<th style="text-align: right;">B3</th>
+<th style="text-align: right;">B4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">20.7</td>
+<td style="text-align: right;">32.1</td>
+<td style="text-align: right;">29.5</td>
+<td style="text-align: right;">37.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">33.0</td>
+<td style="text-align: right;">26.3</td>
+<td style="text-align: right;">37.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PK</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">30.7</td>
+<td style="text-align: right;">25.5</td>
+<td style="text-align: right;">36.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PK</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">36.6</td>
+<td style="text-align: right;">33.8</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">39.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">39.9</td>
+<td style="text-align: right;">41.5</td>
+<td style="text-align: right;">46.4</td>
+<td style="text-align: right;">44.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">37.4</td>
+<td style="text-align: right;">41.2</td>
+<td style="text-align: right;">45.4</td>
+<td style="text-align: right;">44.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">40.8</td>
+<td style="text-align: right;">43.5</td>
+<td style="text-align: right;">43.3</td>
+<td style="text-align: right;">43.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">42.2</td>
+<td style="text-align: right;">46.0</td>
+<td style="text-align: right;">45.9</td>
+<td style="text-align: right;">46.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">42.4</td>
+<td style="text-align: right;">45.6</td>
+<td style="text-align: right;">44.8</td>
+<td style="text-align: right;">47.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">39.8</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">40.9</td>
+<td style="text-align: right;">44.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NPK</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: right;">48.6</td>
+<td style="text-align: right;">49.8</td>
+<td style="text-align: right;">42.6</td>
+<td style="text-align: right;">46.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NPK</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: right;">42.9</td>
+<td style="text-align: right;">45.9</td>
+<td style="text-align: right;">43.9</td>
+<td style="text-align: right;">45.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Karena data belum berbentuk <em>long</em> - satu baris adalah satu observasi, melt data tersebut. Tiap baris dalam data awal diidentifikasi oleh kombinasi pupuk dan genotipe, sehingga <code>id.vars</code> adalag <code>c("P","G")</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Data.SB<span class="ot">&lt;-</span><span class="fu">melt</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  Data.SB,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.vars=</span><span class="fu">c</span>(<span class="st">"P"</span>,<span class="st">"G"</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">value.name =</span> <span class="st">"H"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(Data.SB,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">P</th>
+<th style="text-align: left;">G</th>
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">20.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kontrol</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">27.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PK</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">30.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PK</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">36.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">39.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">37.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">40.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NP</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">42.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">IR-64</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">42.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NK</td>
+<td style="text-align: left;">S-969</td>
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">39.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ubah kolom <code>variable</code> menjadi blok:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'data.table'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:reshape2':
+
+    dcast, melt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(Data.SB,<span class="st">"variable"</span>, <span class="st">"B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Untuk melakukan ANOVA, perlu ada struktur error yang khusus. Pada dasarnya, akan ada error khusus untuk faktor serta interaksinya, sehingga tulis <code>Error(B:(P*G))</code> - akan dihitung <code>Error(B:P)</code>, <code>Error(B:G)</code>, dan <code>Error(B:(G:P))</code>, atau error tiap faktor dan interaksinya di tiap ulangan (blok). Spesifikasi lain adalah:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>aov.SB<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>(P<span class="sc">*</span>G)),Data.SB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in aov(H ~ P * G + B + Error(B:(P * G)), Data.SB): Error() model is
+singular</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Error: B:P
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+P          5 1674.8   335.0  18.767 5.62e-06 ***
+B          3  197.1    65.7   3.681   0.0362 *  
+Residuals 15  267.7    17.8                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Error: B:G
+          Df Sum Sq Mean Sq F value Pr(&gt;F)
+G          1  0.035  0.0352   0.032   0.87
+Residuals  3  3.329  1.1097               
+
+Error: B:P:G
+          Df Sum Sq Mean Sq F value Pr(&gt;F)  
+P:G        5  78.59   15.72   4.504 0.0105 *
+Residuals 15  52.35    3.49                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>aov.SB1<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>P<span class="sc">*</span>B<span class="sc">:</span>G),Data.SB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in aov(H ~ P * G + B + Error(B:P * B:G), Data.SB): Error() model is
+singular</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Error: B:P
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+P          5 1674.8   335.0  18.767 5.62e-06 ***
+B          3  197.1    65.7   3.681   0.0362 *  
+Residuals 15  267.7    17.8                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Error: B:G
+          Df Sum Sq Mean Sq F value Pr(&gt;F)
+G          1  0.035  0.0352   0.032   0.87
+Residuals  3  3.329  1.1097               
+
+Error: B:P:G
+          Df Sum Sq Mean Sq F value Pr(&gt;F)  
+P:G        5  78.59   15.72   4.504 0.0105 *
+Residuals 15  52.35    3.49                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Pastikan ada kurung, karena anova akan salah tanpa kurung:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>aov.SB1<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>P<span class="sc">*</span>G),Data.SB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in aov(H ~ P * G + B + Error(B:P * G), Data.SB): Error() model is
+singular</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Error: G
+  Df  Sum Sq Mean Sq
+G  1 0.03521 0.03521
+
+Error: B:P
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+P          5 1674.8   335.0  18.767 5.62e-06 ***
+B          3  197.1    65.7   3.681   0.0362 *  
+Residuals 15  267.7    17.8                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Error: B:P:G
+          Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+P:G        5  78.59  15.718   5.081 0.00444 **
+Residuals 18  55.68   3.093                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Atau, dapat digunakan fungsi <code>strip.plot(blok, faktor 1, faktor 2, respon)</code> dari agricolae:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>out1<span class="ot">&lt;-</span><span class="fu">with</span>(Data.SB,<span class="fu">strip.plot</span>(B,P,G,H))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ANALYSIS STRIP PLOT:  H 
+Class level information
+
+P   :  Kontrol PK N NP NK NPK 
+G   :  IR-64 S-969 
+B   :  B1 B2 B3 B4 
+
+Number of observations:  48 
+
+model Y: H ~ B + P + Ea + G + Eb + G:P + Ec 
+
+Analysis of Variance Table
+
+Response: H
+    Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+B    3  197.11   65.70                      
+P    5 1674.80  334.96 18.7668 5.616e-06 ***
+Ea  15  267.73   17.85                      
+G    1    0.04    0.04  0.0317   0.86997    
+Eb   3    3.33    1.11                      
+G:P  5   78.59   15.72  4.5038   0.01047 *  
+Ec  15   52.35    3.49                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+cv(a) = 10.6 %, cv(b) = 2.7 %, cv(c) = 4.7 %, Mean = 39.71458 </code></pre>
+</div>
+</div>
+<p>Uji lanjut untuk tiap faktor dapat mudah dilakukan. gl.a adalah derajat bebas galat a, dan Ea galat A.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>test1<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">LSD.test</span>(Data.SB<span class="sc">$</span>H, Data.SB<span class="sc">$</span>P, out1<span class="sc">$</span>gl.a, out1<span class="sc">$</span>Ea)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>test1<span class="sc">$</span>statistics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   MSerror Df     Mean       CV t.value      LSD
+  17.84854 15 39.71458 10.63779 2.13145 4.502424</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(test1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="07-Bab7_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Namun, tampaknya tidak dilakukan penyesuaian pada KTG sehingga perlu dilakukan perhitungan manual jika ingin ada penyesuaian tersebut:</p>
+</section>
+<section id="latihan-huasahuasi" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="latihan-huasahuasi"><span class="header-section-number">7.2.3</span> Latihan: Huasahuasi</h3>
+<p>Sedang diteliti ambang batas curah hujan sebagai dukungan untuk aplikasi fungisida waktu dalam pengendalian penyakit busuk daun kentang di Peru menggunakan strip plot.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(huasahuasi)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(huasahuasi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 2
+ $ AUDPC:'data.frame':  450 obs. of  13 variables:
+  ..$ block: Factor w/ 3 levels "I","II","III": 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ trt  : Factor w/ 3 levels "40mm","7-days",..: 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ clon : Factor w/ 5 levels "C386209.10","C387164.4",..: 2 2 2 2 2 2 2 2 2 2 ...
+  ..$ plant: num [1:450] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ d44  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d51  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d58  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d65  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d72  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d79  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d86  : num [1:450] 0 0 0 0 0 0 0 0 0 0 ...
+  ..$ d93  : num [1:450] 0 0 0 1 1 0 0 0 0 0 ...
+  ..$ d100 : num [1:450] 0 0 0 1 1 0 0 0 0 0 ...
+ $ YIELD:'data.frame':  45 obs. of  6 variables:
+  ..$ block: Factor w/ 3 levels "I","II","III": 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ trt  : Factor w/ 3 levels "40mm","7-days",..: 1 1 1 1 1 2 2 2 2 2 ...
+  ..$ clon : Factor w/ 5 levels "C386209.10","C387164.4",..: 2 1 3 5 4 2 1 3 5 4 ...
+  ..$ y1da : num [1:45] 22.8 10.8 1.6 10.9 3.5 ...
+  ..$ y2da : num [1:45] 5.5 8 11.7 9.9 5.1 7 12.5 9.15 8.8 4.6 ...
+  ..$ y3da : num [1:45] 4.14 6.1 4.15 5.2 2.4 7.6 3.6 4.9 5.9 3.5 ...</code></pre>
+</div>
+</div>
+<p>Karena ada dua data.frame, ambil <code>data.frame</code> YIELD:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>YIELD<span class="ot">&lt;-</span>huasahuasi<span class="sc">$</span>YIELD</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(YIELD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   45 obs. of  6 variables:
+ $ block: Factor w/ 3 levels "I","II","III": 1 1 1 1 1 1 1 1 1 1 ...
+ $ trt  : Factor w/ 3 levels "40mm","7-days",..: 1 1 1 1 1 2 2 2 2 2 ...
+ $ clon : Factor w/ 5 levels "C386209.10","C387164.4",..: 2 1 3 5 4 2 1 3 5 4 ...
+ $ y1da : num  22.8 10.8 1.6 10.9 3.5 ...
+ $ y2da : num  5.5 8 11.7 9.9 5.1 7 12.5 9.15 8.8 4.6 ...
+ $ y3da : num  4.14 6.1 4.15 5.2 2.4 7.6 3.6 4.9 5.9 3.5 ...</code></pre>
+</div>
+</div>
+<p>Ada y1da, y2da, dan y3da. Respon yield merupakan penjumlahan dari ketiga respon tersebut - <code>YIELD$yield&lt;- y1da+y2da+y3da</code>, dan perlakuan ada di trt dan clon.</p>
+<p>Buat bagan percobaan dengan edibble dan lakukan ANOVA!</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-Bab6.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Rancangan Petak Terpisah (Split Plot Design)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-Bab8.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANCOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb44" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Rancangan Split Blok</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>Filosofi dasar rancangan split blok mirip dengan strip plot - ada petak utama dan anak petak. Anak petak tersebut mengandung suatu aspek dari percobaan yang ingin ditekankan (diketahui pengaruhnya dengan ketepatan lebih tinggi). Dalam split blok kasus ini yang ditekankan bukan satu faktor, melainkan interaksi antara faktor. Oleh karena itu, faktor menjadi petak utama.</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>Rancangan split blok hanya dapat diterapkan dalam RAKL, tidak di RAL. Unit percobaan harus dipisahkan menjadi blok, lalu petak utama diacak di lajur dan baris blok tersebut. Pengacakan semua faktor di lajur dan baris tidak mungkin terjadi di satu unit percobaan yang hanya mengandung satu perlakuan atau satu kombinasi faktor sehingga dibutuhkan blok agar pengacakan semua kombinasi tersebut dapat dilakukan.</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pengacakan</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>Langkah pengacakannya adalah sebagai berikut:</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pilihlah kelompok unit percobaan secara acak </span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tempatkan taraf-taraf faktor A secara acak pada setiap kelompok </span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>mengikuti plot lajur</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tempatkan taraf-taraf faktor B secara acak pada setiap kelompok </span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>mengikuti plot baris.</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pengacakan di agricolae</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>Sebelum langkah-langkah pengacakan di atas diikuti, akan didefinisikan faktor yang akan dicobakan dan tarafnya. Hendak dicobakan pupuk dengan taraf "Kontrol", "PK", "N", "NP", "NK", dan "NPK" serta genotipe beras dengan taraf IR-64 dan S-969.</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>P<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Kontrol"</span>, <span class="st">"PK"</span>, <span class="st">"N"</span>, <span class="st">"NP"</span>, <span class="st">"NK"</span>,<span class="st">"NPK"</span>)</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>G<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"IR-64"</span>,<span class="st">"S-969"</span>)</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>Pengacakan split blok di agricolae cukup sederhana. Nama lain dari split blok adalah strip-plot, dan ada fungsi <span class="in">`design.strip(faktor1, faktor2, nblok)`</span> di package tersebut:</span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>baganSplitB<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">design.strip</span>(P,G,<span class="at">r=</span><span class="dv">4</span>,<span class="at">serie=</span><span class="dv">1</span>)</span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>Perlihatkan bagan percobaan:</span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(baganSplitB<span class="sc">$</span>book, <span class="at">n=</span><span class="dv">10</span>),</span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names=</span> <span class="fu">c</span>(<span class="st">"Petak"</span>, <span class="st">"Blok"</span>,</span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Pupuk"</span>, <span class="st">"Genotipe"</span>))</span>
+<span id="cb44-44"><a href="#cb44-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pengacakan di edibble</span></span>
+<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a>Dalam rancangan strip plot, ada empat unit percobaan. Pengaruh blok tentu diaplikasikan ke blok, lalu pengaruh faktor ditaruh di lajur dan baris, serta interaksi di tiap unit. Maka, di edibble buat empat unit. Blok, lalu kolom dan baris yang <span class="in">`nested_in(blok)`</span>, dan petak yang di dalam blok - <span class="in">`nested_in(blok)`</span> dan <span class="in">`crossed_by(baris, kolom)`</span> - tiap petak merupakan gabungan dari baris dan kolom. Cara mendefinisikan kasus ini adalah dengan menyatakan bahwa petak <span class="in">`crossed_by()`</span> terlebih dahulu, lalu <span class="in">`nested_in()`</span> - di tiap blok, petak merupakan gabungan baris dan kolom. Karena operasi dalam kurung dilaksanakan terlebih dahulu, bentuknya menjadi <span class="in">`nested_in(blok, crossed_by())`</span>.</span>
+<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a>Lalu, pengacakan dilakukan ke baris dan kolom.</span>
+<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-54"><a href="#cb44-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-55"><a href="#cb44-55" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edibble)</span>
+<span id="cb44-56"><a href="#cb44-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-57"><a href="#cb44-57" aria-hidden="true" tabindex="-1"></a>desSBlok<span class="ot">&lt;-</span><span class="fu">design</span>(<span class="at">name=</span><span class="st">"Padi"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-58"><a href="#cb44-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(<span class="at">blok=</span><span class="dv">4</span>,</span>
+<span id="cb44-59"><a href="#cb44-59" aria-hidden="true" tabindex="-1"></a>            <span class="at">baris=</span><span class="fu">nested_in</span>(blok,<span class="dv">2</span>),</span>
+<span id="cb44-60"><a href="#cb44-60" aria-hidden="true" tabindex="-1"></a>            <span class="at">kolom=</span><span class="fu">nested_in</span>(blok,<span class="dv">6</span>),</span>
+<span id="cb44-61"><a href="#cb44-61" aria-hidden="true" tabindex="-1"></a>            <span class="at">petak=</span><span class="fu">nested_in</span>(blok,<span class="fu">crossed_by</span>(baris,kolom))) <span class="sc">%&gt;%</span></span>
+<span id="cb44-62"><a href="#cb44-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_trts</span>(<span class="at">Genotipe=</span>G,</span>
+<span id="cb44-63"><a href="#cb44-63" aria-hidden="true" tabindex="-1"></a>           <span class="at">Pupuk=</span>P) <span class="sc">%&gt;%</span></span>
+<span id="cb44-64"><a href="#cb44-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">allot_trts</span>(Genotipe<span class="sc">~</span>baris,</span>
+<span id="cb44-65"><a href="#cb44-65" aria-hidden="true" tabindex="-1"></a>             Pupuk<span class="sc">~</span>kolom) <span class="sc">%&gt;%</span></span>
+<span id="cb44-66"><a href="#cb44-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign_trts</span>(<span class="st">"random"</span>, <span class="at">seed=</span><span class="dv">420</span>) <span class="sc">%&gt;%</span> serve_table</span>
+<span id="cb44-67"><a href="#cb44-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-68"><a href="#cb44-68" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(desSBlok,<span class="at">n=</span><span class="dv">10</span>))</span>
+<span id="cb44-69"><a href="#cb44-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-70"><a href="#cb44-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-71"><a href="#cb44-71" aria-hidden="true" tabindex="-1"></a>Plot rancangan tersebut:</span>
+<span id="cb44-72"><a href="#cb44-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-75"><a href="#cb44-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-76"><a href="#cb44-76" aria-hidden="true" tabindex="-1"></a>deggust<span class="sc">::</span><span class="fu">autoplot</span>(desSBlok)</span>
+<span id="cb44-77"><a href="#cb44-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-78"><a href="#cb44-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-79"><a href="#cb44-79" aria-hidden="true" tabindex="-1"></a>Bandingkan dengan default edibble:</span>
+<span id="cb44-80"><a href="#cb44-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-83"><a href="#cb44-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-84"><a href="#cb44-84" aria-hidden="true" tabindex="-1"></a>strip <span class="ot">&lt;-</span> <span class="fu">takeout</span>(<span class="fu">menu_strip</span>(<span class="at">t1 =</span> <span class="dv">2</span>, <span class="at">t2 =</span> <span class="dv">6</span>, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">seed=</span><span class="dv">420</span>))</span>
+<span id="cb44-85"><a href="#cb44-85" aria-hidden="true" tabindex="-1"></a><span class="fu">examine_recipe</span>(strip)</span>
+<span id="cb44-86"><a href="#cb44-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-87"><a href="#cb44-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-88"><a href="#cb44-88" aria-hidden="true" tabindex="-1"></a>Plotnya akan relatif sama:</span>
+<span id="cb44-89"><a href="#cb44-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-92"><a href="#cb44-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-93"><a href="#cb44-93" aria-hidden="true" tabindex="-1"></a>deggust<span class="sc">::</span><span class="fu">autoplot</span>(strip)</span>
+<span id="cb44-94"><a href="#cb44-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-95"><a href="#cb44-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-96"><a href="#cb44-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## ANOVA</span></span>
+<span id="cb44-97"><a href="#cb44-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-98"><a href="#cb44-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### Teori</span></span>
+<span id="cb44-99"><a href="#cb44-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-100"><a href="#cb44-100" aria-hidden="true" tabindex="-1"></a>Model linear aditif bagi split plot RAL adalah:</span>
+<span id="cb44-101"><a href="#cb44-101" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-102"><a href="#cb44-102" aria-hidden="true" tabindex="-1"></a>y_{ijk} = \mu + \alpha_i + K_{k}+ \delta_{ik} + \beta_j + \gamma_{jk}+(\alpha\beta)_{ij} + \epsilon_{ijk}</span>
+<span id="cb44-103"><a href="#cb44-103" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-104"><a href="#cb44-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-105"><a href="#cb44-105" aria-hidden="true" tabindex="-1"></a>Dengan:</span>
+<span id="cb44-106"><a href="#cb44-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-107"><a href="#cb44-107" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$y_{ijk}$ adalah nilai pengamatan pada faktor A taraf ke-i dan faktor B taraf ke-j pada blok ke-k.</span>
+<span id="cb44-108"><a href="#cb44-108" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$\mu$ komponen aditif dari rataan umum.</span>
+<span id="cb44-109"><a href="#cb44-109" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>$\alpha_i$ pengaruh utama faktor A. Diasumsikan $\sum_{i=1}^a \alpha_i=0$ bagi model tetap dan $\alpha\sim N(0,\sigma_a^2)$ bagi model acak.</span>
+<span id="cb44-110"><a href="#cb44-110" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>$\beta_{j}$ pengaruh utama faktor B. Diasumsikan $\sum_{j=1}^b \beta_j=0$ bagi model tetap dan $\beta\sim N(0,\sigma_b^2)$ bagi model acak.</span>
+<span id="cb44-111"><a href="#cb44-111" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>$K_{k}$ pengaruh utama kelompok.</span>
+<span id="cb44-112"><a href="#cb44-112" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>$(\alpha\beta)_{ij}$ komponen interaksi faktor A dan faktor B. Diasumsikan $\sum_{i=1}^p(\alpha\beta)_{ij}=\sum_{i=1}^t (\alpha\beta)_{ij}=0$ bagi model tetap dan $(\alpha\beta)_{ij}\sim N(0,\sigma_{ab}^2)$ bagi model acak.</span>
+<span id="cb44-113"><a href="#cb44-113" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>$\delta_{ik}\sim N(0,\sigma_{\delta}^2)$ komponen acak dari faktor A.</span>
+<span id="cb44-114"><a href="#cb44-114" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>$\gamma_{jk}\sim N(0,\sigma_{\gamma}^2)$ komponen acak dari faktor B.</span>
+<span id="cb44-115"><a href="#cb44-115" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>$\epsilon_{ijk}\sim N(0,\sigma^2)$ komponen acak interaksi dari faktor A dan B.</span>
+<span id="cb44-116"><a href="#cb44-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-117"><a href="#cb44-117" aria-hidden="true" tabindex="-1"></a>Dan hipotesis pengaruh faktor petak utama:</span>
+<span id="cb44-118"><a href="#cb44-118" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-119"><a href="#cb44-119" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-120"><a href="#cb44-120" aria-hidden="true" tabindex="-1"></a>H_{0}&amp;:\alpha_{1}=\ldots=\alpha_{a}=0 <span class="sc">\\</span></span>
+<span id="cb44-121"><a href="#cb44-121" aria-hidden="true" tabindex="-1"></a>&amp;\text{ faktor A tidak berpengaruh pada respon}<span class="sc">\\</span></span>
+<span id="cb44-122"><a href="#cb44-122" aria-hidden="true" tabindex="-1"></a>H_{1}&amp;: \text{Paling sedikit ada satu i di mana }\alpha_{i}\neq 0<span class="sc">\\</span></span>
+<span id="cb44-123"><a href="#cb44-123" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-124"><a href="#cb44-124" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-125"><a href="#cb44-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-126"><a href="#cb44-126" aria-hidden="true" tabindex="-1"></a>Hipotesis pengaruh faktor anak petak:</span>
+<span id="cb44-127"><a href="#cb44-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-128"><a href="#cb44-128" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-129"><a href="#cb44-129" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-130"><a href="#cb44-130" aria-hidden="true" tabindex="-1"></a>H_{0}&amp;:\beta_{1}=\ldots=\beta_{b}=0 <span class="sc">\\</span></span>
+<span id="cb44-131"><a href="#cb44-131" aria-hidden="true" tabindex="-1"></a>&amp;\text{ faktor B tidak berpengaruh pada respon}<span class="sc">\\</span></span>
+<span id="cb44-132"><a href="#cb44-132" aria-hidden="true" tabindex="-1"></a>H_{1}&amp;: \text{Paling sedikit ada satu j di mana }\beta_{j}\neq 0<span class="sc">\\</span></span>
+<span id="cb44-133"><a href="#cb44-133" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-134"><a href="#cb44-134" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-135"><a href="#cb44-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-136"><a href="#cb44-136" aria-hidden="true" tabindex="-1"></a>Hipotesis pengaruh interaksi:</span>
+<span id="cb44-137"><a href="#cb44-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-138"><a href="#cb44-138" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-139"><a href="#cb44-139" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-140"><a href="#cb44-140" aria-hidden="true" tabindex="-1"></a>H_{0}&amp;:(\alpha\beta)_{11}=(\alpha\beta)_{12}=\ldots=(\alpha\beta)_{ab}=0 <span class="sc">\\</span></span>
+<span id="cb44-141"><a href="#cb44-141" aria-hidden="true" tabindex="-1"></a>&amp;\text{ interaksi tidak berpengaruh pada respon}<span class="sc">\\</span></span>
+<span id="cb44-142"><a href="#cb44-142" aria-hidden="true" tabindex="-1"></a>H_{1}&amp;: \text{Paling sedikit ada sepasang ij di mana }(\alpha\beta)_{ij}\neq 0<span class="sc">\\</span></span>
+<span id="cb44-143"><a href="#cb44-143" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-144"><a href="#cb44-144" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-145"><a href="#cb44-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-146"><a href="#cb44-146" aria-hidden="true" tabindex="-1"></a>Dan hipotesis pengaruh kelompok:</span>
+<span id="cb44-147"><a href="#cb44-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-148"><a href="#cb44-148" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-149"><a href="#cb44-149" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-150"><a href="#cb44-150" aria-hidden="true" tabindex="-1"></a>H_{0}&amp;:K_{1}=\ldots=K_{k}=0 <span class="sc">\\</span></span>
+<span id="cb44-151"><a href="#cb44-151" aria-hidden="true" tabindex="-1"></a>&amp;\text{ Kelompok tidak berpengaruh pada respon}<span class="sc">\\</span></span>
+<span id="cb44-152"><a href="#cb44-152" aria-hidden="true" tabindex="-1"></a>H_{1}&amp;: \text{Paling sedikit ada satu k di mana }K_{k}\neq 0<span class="sc">\\</span></span>
+<span id="cb44-153"><a href="#cb44-153" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-154"><a href="#cb44-154" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-155"><a href="#cb44-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-156"><a href="#cb44-156" aria-hidden="true" tabindex="-1"></a>Dan tabel ANOVA:</span>
+<span id="cb44-157"><a href="#cb44-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r , echo=FALSE, results='asis'}</span></span>
+<span id="cb44-158"><a href="#cb44-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">'</span></span>
+<span id="cb44-159"><a href="#cb44-159" aria-hidden="true" tabindex="-1"></a><span class="st">  | Sumber Keragaman| db| JK| KT| F-hit|F(dbP,dbG)|</span></span>
+<span id="cb44-160"><a href="#cb44-160" aria-hidden="true" tabindex="-1"></a><span class="st">  |------------:|-----------:|------------:|------------:|------------:|------------:|</span></span>
+<span id="cb44-161"><a href="#cb44-161" aria-hidden="true" tabindex="-1"></a><span class="st">  |          Blok|         r-1|          JKK| JKK/dbA | KTK/KTGA | |</span></span>
+<span id="cb44-162"><a href="#cb44-162" aria-hidden="true" tabindex="-1"></a><span class="st">  |          A|         a-1|          JKA| JKA/dbA | KTA/KTGA | |</span></span>
+<span id="cb44-163"><a href="#cb44-163" aria-hidden="true" tabindex="-1"></a><span class="st">  |          Galat (a)|         (a-1)(r-1)|          JKGA| JKGA/dbGA | | |</span></span>
+<span id="cb44-164"><a href="#cb44-164" aria-hidden="true" tabindex="-1"></a><span class="st">  |          B|         (b-1)|         JKB| JKB/dbB | KTB/KTGB | |</span></span>
+<span id="cb44-165"><a href="#cb44-165" aria-hidden="true" tabindex="-1"></a><span class="st">  |          Galat (b)|         (b-1)(r-1)|          JKGA| JKGA/dbGB | | |</span></span>
+<span id="cb44-166"><a href="#cb44-166" aria-hidden="true" tabindex="-1"></a><span class="st">  |          AB|         (a-1)(b-1)|         JKAB| JKAB/dbAB | KTAB/KTGC | |</span></span>
+<span id="cb44-167"><a href="#cb44-167" aria-hidden="true" tabindex="-1"></a><span class="st">  |          Galat (c)|       (a-1)(b-1)(r-1)|         JKGC| JKGC/dbGC | | |</span></span>
+<span id="cb44-168"><a href="#cb44-168" aria-hidden="true" tabindex="-1"></a><span class="st">  |          Total|         abr-1|          JKT| | | |'</span>)</span>
+<span id="cb44-169"><a href="#cb44-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-170"><a href="#cb44-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-171"><a href="#cb44-171" aria-hidden="true" tabindex="-1"></a>Untuk bagian pertama tabel, jumlah kuadrat dihitung dengan:</span>
+<span id="cb44-172"><a href="#cb44-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-173"><a href="#cb44-173" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-174"><a href="#cb44-174" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-175"><a href="#cb44-175" aria-hidden="true" tabindex="-1"></a>FK&amp;=\frac{y^2_{...}}{abr}<span class="sc">\\</span></span>
+<span id="cb44-176"><a href="#cb44-176" aria-hidden="true" tabindex="-1"></a>JKT&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(y_{ijk}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r y_{ijk}^2-FK<span class="sc">\\</span></span>
+<span id="cb44-177"><a href="#cb44-177" aria-hidden="true" tabindex="-1"></a>JKST_a&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i.k}-\bar{y}_{...}\right)^2=\sum_{i=1}^a\sum_{k=1}^r \frac{y_{i.k}^2}{b}-FK<span class="sc">\\</span></span>
+<span id="cb44-178"><a href="#cb44-178" aria-hidden="true" tabindex="-1"></a>JKA&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{i..}-\bar{y}_{...}\right)^2=\sum_{i=1}^a \frac{y_{i..}^2}{br}-FK<span class="sc">\\</span></span>
+<span id="cb44-179"><a href="#cb44-179" aria-hidden="true" tabindex="-1"></a>JKK&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r \left(\bar{y}_{..k}-\bar{y}_{...}\right)^2=\sum_{k=1}^r \frac{y_{..k}^2}{ab}-FK<span class="sc">\\</span></span>
+<span id="cb44-180"><a href="#cb44-180" aria-hidden="true" tabindex="-1"></a>JKG_{a}&amp;=JKST_a-JKA-JKK<span class="sc">\\</span></span>
+<span id="cb44-181"><a href="#cb44-181" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-182"><a href="#cb44-182" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-183"><a href="#cb44-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-184"><a href="#cb44-184" aria-hidden="true" tabindex="-1"></a>Untuk bagian kedua tabel:</span>
+<span id="cb44-185"><a href="#cb44-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-186"><a href="#cb44-186" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-187"><a href="#cb44-187" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-188"><a href="#cb44-188" aria-hidden="true" tabindex="-1"></a>JKB&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{.j.}-\bar{y}_{...}\right)^2=\sum_{j=1}^b \frac{y_{.j.}^2}{ar}-FK<span class="sc">\\</span></span>
+<span id="cb44-189"><a href="#cb44-189" aria-hidden="true" tabindex="-1"></a>JKST_{b}&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2=\sum_{k=1}^r\sum_{j=1}^b \frac{y_{.jk}^2}{a}-FK<span class="sc">\\</span></span>
+<span id="cb44-190"><a href="#cb44-190" aria-hidden="true" tabindex="-1"></a>JKG_{b}&amp;=JKST_{b}-JKB<span class="sc">\\</span></span>
+<span id="cb44-191"><a href="#cb44-191" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-192"><a href="#cb44-192" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-193"><a href="#cb44-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-194"><a href="#cb44-194" aria-hidden="true" tabindex="-1"></a>Dan untuk bagian terakhir tabel:</span>
+<span id="cb44-195"><a href="#cb44-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-196"><a href="#cb44-196" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-197"><a href="#cb44-197" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb44-198"><a href="#cb44-198" aria-hidden="true" tabindex="-1"></a>JKP&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij}-\bar{y}_{..}\right)^2=\sum_{i=1}^a\sum_{j=1}^b\frac{y_{ij.}^2}{r}-FK<span class="sc">\\</span></span>
+<span id="cb44-199"><a href="#cb44-199" aria-hidden="true" tabindex="-1"></a>JKAB&amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{i..}-\bar{y}_{.j.}+\bar{y}_{...}\right)^2\\ &amp;=\sum_{i=1}^a\sum_{j=1}^b\sum_{k-1}^r\left(\bar{y}_{ij.}-\bar{y}_{...}\right)^2-JKA-JKB<span class="sc">\\</span></span>
+<span id="cb44-200"><a href="#cb44-200" aria-hidden="true" tabindex="-1"></a>&amp;=JKP-JKB-JKA<span class="sc">\\</span></span>
+<span id="cb44-201"><a href="#cb44-201" aria-hidden="true" tabindex="-1"></a>JKG_{c}&amp;=JKT-JKP-JKK-JKG_{a}-JKG_{b}</span>
+<span id="cb44-202"><a href="#cb44-202" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb44-203"><a href="#cb44-203" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb44-204"><a href="#cb44-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-205"><a href="#cb44-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### Analisis dengan R</span></span>
+<span id="cb44-206"><a href="#cb44-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-207"><a href="#cb44-207" aria-hidden="true" tabindex="-1"></a>Load data:</span>
+<span id="cb44-208"><a href="#cb44-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-209"><a href="#cb44-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cache=TRUE}</span></span>
+<span id="cb44-210"><a href="#cb44-210" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb44-211"><a href="#cb44-211" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb44-212"><a href="#cb44-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-213"><a href="#cb44-213" aria-hidden="true" tabindex="-1"></a>Data.SB<span class="ot">&lt;-</span><span class="fu">as.data.table</span>(<span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1meWerIyAv1X8jtHXoFCTysvzPy91ptQL6F9sO_-RUNs/edit?usp=sharing"</span>))</span>
+<span id="cb44-214"><a href="#cb44-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-215"><a href="#cb44-215" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(Data.SB)</span>
+<span id="cb44-216"><a href="#cb44-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-217"><a href="#cb44-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-218"><a href="#cb44-218" aria-hidden="true" tabindex="-1"></a>Karena data belum berbentuk *long* - satu baris adalah satu observasi, melt data tersebut. Tiap baris dalam data awal diidentifikasi oleh kombinasi pupuk dan genotipe, sehingga <span class="in">`id.vars`</span> adalag <span class="in">`c("P","G")`</span>:</span>
+<span id="cb44-219"><a href="#cb44-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-222"><a href="#cb44-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-223"><a href="#cb44-223" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb44-224"><a href="#cb44-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-225"><a href="#cb44-225" aria-hidden="true" tabindex="-1"></a>Data.SB<span class="ot">&lt;-</span><span class="fu">melt</span>(</span>
+<span id="cb44-226"><a href="#cb44-226" aria-hidden="true" tabindex="-1"></a>  Data.SB,</span>
+<span id="cb44-227"><a href="#cb44-227" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.vars=</span><span class="fu">c</span>(<span class="st">"P"</span>,<span class="st">"G"</span>),</span>
+<span id="cb44-228"><a href="#cb44-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">value.name =</span> <span class="st">"H"</span></span>
+<span id="cb44-229"><a href="#cb44-229" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-230"><a href="#cb44-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-231"><a href="#cb44-231" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(Data.SB,<span class="dv">10</span>))</span>
+<span id="cb44-232"><a href="#cb44-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-233"><a href="#cb44-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-234"><a href="#cb44-234" aria-hidden="true" tabindex="-1"></a>Ubah kolom <span class="in">`variable`</span> menjadi blok:</span>
+<span id="cb44-235"><a href="#cb44-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-238"><a href="#cb44-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-239"><a href="#cb44-239" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb44-240"><a href="#cb44-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-241"><a href="#cb44-241" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(Data.SB,<span class="st">"variable"</span>, <span class="st">"B"</span>)</span>
+<span id="cb44-242"><a href="#cb44-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-243"><a href="#cb44-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-244"><a href="#cb44-244" aria-hidden="true" tabindex="-1"></a>Untuk melakukan ANOVA, perlu ada struktur error yang khusus. Pada dasarnya, akan ada error khusus untuk faktor serta interaksinya, sehingga tulis <span class="in">`Error(B:(P*G))`</span> - akan dihitung <span class="in">`Error(B:P)`</span>, <span class="in">`Error(B:G)`</span>, dan <span class="in">`Error(B:(G:P))`</span>, atau error tiap faktor dan interaksinya di tiap ulangan (blok). Spesifikasi lain adalah:</span>
+<span id="cb44-245"><a href="#cb44-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-248"><a href="#cb44-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-249"><a href="#cb44-249" aria-hidden="true" tabindex="-1"></a>aov.SB<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>(P<span class="sc">*</span>G)),Data.SB)</span>
+<span id="cb44-250"><a href="#cb44-250" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB)</span>
+<span id="cb44-251"><a href="#cb44-251" aria-hidden="true" tabindex="-1"></a>aov.SB1<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>P<span class="sc">*</span>B<span class="sc">:</span>G),Data.SB)</span>
+<span id="cb44-252"><a href="#cb44-252" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB1)</span>
+<span id="cb44-253"><a href="#cb44-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-254"><a href="#cb44-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-255"><a href="#cb44-255" aria-hidden="true" tabindex="-1"></a>Pastikan ada kurung, karena anova akan salah tanpa kurung:</span>
+<span id="cb44-256"><a href="#cb44-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-259"><a href="#cb44-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-260"><a href="#cb44-260" aria-hidden="true" tabindex="-1"></a>aov.SB1<span class="ot">&lt;-</span><span class="fu">aov</span>(H<span class="sc">~</span>P<span class="sc">*</span>G<span class="sc">+</span>B<span class="sc">+</span><span class="fu">Error</span>(B<span class="sc">:</span>P<span class="sc">*</span>G),Data.SB)</span>
+<span id="cb44-261"><a href="#cb44-261" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.SB1)</span>
+<span id="cb44-262"><a href="#cb44-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-263"><a href="#cb44-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-264"><a href="#cb44-264" aria-hidden="true" tabindex="-1"></a>Atau, dapat digunakan fungsi <span class="in">`strip.plot(blok, faktor 1, faktor 2, respon)`</span> dari agricolae:</span>
+<span id="cb44-265"><a href="#cb44-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-268"><a href="#cb44-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-269"><a href="#cb44-269" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb44-270"><a href="#cb44-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-271"><a href="#cb44-271" aria-hidden="true" tabindex="-1"></a>out1<span class="ot">&lt;-</span><span class="fu">with</span>(Data.SB,<span class="fu">strip.plot</span>(B,P,G,H))</span>
+<span id="cb44-272"><a href="#cb44-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-273"><a href="#cb44-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-274"><a href="#cb44-274" aria-hidden="true" tabindex="-1"></a>Uji lanjut untuk tiap faktor dapat mudah dilakukan. gl.a adalah derajat bebas galat a, dan Ea galat A.</span>
+<span id="cb44-275"><a href="#cb44-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-278"><a href="#cb44-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-279"><a href="#cb44-279" aria-hidden="true" tabindex="-1"></a>test1<span class="ot">&lt;-</span>agricolae<span class="sc">::</span><span class="fu">LSD.test</span>(Data.SB<span class="sc">$</span>H, Data.SB<span class="sc">$</span>P, out1<span class="sc">$</span>gl.a, out1<span class="sc">$</span>Ea)</span>
+<span id="cb44-280"><a href="#cb44-280" aria-hidden="true" tabindex="-1"></a>test1<span class="sc">$</span>statistics</span>
+<span id="cb44-281"><a href="#cb44-281" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(test1)</span>
+<span id="cb44-282"><a href="#cb44-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-283"><a href="#cb44-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-284"><a href="#cb44-284" aria-hidden="true" tabindex="-1"></a>Namun, tampaknya tidak dilakukan penyesuaian pada KTG sehingga perlu dilakukan perhitungan manual jika ingin ada penyesuaian tersebut:</span>
+<span id="cb44-285"><a href="#cb44-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-286"><a href="#cb44-286" aria-hidden="true" tabindex="-1"></a><span class="fu">### Latihan: Huasahuasi</span></span>
+<span id="cb44-287"><a href="#cb44-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-288"><a href="#cb44-288" aria-hidden="true" tabindex="-1"></a>Sedang diteliti ambang batas curah hujan sebagai dukungan untuk aplikasi fungisida waktu dalam pengendalian penyakit busuk daun kentang di Peru menggunakan strip plot. </span>
+<span id="cb44-289"><a href="#cb44-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-290"><a href="#cb44-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-293"><a href="#cb44-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-294"><a href="#cb44-294" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb44-295"><a href="#cb44-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-296"><a href="#cb44-296" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(huasahuasi)</span>
+<span id="cb44-297"><a href="#cb44-297" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(huasahuasi)</span>
+<span id="cb44-298"><a href="#cb44-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-299"><a href="#cb44-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-300"><a href="#cb44-300" aria-hidden="true" tabindex="-1"></a>Karena ada dua data.frame, ambil <span class="in">`data.frame`</span> YIELD:</span>
+<span id="cb44-301"><a href="#cb44-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-304"><a href="#cb44-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb44-305"><a href="#cb44-305" aria-hidden="true" tabindex="-1"></a>YIELD<span class="ot">&lt;-</span>huasahuasi<span class="sc">$</span>YIELD</span>
+<span id="cb44-306"><a href="#cb44-306" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(YIELD)</span>
+<span id="cb44-307"><a href="#cb44-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-308"><a href="#cb44-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-309"><a href="#cb44-309" aria-hidden="true" tabindex="-1"></a>Ada y1da, y2da, dan y3da. Respon yield merupakan penjumlahan dari ketiga respon tersebut - <span class="in">`YIELD$yield&lt;- y1da+y2da+y3da`</span>, dan perlakuan ada di trt dan clon. </span>
+<span id="cb44-310"><a href="#cb44-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-311"><a href="#cb44-311" aria-hidden="true" tabindex="-1"></a>Buat bagan percobaan dengan edibble dan lakukan ANOVA!</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
